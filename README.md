@@ -4,17 +4,17 @@ Consiste en una web que administra y gestiona los centros deportivos de los camp
 - La parte privada consiste en la gestion por parte de los usuarios de todos los recursos a los que se tenga acceso. 
 
 # Entidades 
-## Usuario
+### Usuario
 Representa a los usuarios del sistema que pueden ser alumnos, docentes, trabajadores y administradores de los centros deportivos.
-## Centro deportivo
+### Centro deportivo
 Representa los diferentes centros deportivos de los distintos campus.
-## Cursos
+### Curso
 Representa los cursos que se imparten en distintas actividades deportivas a lo largo del curso academico.
-## Actividades
+### Actividad
 Representa las actividades deportivas disponibles para los usuarios.
-## Reservas
+### Reserva
 Representa la forma de acceder a un recurso del centro deportivo (pista de tenis, cancha de baloncesto, etc).
-## Tablero informativo
+### Tablero informativo
 Representa las fechas en las que se relaizan las distintas actividades deportivas.
 
 # Funcionalidades del servicio interno
