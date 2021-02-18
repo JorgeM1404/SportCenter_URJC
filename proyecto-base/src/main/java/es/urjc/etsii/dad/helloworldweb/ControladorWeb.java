@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class ControladorWeb 
 {
-	@GetMapping("/hola-mundo")
+	/*@GetMapping("/hola-mundo")
 	public String holaMundo()
 	{
 		return "hola_mundo.html";
-	}
+	}*/
 	
 	@GetMapping("/")
 	public String saludo()
