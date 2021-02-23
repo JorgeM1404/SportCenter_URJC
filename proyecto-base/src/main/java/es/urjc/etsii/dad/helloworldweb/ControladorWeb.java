@@ -14,15 +14,25 @@ public class ControladorWeb
 	}*/
 	
 	@GetMapping("/")
-	public String saludo()
+	public String principal()
 	{
-		return "saludo.html";
+		return "pagPrincipal.html";
 	}
 	
-	@RequestMapping("/hola")
-	public String hola(Model model, @RequestParam String userName)
+	@RequestMapping("/registrarse")
+	public String registrarse(Model model, @RequestParam String userName, String userPassword, String userMail)
 	{
 		model.addAttribute("nombre", userName);
-		return "hola_template";
+		model.addAttribute("contrasenya", userPassword);
+		model.addAttribute("correo", userMail);
+		return "registrarse_template";
+	}
+	
+	@RequestMapping("/iniciarSesion")
+	public String iniciarSesion(Model model, @RequestParam String userName, String userPassword)
+	{
+		model.addAttribute("nombre", userName);
+		model.addAttribute("contrasenya", userPassword);
+		return "iniciarSesion_template";
 	}
 }
