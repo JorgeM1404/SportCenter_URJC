@@ -1,15 +1,15 @@
 <html>
 <body>
-
-  <form action="registrarse">
-     <h1> Registrar usuario: </h1>
+  <h1> Registrar usuario: </h1> 
+  <form action="usuario/nuevo" method="post">
      <p>Nombre usuario</p>
-     <input type='text' name='userName' />
-     <p>Contrasenya</p>
-     <input type='text' name='userPassword' />
+     <input type='text' name='nombre' />
+     <p>Clave de usuario</p>
+     <input type='text' name='clave' />
      <p>Correo electrónico</p>
-     <input type='text' name='userMail' />
-     <input type='submit' value='Enviar' />
+     <input type='text' name='correo' />
+     
+     <input type='submit' value='Registrar' />
   </form>
   
 </body>

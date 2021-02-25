@@ -6,8 +6,29 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class ControladorWeb 
-{			
+{		
+	
 	@GetMapping("/")
+	public String inicio()
+	{
+		return "inicio";
+	}
+	
+	@GetMapping("/registrarse")
+	public String registrarse()
+	{
+		return "registrarse";
+	}
+	
+	@GetMapping("/iniciarSesion")
+	public String iniciarSesion()
+	{
+		return "iniciarSesion";
+	}
+	
+	// Controlador anterior
+	
+	/*@GetMapping("/")
 	public String principal()
 	{
 		return "index";
@@ -25,5 +46,5 @@ public class ControladorWeb
 	{		
 		model.addAttribute("usuario", usuario);
 		return "iniciarSesion_template";
-	}
+	}*/
 }
