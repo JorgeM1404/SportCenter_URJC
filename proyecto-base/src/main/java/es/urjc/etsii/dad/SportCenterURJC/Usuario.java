@@ -3,16 +3,12 @@ package es.urjc.etsii.dad.SportCenterURJC;
 public class Usuario {
 	
 	private String nombre;
-	private String contraseña;
+	private String clave;
 	private String correo;
 	
-	public Usuario() {
-	}
-	
-	public Usuario(String nombre, String contraseña, String correo) {
-		super();
+	public Usuario(String nombre, String clave, String correo) {
 		this.nombre = nombre;
-		this.contraseña = contraseña;
+		this.clave = clave;
 		this.correo = correo;
 	}
 	
@@ -25,11 +21,11 @@ public class Usuario {
 	}
 	
 	public String getContraseña() {
-		return contraseña;
+		return clave;
 	}
 
 	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+		this.clave = contraseña;
 	}
 	
 	public String getCorreo() {
@@ -39,4 +35,16 @@ public class Usuario {
 	public void setCorreo(String correo) {
 		this.correo = correo;
 	}
+	
+	/*@Override
+	public boolean equals(Object o)
+	{
+		if(this == o) return true;
+		if(o == null) return false;
+		if(getClass() != o.getClass()) return false;
+		
+		Usuario u = (Usuario) o;
+		
+		return ( (this.getNombre() == u.getNombre()) && (this.getContraseña() == u.getContraseña()) && (this.getCorreo() == u.getCorreo()) );
+	}*/
 }

@@ -6,23 +6,23 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class ControladorWeb 
-{	
+{			
 	@GetMapping("/")
 	public String principal()
 	{
-		return "pagPrincipal.html";
+		return "index";
 	}
 	
-	@RequestMapping("/registrarse")
-	public String registrarse(Model model, @RequestParam Usuario usuario)
+	@PostMapping("/usuario/nuevo")
+	public String registrarse(Model model, Usuario usuario)
 	{
-		model.addAttribute("usuario", usuario);
+		model.addAttribute("usu",usuario);
 		return "registrarse_template";
 	}
 	
 	@RequestMapping("/iniciarSesion")
 	public String iniciarSesion(Model model, @RequestParam Usuario usuario)
-	{
+	{		
 		model.addAttribute("usuario", usuario);
 		return "iniciarSesion_template";
 	}
