@@ -38,7 +38,7 @@ public class ControladorWeb
 		{
 			servicio.nuevoUsuario(usuario);
 			model.addAttribute("usu",usuario);
-			return "registrarse_template";
+			return "seleccion_campus";
 		}
 		else return "yaExisteUsuario";
 	}
@@ -49,7 +49,7 @@ public class ControladorWeb
 		if(servicio.findAll().contains(usuario))
 		{
 			model.addAttribute("usu", usuario);
-			return "iniciarSesion_template";
+			return "seleccion_campus";
 		}
 		else return "noExisteUsuario";
 	}
