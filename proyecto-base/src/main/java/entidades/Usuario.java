@@ -8,6 +8,10 @@ public class Usuario
 	private String clave;
 	private String correo;
 	
+	public Usuario() {
+		
+	}
+	
 	public Usuario(String nombre, String clave, String correo) {
 		this.nombre = nombre;
 		this.clave = clave;
