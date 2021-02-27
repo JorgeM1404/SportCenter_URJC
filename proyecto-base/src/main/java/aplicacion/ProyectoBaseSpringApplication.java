@@ -1,4 +1,4 @@
-package es.urjc.etsii.dad.SportCenterURJC;
+package aplicacion;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
