@@ -13,6 +13,10 @@ public class CentroDeportivo {
 		
 	}
 	
+	public CentroDeportivo(String campus) {
+		this.campus = campus;
+	}
+	
 	public CentroDeportivo(String campus, ArrayList<Actividad> actividades) {
 		this.campus = campus;
 		this.actividades= actividades;

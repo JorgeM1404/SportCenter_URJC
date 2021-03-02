@@ -1,0 +1,15 @@
+{{>cabecera}}
+<body>
+	<h1>Bienvenido a {{centro.campus}}</h1>
+	{{#centro.actividades}}
+	<a href="centro.actividades/{{-index}}">{{user}} {{title}}</a><br>
+	{{/centro.actividades}}
+	
+	{{^centro.actividades}}
+	<p>No hay actividades todavia.</p>
+	{{/centro.actividades}}
+
+	<br>
+	<a href="/campus">Volver</a>
+</body>
+{{>piepag}}

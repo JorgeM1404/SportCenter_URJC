@@ -1,11 +1,12 @@
 package aplicacion;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import entidades.Usuario;
+import entidades.*;
 
 @Controller
 public class ControladorWeb 
@@ -52,5 +53,39 @@ public class ControladorWeb
 			return "seleccion_campus";
 		}
 		else return "noExisteUsuario";
+	}
+	
+	@GetMapping("/campus/{num}")
+	public String SeleccionarCampus(Model model, @PathVariable int num)
+	{
+		
+		CentroDeportivo centro = null;
+		switch (num) {
+		case 1: centro = new CentroDeportivo ("Móstoles");
+				break;
+		case 2: centro = new CentroDeportivo ("Alcorcón");
+				break;
+		case 3: centro = new CentroDeportivo ("Fuenlabrada");
+				break;
+		case 4: centro = new CentroDeportivo ("Aranjuez");
+				break;
+		case 5: centro = new CentroDeportivo ("Vicálvaro");
+				break;
+		}
+		model.addAttribute("centro", centro );
+		return "campus";
+	}
+	
+	@GetMapping("/campus")
+	public String menuCampus()
+	{
+		return "seleccion_campus";
+	}
+	
+	@GetMapping("/perfil")
+	public String miPerfil(Model model, @RequestParam Usuario usuario)
+	{
+		model.addAttribute("usu", usuario);
+		return "iniciarSesion_template";
 	}
 }
