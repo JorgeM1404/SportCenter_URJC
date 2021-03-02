@@ -1,5 +1,7 @@
 package aplicacion;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -12,7 +14,18 @@ import entidades.*;
 public class ControladorWeb 
 {		
 	@Autowired
-	private ServicioUsuarios servicio;
+	private ServicioUsuarios servicioUsuarios;
+	
+	/*@Autowired
+	private ServicioCentroDeportivo servicioCentros;*/
+	
+	private Usuario usuarioActual;
+	
+	private boolean errorNombre = false;
+	private boolean errorClave = false;
+	private boolean faltanDatos = false;
+	
+	//private CentroDeportivo centro1;
 	
 	@GetMapping("/")
 	public String principal()
@@ -35,34 +48,80 @@ public class ControladorWeb
 	@PostMapping("/usuario/nuevo")
 	public String registrarse(Model model, Usuario usuario)
 	{
-		if(!servicio.findAll().contains(usuario))
+		if(!servicioUsuarios.findAll().contains(usuario))
 		{
-			servicio.nuevoUsuario(usuario);
+			servicioUsuarios.nuevoUsuario(usuario);
 			model.addAttribute("usu",usuario);
 			return "seleccion_campus";
 		}
 		else return "yaExisteUsuario";
 	}
 	
-	@PostMapping("/usuario/acceso")
-	public String iniciarSesion(Model model, Usuario usuario)
+	@GetMapping("/usuario/acceso")
+	public String acceder(Model model)
 	{
+		model.addAttribute("errorNombre", errorNombre);
+		model.addAttribute("errorClave", errorClave);
+		
+		return "iniciarSesion";
+	}
+	@PostMapping("/usuario/acceso")
+	public String iniciarSesion(Model model,Usuario usuario)
+	{
+		if(usuario.getNombre().trim().equals("") || usuario.getClave().trim().equals(""))
+		{
+			faltanDatos = true;
+			model.addAttribute("faltanDatos", faltanDatos);
+			faltanDatos = false;
+			
+			return "iniciarSesion";
+		}
+		else
+		{
+			if(servicioUsuarios.findAll().contains(usuario))
+			{
+				usuarioActual = usuario;
+				model.addAttribute("usu", usuario);
+				return "seleccion_campus";
+			}
+			else
+			{
+				errorNombre = true;
+				model.addAttribute("errorNombre",errorNombre);
+				errorNombre = false;
+				
+				return "iniciarSesion";
+			}
+		}
+		
+		/*
 		if(servicio.findAll().contains(usuario))
 		{
 			model.addAttribute("usu", usuario);
 			return "seleccion_campus";
 		}
-		else return "noExisteUsuario";
+		else return "noExisteUsuario";*/
 	}
+	
+	/*@GetMapping("/campus/actividades/{num}")
+	public String SeleccionarActividad(Model model, @PathVariable int num)
+	{
+		CentroDeportivo centro = servicioCentros.findById(0);
+		model.addAttribute("centro", centro);
+		
+		return "actividad";
+	}*/
 	
 	@GetMapping("/campus/{num}")
 	public String SeleccionarCampus(Model model, @PathVariable int num)
-	{
-		
+	{	
 		CentroDeportivo centro = null;
-		switch (num) {
-		case 1: centro = new CentroDeportivo ("Móstoles");
+		
+		switch (num) 
+		{
+		case 1: centro = new CentroDeportivo ("Mostoles");//centro = centro1;
 				break;
+				
 		case 2: centro = new CentroDeportivo ("Alcorcón");
 				break;
 		case 3: centro = new CentroDeportivo ("Fuenlabrada");
@@ -72,7 +131,7 @@ public class ControladorWeb
 		case 5: centro = new CentroDeportivo ("Vicálvaro");
 				break;
 		}
-		model.addAttribute("centro", centro );
+		model.addAttribute("centro", centro);
 		return "campus";
 	}
 	
@@ -82,10 +141,25 @@ public class ControladorWeb
 		return "seleccion_campus";
 	}
 	
-	@GetMapping("/perfil")
-	public String miPerfil(Model model, @RequestParam Usuario usuario)
+	@GetMapping("/menuPrincipal")
+	public String irAmenuPrincipal(Model model)
 	{
-		model.addAttribute("usu", usuario);
+		model.addAttribute("usu",usuarioActual);
+		return "seleccion_campus";
+	}
+	
+	@GetMapping("/perfil")
+	public String miPerfil(Model model)
+	{
+		model.addAttribute("usu", usuarioActual);
 		return "iniciarSesion_template";
 	}
+	
+	/*@GetMapping("/perfil/{id}")
+	public String miPerfil(Model model, @PathVariable long id)
+	{
+		Usuario usuario = servicio.findById(id);
+		model.addAttribute("usu", usuario);
+		return "iniciarSesion_template";
+	}*/
 }

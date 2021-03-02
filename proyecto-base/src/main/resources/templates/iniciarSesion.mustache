@@ -2,6 +2,18 @@
 
 <p>INICIAR SESION</p>
 
+{{#errorNombre}}
+   <p> Nombre incorrecto </p>
+{{/errorNombre}}
+
+{{#errorClave}}
+   <p> Clave incorrecta </p>
+{{/errorClave}}
+
+{{#faltanDatos}}
+   <p> Faltan datos </p>
+{{/faltanDatos}}
+
 <form action="usuario/acceso" method="post">
 <p>Nombre usuario</p>
 <p><input type= 'text' name= 'nombre'/></p>

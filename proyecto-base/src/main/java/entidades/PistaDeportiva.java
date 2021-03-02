@@ -18,6 +18,12 @@ public class PistaDeportiva {
 		this.ocupado = ocupado;
 	}
 	
+	public PistaDeportiva(String nombre_pista, boolean ocupado) {
+		this.nombre_pista = nombre_pista;
+		//this.actividad = actividad;
+		this.ocupado = ocupado;
+	}
+	
 	public String getNombrePista() {
 		return nombre_pista;
 	}

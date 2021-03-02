@@ -7,18 +7,22 @@ public class Actividad {
 	private long id;
 	
 	private String nombre_actividad;
-	private ArrayList<PistaDeportiva> pistas;
+	private PistaDeportiva [] pistas;
 	private Reserva reserva;
 
-	
 	public Actividad() {
 		
 	}
 	
-	public Actividad(String nombre_actividad, ArrayList<PistaDeportiva> pistas, Reserva reserva ) {
+	public Actividad(String nombre_actividad, PistaDeportiva [] pistas, Reserva reserva) {
 		this.nombre_actividad = nombre_actividad;
 		this.pistas = pistas;
 		this.reserva = reserva;
+	}
+	
+	public Actividad(String nombre_actividad, PistaDeportiva [] pistas) {
+		this.nombre_actividad = nombre_actividad;
+		this.pistas = pistas;
 	}
 	
 	public String getNombre_actividad() {
@@ -29,11 +33,11 @@ public class Actividad {
 		this.nombre_actividad = nombre_actividad;
 	}
 	
-	public ArrayList<PistaDeportiva> getPistas() {
+	public PistaDeportiva [] getPistas() {
 		return pistas;
 	}		
 	
-	public void setPistas(ArrayList<PistaDeportiva> pistas) {
+	public void setPistas(PistaDeportiva [] pistas) {
 		this.pistas = pistas;
 	}
 	

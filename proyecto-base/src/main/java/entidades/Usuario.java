@@ -8,6 +8,8 @@ public class Usuario
 	private String clave;
 	private String correo;
 	
+	private Reserva [] reservas;
+	
 	public Usuario() {
 		
 	}
