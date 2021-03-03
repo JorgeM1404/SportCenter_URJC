@@ -1,14 +1,9 @@
 package aplicacion;
 
-import java.util.ArrayList;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import entidades.*;
 
 @Controller
 public class ControladorWeb 
@@ -16,10 +11,11 @@ public class ControladorWeb
 	@Autowired
 	private ServicioUsuarios servicioUsuarios;
 	
-	/*@Autowired
-	private ServicioCentroDeportivo servicioCentros;*/
+	@Autowired
+	private ServicioCentros servicioCentros;
 	
 	private Usuario usuarioActual;
+	private CentroDeportivo centroActual;
 	
 	private boolean errorNombre = false;
 	private boolean errorClave = false;
@@ -48,9 +44,9 @@ public class ControladorWeb
 	@PostMapping("/usuario/nuevo")
 	public String registrarse(Model model, Usuario usuario)
 	{
-		if(!servicioUsuarios.findAll().contains(usuario))
+		if(!servicioUsuarios.getUsuarios().contains(usuario))
 		{
-			servicioUsuarios.nuevoUsuario(usuario);
+			servicioUsuarios.guardarUsuario(usuario);
 			model.addAttribute("usu",usuario);
 			return "seleccion_campus";
 		}
@@ -78,7 +74,7 @@ public class ControladorWeb
 		}
 		else
 		{
-			if(servicioUsuarios.findAll().contains(usuario))
+			if(servicioUsuarios.getUsuarios().contains(usuario))
 			{
 				usuarioActual = usuario;
 				model.addAttribute("usu", usuario);
@@ -112,36 +108,38 @@ public class ControladorWeb
 		return "actividad";
 	}*/
 	
-	@GetMapping("/campus/{num}")
-	public String SeleccionarCampus(Model model, @PathVariable int num)
+	@GetMapping("/campus/{campus}")
+	public String SeleccionarCampus(Model model, @PathVariable String campus)
 	{	
-		CentroDeportivo centro = null;
-		
-		switch (num) 
+		String plantilla = "";
+		centroActual = servicioCentros.getCentroByCampus(campus);
+		/*switch (num) 
 		{
-		case 1: centro = new CentroDeportivo ("Móstoles");//centro = centro1;
-				break;
-				
-		case 2: centro = new CentroDeportivo ("Alcorcón");
-				break;
-		case 3: centro = new CentroDeportivo ("Fuenlabrada");
-				break;
-		case 4: centro = new CentroDeportivo ("Aranjuez");
-				break;
-		case 5: centro = new CentroDeportivo ("Vicálvaro");
-				break;
+			case 1: centroActual = servicioCentros.getCentroByCampus("Mostoles"); break;				
+			case 2: centroActual = new CentroDeportivo ("Alcorcón"); break;
+			case 3: centroActual = new CentroDeportivo ("Fuenlabrada"); break;
+			case 4: centroActual = new CentroDeportivo ("Aranjuez"); break;
+			case 5: centroActual = new CentroDeportivo ("Vicálvaro"); break;
+		}*/
+		
+		model.addAttribute("centro", centroActual);
+		
+		switch (campus) 
+		{
+			case "Mostoles": plantilla = "campus1"; break;				
+			case "Alcorcón": plantilla = "campus1"; break;
+			case "Fuenlabrada": plantilla = "campus1"; break;
+			case "Aranjuez": plantilla = "campus1"; break;
+			case "Vicálvaro": plantilla = "campus1"; break;
 		}
-		model.addAttribute("centro", centro);
-		if (num == 1)
-		 return "campus1";
-		if (num == 2)
-			 return "campus2";
-		if (num == 3)
-			 return "campus3";
-		if (num == 4)
-			 return "campus4";
-		else
-			 return "campus5";
+		
+		/*if (campus.equals("Mostoles")) plantilla = "campus1";
+		if (campus.equals("Alcorcón")) plantilla =  "campus2";
+		if (campus.equals("Fuenlabrada")) plantilla = "campus3";
+		if (campus.equals("Aranjuez")) plantilla =  "campus4";
+		else plantilla =  "campus5";*/
+		
+		return plantilla;
 	}
 	
 	@GetMapping("/campus")

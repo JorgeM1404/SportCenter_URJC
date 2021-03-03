@@ -1,4 +1,4 @@
-package entidades;
+package aplicacion;
 
 public class PistaDeportiva {
 

@@ -1,18 +1,16 @@
-package entidades;
+package aplicacion;
 
 import java.util.ArrayList;
 
-public class Actividad {
-
+public class Actividad 
+{
 	private long id;
 	
 	private String nombre_actividad;
 	private PistaDeportiva [] pistas;
 	private Reserva reserva;
 
-	public Actividad() {
-		
-	}
+	public Actividad() { }
 	
 	public Actividad(String nombre_actividad, PistaDeportiva [] pistas, Reserva reserva) {
 		this.nombre_actividad = nombre_actividad;

@@ -1,0 +1,16 @@
+{{>cabecera4}}
+<body>
+	<h1>Bienvenido al campus de  {{centro.campus}}</h1>
+	
+	{{#centro.actividades}}
+	    <a href="/campus4/actividades/{{-index}}">{{nombre_actividad}} </a><br>
+	{{/centro.actividades}}
+	
+	{{^centro.actividades}}
+	    <p><h2>No hay actividades todavía.</h2></p>
+	{{/centro.actividades}}
+
+	<br>
+	<a href="/menuPrincipal">Volver</a>
+</body>
+{{>piepag}}

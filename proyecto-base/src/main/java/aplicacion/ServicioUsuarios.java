@@ -1,37 +1,40 @@
 package aplicacion;
 
 import java.util.Collection;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicLong;
+import javax.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import entidades.Usuario;
 
 @Service
 public class ServicioUsuarios 
 {
-	private ConcurrentHashMap<Long,Usuario> usuarios = new ConcurrentHashMap<>();
-	private AtomicLong nextId = new AtomicLong();
+	@Autowired
+	private RepositorioUsuarios repositorio;
 	
-	public ServicioUsuarios() {
-		nuevoUsuario(new Usuario("Jorge","1234","j.molinat.2017@alumnos.urjc.es"));
+	@PostConstruct
+	public void init()
+	{
+		repositorio.save(new Usuario("Jorge","1234","j.molinat.2017@alumnos.urjc.es"));
 	}
 	
-	public Usuario findById(long id) {
-		return usuarios.get(id);
+	public Collection<Usuario> getUsuarios()
+	{
+		return repositorio.findAll();
 	}
 	
-	public void removeById(long id) {
-		usuarios.remove(id);
+	public Usuario getUsuario(long id)
+	{
+		return repositorio.findById(id).orElseThrow();		
 	}
 	
-	public Collection<Usuario> findAll() {
-		return usuarios.values();
+	public void borrarUsuario(long id)
+	{
+		Usuario usu = repositorio.findById(id).orElseThrow();
+		repositorio.delete(usu);
 	}
 	
-	public void nuevoUsuario(Usuario usu) {
-		long id = nextId.getAndIncrement();
-		usu.setId(id);
-		this.usuarios.put(id, usu);
+	public void guardarUsuario(Usuario usu)
+	{
+		repositorio.save(usu);
 	}
 }
