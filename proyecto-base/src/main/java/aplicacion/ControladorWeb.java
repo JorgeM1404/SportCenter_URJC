@@ -119,7 +119,7 @@ public class ControladorWeb
 		
 		switch (num) 
 		{
-		case 1: centro = new CentroDeportivo ("Mostoles");//centro = centro1;
+		case 1: centro = new CentroDeportivo ("Móstoles");//centro = centro1;
 				break;
 				
 		case 2: centro = new CentroDeportivo ("Alcorcón");
@@ -132,7 +132,16 @@ public class ControladorWeb
 				break;
 		}
 		model.addAttribute("centro", centro);
-		return "campus";
+		if (num == 1)
+		 return "campus1";
+		if (num == 2)
+			 return "campus2";
+		if (num == 3)
+			 return "campus3";
+		if (num == 4)
+			 return "campus4";
+		else
+			 return "campus5";
 	}
 	
 	@GetMapping("/campus")
@@ -152,7 +161,7 @@ public class ControladorWeb
 	public String miPerfil(Model model)
 	{
 		model.addAttribute("usu", usuarioActual);
-		return "iniciarSesion_template";
+		return "mostrar_perfil";
 	}
 	
 	/*@GetMapping("/perfil/{id}")
