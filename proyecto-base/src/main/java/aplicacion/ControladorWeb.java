@@ -1,6 +1,9 @@
 package aplicacion;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,11 +20,12 @@ public class ControladorWeb
 	private Usuario usuarioActual;
 	private CentroDeportivo centroActual;
 	
-	private boolean errorNombre = false;
-	private boolean errorClave = false;
-	private boolean faltanDatos = false;
-	
-	//private CentroDeportivo centro1;
+	//private boolean errorNombre = false;
+	//private boolean errorClave = false;
+	//private boolean faltanDatos = false;
+	private boolean datosIncorrectos = false;
+	private boolean usuarioNoExiste = false;
+	private boolean usuarioYaExiste = false;
 	
 	@GetMapping("/")
 	public String principal()
@@ -41,62 +45,90 @@ public class ControladorWeb
 		return "iniciarSesion";
 	}
 	
+	
+	@GetMapping("/usuario/nuevo")
+	public String registrarse1(Model model)
+	{
+		model.addAttribute("datosIncorrectos", datosIncorrectos);
+		model.addAttribute("usuarioYaExiste", usuarioYaExiste);
+		datosIncorrectos = false;
+		usuarioYaExiste = false;
+		
+		return "registrarse";
+	}
+	
 	@PostMapping("/usuario/nuevo")
 	public String registrarse(Model model, Usuario usuario)
 	{
-		if(!servicioUsuarios.getUsuarios().contains(usuario))
+		if(usuario.getNombre().trim().equals("") || usuario.getClave().trim().equals("") || usuario.getCorreo().trim().equals(""))
 		{
-			servicioUsuarios.guardarUsuario(usuario);
-			model.addAttribute("usu",usuario);
-			return "seleccion_campus";
+			datosIncorrectos = true;
+			model.addAttribute("datosIncorrectos", datosIncorrectos);
+			//datosIncorrectos = false;
+			
+			return "registrarse";
 		}
-		else return "yaExisteUsuario";
+		else
+		{
+			Optional<Usuario> usu = servicioUsuarios.getUsuarioByAllFields(usuario.getNombre(), usuario.getClave(), usuario.getCorreo());
+			if(!usu.isPresent())
+			{
+				servicioUsuarios.guardarUsuario(usuario);
+				usuarioActual = usuario;
+				model.addAttribute("usu", usuarioActual);
+				
+				return "seleccion_campus";
+			}
+			else
+			{
+				usuarioYaExiste = true;
+				model.addAttribute("usuarioYaExiste", usuarioYaExiste);
+				//usuarioYaExiste = false;
+				
+				return "registrarse";
+			}
+		}
 	}
 	
 	@GetMapping("/usuario/acceso")
 	public String acceder(Model model)
 	{
-		model.addAttribute("errorNombre", errorNombre);
-		model.addAttribute("errorClave", errorClave);
+		model.addAttribute("datosIncorrectos", datosIncorrectos);
+		model.addAttribute("usuarioNoExiste", usuarioNoExiste);
+		usuarioNoExiste = false;
+		datosIncorrectos = false;
 		
 		return "iniciarSesion";
 	}
 	@PostMapping("/usuario/acceso")
 	public String iniciarSesion(Model model,Usuario usuario)
 	{
-		if(usuario.getNombre().trim().equals("") || usuario.getClave().trim().equals(""))
+		if(usuario.getNombre().trim().equals("") || usuario.getClave().trim().equals("") || usuario.getCorreo().trim().equals(""))
 		{
-			faltanDatos = true;
-			model.addAttribute("faltanDatos", faltanDatos);
-			faltanDatos = false;
+			datosIncorrectos = true;
+			model.addAttribute("datosIncorrectos", datosIncorrectos);
+			//datosIncorrectos = false;
 			
 			return "iniciarSesion";
 		}
 		else
 		{
-			if(servicioUsuarios.getUsuarios().contains(usuario))
+			Optional<Usuario> usu = servicioUsuarios.getUsuarioByAllFields(usuario.getNombre(), usuario.getClave(), usuario.getCorreo());
+			if(usu.isPresent())
 			{
-				usuarioActual = usuario;
-				model.addAttribute("usu", usuario);
+				usuarioActual = usu.orElseThrow();
+				model.addAttribute("usu", usuarioActual);
 				return "seleccion_campus";
 			}
 			else
 			{
-				errorNombre = true;
-				model.addAttribute("errorNombre",errorNombre);
-				errorNombre = false;
+				usuarioNoExiste = true;
+				model.addAttribute("usuarioNoExiste", usuarioNoExiste);
+				//usuarioNoExiste = false;
 				
 				return "iniciarSesion";
 			}
 		}
-		
-		/*
-		if(servicio.findAll().contains(usuario))
-		{
-			model.addAttribute("usu", usuario);
-			return "seleccion_campus";
-		}
-		else return "noExisteUsuario";*/
 	}
 	
 	/*@GetMapping("/campus/actividades/{num}")
@@ -127,10 +159,10 @@ public class ControladorWeb
 		switch (campus) 
 		{
 			case "Mostoles": plantilla = "campus1"; break;				
-			case "Alcorcón": plantilla = "campus1"; break;
-			case "Fuenlabrada": plantilla = "campus1"; break;
-			case "Aranjuez": plantilla = "campus1"; break;
-			case "Vicálvaro": plantilla = "campus1"; break;
+			case "Alcorcón": plantilla = "campus2"; break;
+			case "Fuenlabrada": plantilla = "campus3"; break;
+			case "Aranjuez": plantilla = "campus4"; break;
+			case "Vicálvaro": plantilla = "campus5"; break;
 		}
 		
 		/*if (campus.equals("Mostoles")) plantilla = "campus1";
