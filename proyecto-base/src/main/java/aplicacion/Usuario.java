@@ -1,20 +1,18 @@
 package aplicacion;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Usuario 
 {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long id;
-	
 	private String nombre;
+	
 	private String clave;
 	private String correo;
+	
+	//private List<Reserva> reservas;
 	
 	public Usuario() {}
 	
@@ -24,14 +22,6 @@ public class Usuario
 		this.nombre = nombre;
 		this.clave = clave;
 		this.correo = correo;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public String getNombre() {
@@ -62,7 +52,9 @@ public class Usuario
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((clave == null) ? 0 : clave.hashCode());
+		result = prime * result + ((correo == null) ? 0 : correo.hashCode());
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
 		return result;
 	}
 
@@ -75,13 +67,26 @@ public class Usuario
 		if (getClass() != obj.getClass())
 			return false;
 		Usuario other = (Usuario) obj;
-		if (id != other.id)
+		if (clave == null) {
+			if (other.clave != null)
+				return false;
+		} else if (!clave.equals(other.clave))
+			return false;
+		if (correo == null) {
+			if (other.correo != null)
+				return false;
+		} else if (!correo.equals(other.correo))
+			return false;
+		if (nombre == null) {
+			if (other.nombre != null)
+				return false;
+		} else if (!nombre.equals(other.nombre))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nombre=" + nombre + ", clave=" + clave + ", correo=" + correo + "]";
+		return "Usuario [nombre=" + nombre + ", clave=" + clave + ", correo=" + correo + "]";
 	}
 }

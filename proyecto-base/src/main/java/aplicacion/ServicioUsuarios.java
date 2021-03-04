@@ -1,7 +1,6 @@
 package aplicacion;
 
 import java.util.Collection;
-import java.util.Optional;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,15 +20,11 @@ public class ServicioUsuarios
 		return repositorio.findAll();
 	}
 	
-	public Optional<Usuario> getUsuarioByAllFields(String nombre, String clave, String correo) {
-		return repositorio.findByNombreAndClaveAndCorreo(nombre, clave, correo);
-	}
-	
-	public Usuario getUsuario(long id) {
+	public Usuario getUsuario(String id) {
 		return repositorio.findById(id).orElseThrow();		
 	}
 	
-	public void borrarUsuario(long id) {
+	public void borrarUsuario(String id) {
 		Usuario usu = repositorio.findById(id).orElseThrow();
 		repositorio.delete(usu);
 	}

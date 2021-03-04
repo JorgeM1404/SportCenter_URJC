@@ -1,38 +1,35 @@
 package aplicacion;
 
 import java.util.ArrayList;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.util.LinkedList;
+import java.util.List;
+import javax.persistence.*;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
+@Table(name = "centro")
 public class CentroDeportivo 
 {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-	private long id;
-	
 	private String campus;
-	private ArrayList<Actividad> actividades;
+	
+    @ManyToMany(mappedBy = "centros")
+    @LazyCollection(LazyCollectionOption.FALSE)
+	private List<Actividad> actividades;
 
 	public CentroDeportivo() { }
 	
 	public CentroDeportivo(String campus) {
+		super();
 		this.campus = campus;
+		this.actividades = new LinkedList<>();
 	}
 	
 	public CentroDeportivo(String campus, ArrayList<Actividad> actividades) {
+		super();
 		this.campus = campus;
 		this.actividades= actividades;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public String getCampus() {
@@ -43,11 +40,11 @@ public class CentroDeportivo
 		this.campus = campus;
 	}
 
-	public ArrayList<Actividad> getActividades() {
+	public List<Actividad> getActividades() {
 		return actividades;
 	}
 
-	public void setActividades(ArrayList<Actividad> actividades) {
+	public void setActividades(List<Actividad> actividades) {
 		this.actividades = actividades;
 	}
 
@@ -55,7 +52,7 @@ public class CentroDeportivo
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((campus == null) ? 0 : campus.hashCode());
 		return result;
 	}
 
@@ -68,13 +65,16 @@ public class CentroDeportivo
 		if (getClass() != obj.getClass())
 			return false;
 		CentroDeportivo other = (CentroDeportivo) obj;
-		if (id != other.id)
+		if (campus == null) {
+			if (other.campus != null)
+				return false;
+		} else if (!campus.equals(other.campus))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "CentroDeportivo [id=" + id + ", campus=" + campus + ", actividades=" + actividades + "]";
+		return "CentroDeportivo [campus=" + campus + "]";
 	}
 }

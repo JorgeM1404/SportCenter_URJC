@@ -1,9 +1,7 @@
 package aplicacion;
 
-import java.util.Optional;
-
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,9 +18,6 @@ public class ControladorWeb
 	private Usuario usuarioActual;
 	private CentroDeportivo centroActual;
 	
-	//private boolean errorNombre = false;
-	//private boolean errorClave = false;
-	//private boolean faltanDatos = false;
 	private boolean datosIncorrectos = false;
 	private boolean usuarioNoExiste = false;
 	private boolean usuarioYaExiste = false;
@@ -70,8 +65,8 @@ public class ControladorWeb
 		}
 		else
 		{
-			Optional<Usuario> usu = servicioUsuarios.getUsuarioByAllFields(usuario.getNombre(), usuario.getClave(), usuario.getCorreo());
-			if(!usu.isPresent())
+			Usuario usu = servicioUsuarios.getUsuario(usuario.getNombre());
+			if(!servicioUsuarios.existeUsuario(usu))
 			{
 				servicioUsuarios.guardarUsuario(usuario);
 				usuarioActual = usuario;
@@ -113,10 +108,10 @@ public class ControladorWeb
 		}
 		else
 		{
-			Optional<Usuario> usu = servicioUsuarios.getUsuarioByAllFields(usuario.getNombre(), usuario.getClave(), usuario.getCorreo());
-			if(usu.isPresent())
+			Usuario usu = servicioUsuarios.getUsuario(usuario.getNombre());
+			if(servicioUsuarios.existeUsuario(usu))
 			{
-				usuarioActual = usu.orElseThrow();
+				usuarioActual = usu;
 				model.addAttribute("usu", usuarioActual);
 				return "seleccion_campus";
 			}
@@ -144,17 +139,11 @@ public class ControladorWeb
 	public String SeleccionarCampus(Model model, @PathVariable String campus)
 	{	
 		String plantilla = "";
-		centroActual = servicioCentros.getCentroByCampus(campus);
-		/*switch (num) 
-		{
-			case 1: centroActual = servicioCentros.getCentroByCampus("Mostoles"); break;				
-			case 2: centroActual = new CentroDeportivo ("Alcorcón"); break;
-			case 3: centroActual = new CentroDeportivo ("Fuenlabrada"); break;
-			case 4: centroActual = new CentroDeportivo ("Aranjuez"); break;
-			case 5: centroActual = new CentroDeportivo ("Vicálvaro"); break;
-		}*/
+		centroActual = servicioCentros.getCentro(campus);//.getCentroByCampus(campus);
+		List<Actividad> act = centroActual.getActividades();
 		
 		model.addAttribute("centro", centroActual);
+		model.addAttribute("act", act);
 		
 		switch (campus) 
 		{
@@ -163,14 +152,7 @@ public class ControladorWeb
 			case "Fuenlabrada": plantilla = "campus3"; break;
 			case "Aranjuez": plantilla = "campus4"; break;
 			case "Vicálvaro": plantilla = "campus5"; break;
-		}
-		
-		/*if (campus.equals("Mostoles")) plantilla = "campus1";
-		if (campus.equals("Alcorcón")) plantilla =  "campus2";
-		if (campus.equals("Fuenlabrada")) plantilla = "campus3";
-		if (campus.equals("Aranjuez")) plantilla =  "campus4";
-		else plantilla =  "campus5";*/
-		
+		}	
 		return plantilla;
 	}
 	
@@ -193,12 +175,4 @@ public class ControladorWeb
 		model.addAttribute("usu", usuarioActual);
 		return "mostrar_perfil";
 	}
-	
-	/*@GetMapping("/perfil/{id}")
-	public String miPerfil(Model model, @PathVariable long id)
-	{
-		Usuario usuario = servicio.findById(id);
-		model.addAttribute("usu", usuario);
-		return "iniciarSesion_template";
-	}*/
 }

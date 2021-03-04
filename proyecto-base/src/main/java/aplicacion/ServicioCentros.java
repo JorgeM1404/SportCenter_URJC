@@ -1,7 +1,8 @@
 package aplicacion;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,52 +14,50 @@ public class ServicioCentros
 	@Autowired
 	private RepositorioCentros repositorio;
 	
+	@Autowired
+	private ServicioActividades servicioActividades;
+	
 	@PostConstruct
 	public void Init()
-	{
-		/*PistaDeportiva [] pistas1 = {new PistaDeportiva("Cancha de football A",false),new PistaDeportiva("Cancha de football B",false)};
-        PistaDeportiva [] pistas2 = {new PistaDeportiva("Cancha de football A",false),new PistaDeportiva("Cancha de football B",false)};
-	    Actividad actividad1 = new Actividad("Football",pistas1);
-	    Actividad actividad2 = new Actividad("Football",pistas2);
-	    ArrayList<Actividad> actividades = new ArrayList<>(); actividades.add(actividad1); actividades.add(actividad2);*/
-	    
-	    repositorio.save(new CentroDeportivo ("Mostoles"));//,actividades));
+	{   
+		CentroDeportivo centro1 = new CentroDeportivo("Mostoles");		
+	    repositorio.save(centro1);
+	    setActividadesMostoles(centro1);
+	   
 	    repositorio.save(new CentroDeportivo ("Alcorcón"));
 	    repositorio.save(new CentroDeportivo ("Fuenlabrada"));
 	    repositorio.save(new CentroDeportivo ("Aranjuez"));
 	    repositorio.save(new CentroDeportivo ("Vicálvaro"));
 	}
+	
+	public void setActividadesMostoles(CentroDeportivo centro)
+	{		
+		Actividad act1 = new Actividad("Football");  act1.getCentros().add(centro);
+		Actividad act2 = new Actividad("Baloncesto");  act2.getCentros().add(centro);
+		Actividad act3 = new Actividad("Tenis");  act3.getCentros().add(centro);
+		Actividad act4 = new Actividad("Balonmano");  act4.getCentros().add(centro);
+		Actividad act5 = new Actividad("Natacion");  act5.getCentros().add(centro);
 
-	public ArrayList<Actividad> getActividadesCentroById(long id) {
+		servicioActividades.guardarActividad(act1);
+		servicioActividades.guardarActividad(act2);
+		servicioActividades.guardarActividad(act3);
+		servicioActividades.guardarActividad(act4);
+		servicioActividades.guardarActividad(act5);
+	}
+	
+	public List<Actividad> getActividadesCentro(String id) {
 		return repositorio.findById(id).orElseThrow().getActividades();
 	}
 	
-	public ArrayList<Actividad> getActividadesCentroByCampus(String campus)	{
-		return repositorio.findByCampus(campus).orElseThrow().getActividades();
-	}
-	
-	
-	public CentroDeportivo getCentroById(long id) {
+	public CentroDeportivo getCentro(String id) {
 		return repositorio.findById(id).orElseThrow();
 	}
 	
-	public CentroDeportivo getCentroByCampus(String campus) {
-		return repositorio.findByCampus(campus).orElseThrow();
-	}
-	
-	public void borrarCentroById(long id) {
+	public void borrarCentro(String id) {
 		repositorio.deleteById(id);
-	}
-	
-	public void borrarCentroByCampus(String campus) {
-		repositorio.deleteByCampus(campus);
 	}
 	
 	public Collection<CentroDeportivo> findAll() {
 		return repositorio.findAll();
 	}
-	
-	/*public void guardarCentro(CentroDeportivo centro) {
-		repositorio.save(centro);
-	}*/
 }
