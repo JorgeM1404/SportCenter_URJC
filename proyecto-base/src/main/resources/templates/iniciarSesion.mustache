@@ -15,13 +15,11 @@
 <div class="iSesion">
 
 	{{#datosIncorrectos}}
-		<p> Faltan datos por introducir </p>
-		<a href="/">Volver</a>
+		<p style="color:red">Faltan datos por introducir.</p>
 	{{/datosIncorrectos}}
 
 	{{#usuarioYaExiste}}
-		<p> El usuario introducido ya existe </p>
-		<a href="/">Volver</a>
+		<p style="color:red">El usuario introducido ya existe </p>
 	{{/usuarioYaExiste}}
 
 	<p>INICIAR SESION</p>
@@ -34,7 +32,7 @@
 	<p><input type= 'text' name= 'correo'/></p>
 	<p><input type='submit' value= 'Iniciar Sesión'/></p>
 	</form>
-	<a href="/">Volver</a>
+	<a href="/"><button class="button botonVOLVER"> Volver </button></a>
    
 </div>
 

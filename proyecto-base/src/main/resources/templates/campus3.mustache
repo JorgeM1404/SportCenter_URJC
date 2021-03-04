@@ -1,16 +1,18 @@
-{{>cabecera3}}
-<body>
-	<h1>Bienvenido al campus de  {{centro.campus}}</h1>
-	
-	{{#centro.actividades}}
-	    <a href="/campus3/actividades/{{-index}}">{{nombre_actividad}} </a><br>
-	{{/centro.actividades}}
-	
-	{{^centro.actividades}}
-	    <p><h2>No hay actividades todavía.</h2></p>
-	{{/centro.actividades}}
+{{>cabeceraFUENLABRADA}}
 
-	<br>
-	<a href="/menuPrincipal">Volver</a>
-</body>
+	<div class="contenido">
+		<h1>Bienvenido al campus de  {{centro.campus}}</h1>
+	
+		{{#centro.actividades}}
+	    	<a href="/campus3/actividades/{{-index}}">{{nombre_actividad}} </a><br>
+		{{/centro.actividades}}
+	
+		{{^centro.actividades}}
+	    	<p><h2>No hay actividades todavía.</h2></p>
+		{{/centro.actividades}}
+
+		<br>
+		<a href="/menuPrincipal"><button class="button botonVOLVER"> Volver </button></a>
+	</div>s
+
 {{>piepag}}

@@ -64,7 +64,7 @@ public class ControladorWeb
 		{
 			datosIncorrectos = true;
 			model.addAttribute("datosIncorrectos", datosIncorrectos);
-			//datosIncorrectos = false;
+			datosIncorrectos = false;
 			
 			return "registrarse";
 		}
@@ -83,9 +83,9 @@ public class ControladorWeb
 			{
 				usuarioYaExiste = true;
 				model.addAttribute("usuarioYaExiste", usuarioYaExiste);
-				//usuarioYaExiste = false;
+				usuarioYaExiste = false;
 				
-				return "registrarse";
+				return "yaExisteUsuario";
 			}
 		}
 	}
@@ -107,7 +107,7 @@ public class ControladorWeb
 		{
 			datosIncorrectos = true;
 			model.addAttribute("datosIncorrectos", datosIncorrectos);
-			//datosIncorrectos = false;
+			datosIncorrectos = false;
 			
 			return "iniciarSesion";
 		}
@@ -124,9 +124,9 @@ public class ControladorWeb
 			{
 				usuarioNoExiste = true;
 				model.addAttribute("usuarioNoExiste", usuarioNoExiste);
-				//usuarioNoExiste = false;
+				usuarioNoExiste = false;
 				
-				return "iniciarSesion";
+				return "noExisteUsuario";
 			}
 		}
 	}

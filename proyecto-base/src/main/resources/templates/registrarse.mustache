@@ -3,14 +3,8 @@
 <div class="iSesion">
 
 	{{#datosIncorrectos}}
-		<p> Faltan datos por introducir </p>
-		<a href="/">Volver</a>
+		<p style="color:red">Faltan datos por introducir.</p>
 	{{/datosIncorrectos}}
-
-	{{#usuarioNoExiste}}
-		<p> El usuario introducido no existe </p>
-		<a href="/">Volver</a>
-	{{/usuarioNoExiste}}
 
 	<p>REGISTRAR USUARIO</p>
 	<form action="usuario/nuevo" method="post">
@@ -22,7 +16,7 @@
 	<p><input type= 'text' name= 'correo'/></p>
 	<p><input type='submit' value= 'Registrarse'/></p>
 	</form>
-	<a href="/">Volver</a>
+	<a href="/"><button class="button botonVOLVER"> Volver </button></a>
 </div>
 
 {{>piepag}}
