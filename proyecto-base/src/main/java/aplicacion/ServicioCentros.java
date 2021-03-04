@@ -40,7 +40,6 @@ public class ServicioCentros
 	    repositorio.save(centro5);
 	    setActividadesVicalvaro(centro5);
 	    
-	    
 	    //repositorio.save(new CentroDeportivo ("Alcorcón"));
 	    //repositorio.save(new CentroDeportivo ("Fuenlabrada"));
 	    //repositorio.save(new CentroDeportivo ("Aranjuez"));
