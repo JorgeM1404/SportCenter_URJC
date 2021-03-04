@@ -3,13 +3,13 @@
 	<div class="contenido">
 		<h1>Bienvenido al campus de  {{centro.campus}}</h1>
 	
-		{{#centro.actividades}}
-	    	<a href="/campus5/actividades/{{-index}}">{{nombre_actividad}} </a><br>
-		{{/centro.actividades}}
+		{{#act}}
+	    	<h1><a href="/">{{nombre}} </a><br></h1>
+		{{/act}}
 	
-		{{^centro.actividades}}
+		{{^act}}
 	    	<p><h2>No hay actividades todavía.</h2></p>
-		{{/centro.actividades}}
+		{{/act}}
 
 		<br>
 		<a href="/menuPrincipal"><button class="button botonVOLVER"> Volver </button></a>
