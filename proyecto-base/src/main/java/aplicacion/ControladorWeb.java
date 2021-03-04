@@ -26,7 +26,7 @@ public class ControladorWeb
 	private boolean datosIncorrectos = false;
 	private boolean usuarioNoExiste = false;
 	private boolean usuarioYaExiste = false;
-	
+
 	@GetMapping("/")
 	public String principal()
 	{

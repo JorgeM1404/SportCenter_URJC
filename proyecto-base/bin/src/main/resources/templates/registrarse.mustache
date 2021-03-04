@@ -2,16 +2,27 @@
 
 <p>REGISTRAR USUARIO</p>
 
-<form action="usuario/nuevo" method="post">
-<p>Nombre usuario</p>
-<p><input type= 'text' name= 'nombre'/></p>
-<p>Contraseña</p>
-<p><input type= 'text' name= 'clave'/></p>
-<p>Correo electronico</p>
-<p><input type= 'text' name= 'correo'/></p>
-<p><input type='submit' value= 'Registrarse'/></p>
-</form>
+{{#datosIncorrectos}}
+   <p> Faltan datos por introducir </p>
+   <a href="/">Volver</a>
+{{/datosIncorrectos}}
 
-<a href="/">Volver</a>
+{{#usuarioNoExiste}}
+   <p> El usuario introducido no existe </p>
+   <a href="/">Volver</a>
+{{/usuarioNoExiste}}
+
+
+   <form action="usuario/nuevo" method="post">
+   <p>Nombre usuario</p>
+   <p><input type= 'text' name= 'nombre'/></p>
+   <p>Clave</p>
+   <p><input type= 'text' name= 'clave'/></p>
+   <p>Correo</p>
+   <p><input type= 'text' name= 'correo'/></p>
+   <p><input type='submit' value= 'Registrarse'/></p>
+   </form>
+   <a href="/">Volver</a>
+
 
 {{>piepag}}

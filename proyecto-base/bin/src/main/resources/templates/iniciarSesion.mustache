@@ -2,7 +2,7 @@
 
 <p>INICIAR SESION</p>
 
-{{#errorNombre}}
+<!--{{#errorNombre}}
    <p> Nombre incorrecto </p>
 {{/errorNombre}}
 
@@ -12,18 +12,31 @@
 
 {{#faltanDatos}}
    <p> Faltan datos </p>
-{{/faltanDatos}}
+{{/faltanDatos}} -->
 
-<form action="usuario/acceso" method="post">
-<p>Nombre usuario</p>
-<p><input type= 'text' name= 'nombre'/></p>
-<p>Clave</p>
-<p><input type= 'text' name= 'clave'/></p>
-<p>Correo</p>
-<p><input type= 'text' name= 'correo'/></p>
-<p><input type='submit' value= 'Iniciar Sesión'/></p>
-</form>
 
-<a href="/">Volver</a>
+
+{{#datosIncorrectos}}
+   <p> Faltan datos por introducir </p>
+   <a href="/">Volver</a>
+{{/datosIncorrectos}}
+
+{{#usuarioYaExiste}}
+   <p> El usuario introducido ya existe </p>
+   <a href="/">Volver</a>
+{{/usuarioYaExiste}}
+
+
+   <form action="usuario/acceso" method="post">
+   <p>Nombre usuario</p>
+   <p><input type= 'text' name= 'nombre'/></p>
+   <p>Clave</p>
+   <p><input type= 'text' name= 'clave'/></p>
+   <p>Correo</p>
+   <p><input type= 'text' name= 'correo'/></p>
+   <p><input type='submit' value= 'Iniciar Sesión'/></p>
+   </form>
+   
+   <a href="/">Volver</a>
 
 {{>piepag}}
