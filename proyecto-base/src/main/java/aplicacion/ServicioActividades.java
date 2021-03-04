@@ -15,8 +15,8 @@ public class ServicioActividades
 		return repositorio.findAll();
 	}
 	
-	public Optional<Actividad> getActividad(String id) {
-		return repositorio.findById(id);
+	public Actividad getActividad(String id) {
+		return repositorio.findById(id).orElseThrow();
 	}
 	
 	public void borrarUsuarios(String id) {

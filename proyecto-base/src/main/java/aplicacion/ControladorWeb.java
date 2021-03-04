@@ -15,6 +15,9 @@ public class ControladorWeb
 	@Autowired
 	private ServicioCentros servicioCentros;
 	
+	@Autowired
+	private ServicioActividades servicioActividades;
+	
 	private Usuario usuarioActual;
 	private CentroDeportivo centroActual;
 	
@@ -126,14 +129,32 @@ public class ControladorWeb
 		}
 	}
 	
-	/*@GetMapping("/campus/actividades/{num}")
-	public String SeleccionarActividad(Model model, @PathVariable int num)
+	@GetMapping("/campus/actividades/{nombre}")
+	public String SeleccionarActividad(Model model, @PathVariable String nombre)
 	{
-		CentroDeportivo centro = servicioCentros.findById(0);
-		model.addAttribute("centro", centro);
+		Actividad act = servicioActividades.getActividad(nombre);
+		model.addAttribute("act", act);
 		
 		return "actividad";
-	}*/
+	}
+	
+	@GetMapping("/campus/actividades")
+	public String menuActividades(Model model)
+	{
+		String plantilla = "";
+		List<Actividad> act = centroActual.getActividades();
+		model.addAttribute("centro", centroActual);
+		model.addAttribute("act", act);
+		switch (centroActual.getCampus()) 
+		{
+			case "Mostoles": plantilla = "campus1"; break;				
+			case "Alcorcón": plantilla = "campus2"; break;
+			case "Fuenlabrada": plantilla = "campus3"; break;
+			case "Aranjuez": plantilla = "campus4"; break;
+			case "Vicálvaro": plantilla = "campus5"; break;
+		}	
+		return plantilla;
+	}
 	
 	@GetMapping("/campus/{campus}")
 	public String SeleccionarCampus(Model model, @PathVariable String campus)
