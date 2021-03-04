@@ -77,7 +77,6 @@ public class ServicioCentros
 		servicioActividades.guardarActividad(act3);
 		servicioActividades.guardarActividad(act4);
 		servicioActividades.guardarActividad(act5);
-		
 	}
 	
 	public void setActividadesFuenlabrada(CentroDeportivo centro)
