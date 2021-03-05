@@ -2,6 +2,16 @@
 
 	<div class="contenido">
 		<h1> Bienvenido a tu perfil personal {{usu.nombre}}  </h1>
+		
+		{{#res}}
+		     <li> {{.}} </li>
+		{{/res}}
+		
+		{{^res}}
+		     <p> No se ha realizado ninguna reserva todavia </p>
+		{{/res}}	
+		
+		<p> <a href="/perfil/realizarReserva"><button class="button botonVOLVER"> Reservar </button></a> </p>
 		<a href="/menuPrincipal"><button class="button botonVOLVER"> Volver </button></a>
 	</div>
 

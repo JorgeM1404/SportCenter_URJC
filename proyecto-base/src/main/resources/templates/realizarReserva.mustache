@@ -1,0 +1,17 @@
+{{>cabecera}}
+
+<div class="iSesion">
+
+	<p>SOLICITAR RESERVA</p>
+	<form action="/perfil/realizarReserva" method="post">
+	<p>Nombre de la reserva</p>
+	<p><input type= 'text' name= 'nombreReserva'/></p>
+	<p>Fecha </p>
+	<p><input type= 'date' name= 'fecha'/></p>
+
+	<p><input type='submit' value= 'CONFIRMAR'/></p>
+	</form>
+	<a href="/perfil"><button class="button botonVOLVER"> Volver </button></a>
+</div>
+
+{{>piepag}}

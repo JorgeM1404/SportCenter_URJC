@@ -18,6 +18,9 @@ public class ControladorWeb
 	@Autowired
 	private ServicioActividades servicioActividades;
 	
+	@Autowired
+	private ServicioReservas servicioReservas;
+	
 	private Usuario usuarioActual;
 	private CentroDeportivo centroActual;
 	
@@ -29,6 +32,13 @@ public class ControladorWeb
 	public String principal()
 	{
 		return "inicio";
+	}
+	
+	@GetMapping("/menuPrincipal")
+	public String irAmenuPrincipal(Model model)
+	{
+		model.addAttribute("usu",usuarioActual);
+		return "seleccion_campus";
 	}
 	
 	@GetMapping("/registrarse")
@@ -43,7 +53,6 @@ public class ControladorWeb
 		return "iniciarSesion";
 	}
 	
-	
 	@GetMapping("/usuario/nuevo")
 	public String registrarse1(Model model)
 	{
@@ -54,7 +63,6 @@ public class ControladorWeb
 		
 		return "registrarse";
 	}
-	
 	@PostMapping("/usuario/nuevo")
 	public String registrarse(Model model, Usuario usuario)
 	{
@@ -129,31 +137,10 @@ public class ControladorWeb
 		}
 	}
 	
-	@GetMapping("/campus/actividades/{nombre}")
-	public String SeleccionarActividad(Model model, @PathVariable String nombre)
+	@GetMapping("/campus")
+	public String menuCampus()
 	{
-		Actividad act = servicioActividades.getActividad(nombre);
-		model.addAttribute("act", act);
-		
-		return "actividad";
-	}
-	
-	@GetMapping("/campus/actividades")
-	public String menuActividades(Model model)
-	{
-		String plantilla = "";
-		List<Actividad> act = centroActual.getActividades();
-		model.addAttribute("centro", centroActual);
-		model.addAttribute("act", act);
-		switch (centroActual.getCampus()) 
-		{
-			case "Mostoles": plantilla = "campus1"; break;				
-			case "Alcorcón": plantilla = "campus2"; break;
-			case "Fuenlabrada": plantilla = "campus3"; break;
-			case "Aranjuez": plantilla = "campus4"; break;
-			case "Vicálvaro": plantilla = "campus5"; break;
-		}	
-		return plantilla;
+		return "seleccion_campus";
 	}
 	
 	@GetMapping("/campus/{campus}")
@@ -177,23 +164,59 @@ public class ControladorWeb
 		return plantilla;
 	}
 	
-	@GetMapping("/campus")
-	public String menuCampus()
+	@GetMapping("/campus/actividades")
+	public String menuActividades(Model model)
 	{
-		return "seleccion_campus";
+		String plantilla = "";
+		List<Actividad> act = centroActual.getActividades();
+		model.addAttribute("centro", centroActual);
+		model.addAttribute("act", act);
+		switch (centroActual.getCampus()) 
+		{
+			case "Mostoles": plantilla = "campus1"; break;				
+			case "Alcorcón": plantilla = "campus2"; break;
+			case "Fuenlabrada": plantilla = "campus3"; break;
+			case "Aranjuez": plantilla = "campus4"; break;
+			case "Vicálvaro": plantilla = "campus5"; break;
+		}	
+		return plantilla;
 	}
 	
-	@GetMapping("/menuPrincipal")
-	public String irAmenuPrincipal(Model model)
+	@GetMapping("/campus/actividades/{nombre}")
+	public String SeleccionarActividad(Model model, @PathVariable String nombre)
 	{
-		model.addAttribute("usu",usuarioActual);
-		return "seleccion_campus";
+		Actividad act = servicioActividades.getActividad(nombre);
+		model.addAttribute("act", act);
+		
+		return "actividad";
 	}
 	
 	@GetMapping("/perfil")
 	public String miPerfil(Model model)
 	{
+		List<Reserva> reservas = usuarioActual.getReservas();
 		model.addAttribute("usu", usuarioActual);
+		model.addAttribute("res", reservas);
+		return "mostrar_perfil";
+	}
+	
+	@GetMapping("/perfil/realizarReserva")
+	public String solicitarReservaGet()
+	{
+		return "realizarReserva";
+	}
+	
+	@PostMapping("/perfil/realizarReserva")
+	public String solicitarReservapsot(Model model, Reserva res)
+	{
+		List<Reserva> reservas = usuarioActual.getReservas();
+		
+		res.setUsuario(usuarioActual);
+		reservas.add(res);
+		servicioReservas.guardarReserva(res);
+		
+		model.addAttribute("usu", usuarioActual);
+		model.addAttribute("res", reservas);
 		return "mostrar_perfil";
 	}
 }
