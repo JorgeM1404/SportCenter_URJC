@@ -1,7 +1,11 @@
 package aplicacion;
 
+import java.util.LinkedList;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Usuario 
@@ -12,7 +16,8 @@ public class Usuario
 	private String clave;
 	private String correo;
 	
-	//private List<Reserva> reservas;
+	@OneToMany(mappedBy="usuarioRes",fetch=FetchType.EAGER)
+	private List<Reserva> reservas;
 	
 	public Usuario() {}
 	
@@ -22,6 +27,7 @@ public class Usuario
 		this.nombre = nombre;
 		this.clave = clave;
 		this.correo = correo;
+		this.reservas = new LinkedList<Reserva>();
 	}
 
 	public String getNombre() {
@@ -46,6 +52,14 @@ public class Usuario
 
 	public void setCorreo(String correo) {
 		this.correo = correo;
+	}
+	
+	public List<Reserva> getReservas() {
+		return reservas;
+	}
+
+	public void setReservas(List<Reserva> reservas) {
+		this.reservas = reservas;
 	}
 
 	@Override

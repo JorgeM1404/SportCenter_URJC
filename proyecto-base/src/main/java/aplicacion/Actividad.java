@@ -13,7 +13,7 @@ public class Actividad
 	private String nombre;
 	
 	/*private ArrayList<PistaDeportiva> pistas;
-	private Reserva reserva;*/	
+	private int plazas;*/	
 	
 	@ManyToMany
 	private List<CentroDeportivo> centros;
@@ -24,18 +24,19 @@ public class Actividad
 		super();
 		this.nombre = nombre;
 		//this.pistas = pistas;
-		//this.reserva = reserva;
+		//this.plazas = plazas;
 	}
 	
 	public Actividad(String nombre, ArrayList<PistaDeportiva>pistas) {
 		super();
 		this.nombre = nombre;
-		//this.pistas = pistas;
+		//this.plazas = plazas;
 	}
 	
 	public Actividad(String nombre) {
 		super();
 		this.nombre = nombre;
+		//this.plazas = plazas
 		this.centros =  new LinkedList<>();
 	}
 
@@ -55,12 +56,12 @@ public class Actividad
 		this.pistas = pistas;
 	}
 
-	public Reserva getReserva() {
-		return reserva;
+	public Int getPlazas() {
+		return plazas;
 	}
 
-	public void setReserva(Reserva reserva) {
-		this.reserva = reserva;
+	public void setPlazas(Int plazas) {
+		this.plazas = plazas;
 	}*/
 	
 	public List<CentroDeportivo> getCentros() {

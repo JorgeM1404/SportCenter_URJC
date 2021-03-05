@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RepositorioActividades extends JpaRepository<Actividad,String> {
 	//Actividad findByNombre(String nombre);
+	//List<Actividad> findByNombreOrderByPlazas(String nombre);
 }

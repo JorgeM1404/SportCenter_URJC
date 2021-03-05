@@ -1,47 +1,50 @@
 package aplicacion;
 
-import java.util.ArrayList;
+import java.util.Date;
+import javax.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
-public class Reserva {
-	
+@Entity
+public class Reserva 
+{
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
-	private Actividad actividadReservada;
+	private String nombreReserva;
 	
-	private ArrayList<Usuario> usuarios;
-	private int num_reservas;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(iso=ISO.DATE)
+	private Date fecha;
 	
-	private static final int MAX_PLAZAS = 40;
+	@ManyToOne
+	private Usuario usuarioRes;
+	
+	//private Actividad actividadReservada;		
+	
+	/*private int num_reservas;
+	private static final int MAX_PLAZAS = 40;*/
 	
 	
-	public Reserva() {
-		
+	public Reserva() { }
+	
+	public Reserva(String nombreReserva, Date fecha) {
+		super();
+		this.nombreReserva = nombreReserva;
+		this.fecha = fecha;
 	}
 	
-	public Reserva(ArrayList<Usuario> usuarios) {
-		this.usuarios = usuarios;
-	}
-	
-	public Reserva(Actividad actividad, Usuario usuario) {
+	/*public Reserva(Actividad actividad, Usuario usuarioRes) {
+		super();
 		this.actividadReservada = actividad;
-		usuarios.add(usuario);
-	}
+		this.usuarioRes = usuarioRes;
+	}*/
 	
 	
-	public int getPlazas()
-	{
+	/*public int getPlazas()b{
 		return MAX_PLAZAS;
-	}
-	
-	
-	
-	public ArrayList<Usuario> getUsuario() {
-		return usuarios;
-	}		
-	
-	public void setUsuario(ArrayList<Usuario> usuarios) {
-		this.usuarios = usuarios;
-	}
+	}*/
 	
 	public long getId() {
 		return id;
@@ -51,5 +54,54 @@ public class Reserva {
 		this.id = id;
 	}
 	
+	public String getNombreReserva() {
+		return nombreReserva;
+	}
+
+	public void setNombreReserva(String nombreReserva) {
+		this.nombreReserva = nombreReserva;
+	}
+
+	public Date getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
+
+	public Usuario getUsuario() {
+		return usuarioRes;
+	}
 	
+	public void setUsuario(Usuario usuarioRes) {
+		this.usuarioRes = usuarioRes;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Reserva other = (Reserva) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Reserva [id=" + id + ", nombreReserva=" + nombreReserva + ", fecha=" + fecha + "] " + usuarioRes;
+	}
 }
