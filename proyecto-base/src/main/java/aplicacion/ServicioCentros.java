@@ -1,6 +1,8 @@
 package aplicacion;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -15,7 +17,10 @@ public class ServicioCentros
 	private RepositorioCentros repositorio;
 	
 	@Autowired
-	private ServicioActividades servicioActividades;
+	private ServicioActividades servicioActividades;	
+	
+	@Autowired
+	private ServicioPistas servicioPistas;
 	
 	@PostConstruct
 	public void Init()
@@ -39,84 +44,91 @@ public class ServicioCentros
 	    CentroDeportivo centro5 = new CentroDeportivo("Vicálvaro");		
 	    repositorio.save(centro5);
 	    setActividadesVicalvaro(centro5);
-	    
-	    //repositorio.save(new CentroDeportivo ("Alcorcón"));
-	    //repositorio.save(new CentroDeportivo ("Fuenlabrada"));
-	    //repositorio.save(new CentroDeportivo ("Aranjuez"));
-	    //repositorio.save(new CentroDeportivo ("Vicálvaro"));
 	}
 		
 	public void setActividadesMostoles(CentroDeportivo centro)
-	{		
-		Actividad act1 = new Actividad("Football_Mostoles");  act1.getCentros().add(centro);
-		Actividad act2 = new Actividad("Baloncesto_Mostoles");  act2.getCentros().add(centro);
-		Actividad act3 = new Actividad("Tenis_Mostoles");  act3.getCentros().add(centro);
-		Actividad act4 = new Actividad("Natacion_Mostoles");  act4.getCentros().add(centro);
-		Actividad act5 = new Actividad("Judo_Mostoles");  act5.getCentros().add(centro);
-		Actividad act6 = new Actividad("Padel_Mostoles");  act6.getCentros().add(centro);
+	{	
+		PistaDeportiva p1 = new PistaDeportiva("Campo de Futbol",false);	
+		Actividad a1 = new Actividad("Football_Mostoles",Arrays.asList(p1));
+		p1.setActividad(a1);  a1.getCentros().add(centro);
 		
-		servicioActividades.guardarActividad(act1);
-		servicioActividades.guardarActividad(act2);
-		servicioActividades.guardarActividad(act3);
-		servicioActividades.guardarActividad(act4);
-		servicioActividades.guardarActividad(act5);
-		servicioActividades.guardarActividad(act6);
+		PistaDeportiva p2 = new PistaDeportiva("Cancha de baloncesto",false);	
+		Actividad a2 = new Actividad("Baloncesto_Mostoles", Arrays.asList(p2));
+		p2.setActividad(a2);  a2.getCentros().add(centro);
+		
+		PistaDeportiva p3a = new PistaDeportiva("Pista de tenis A",false);	
+		PistaDeportiva p3b = new PistaDeportiva("Pista de tenis B",false);	
+		Actividad a3 = new Actividad("Tenis_Mostoles", Arrays.asList(p3a,p3b));
+		p3a.setActividad(a3); p3b.setActividad(a3); a3.getCentros().add(centro);
+		
+		PistaDeportiva p4 = new PistaDeportiva("Piscina olímpica",false);	
+		Actividad a4 = new Actividad("Natacion_Mostoles", Arrays.asList(p4));
+		p4.setActividad(a4); a4.getCentros().add(centro);
+		
+		PistaDeportiva p5 = new PistaDeportiva("Tatami reglamentario",false);	
+		Actividad a5 = new Actividad("Judo_Mostoles", Arrays.asList(p5));
+		p5.setActividad(a5); a5.getCentros().add(centro);
+		
+		servicioActividades.guardarActividades(Arrays.asList(a1,a2,a3,a4,a5));
+		servicioPistas.guardarPistas(Arrays.asList(p1,p2,p3a,p3b,p4,p5));
+		
+		/*List<Actividad> act = new LinkedList<>();
+		act.add(new Actividad("Football_Mostoles"));
+		act.add(new Actividad("Baloncesto_Mostoles"));
+		act.add(new Actividad("Tenis_Mostoles"));
+		act.add(new Actividad("Natacion_Mostoles"));
+		act.add(new Actividad("Judo_Mostoles"));
+		
+		for(Actividad a: act) a.getCentros().add(centro);
+		servicioActividades.guardarActividades(act);*/	
 	}
 	
 	public void setActividadesAlcorcon(CentroDeportivo centro)
-	{		
-		Actividad act1 = new Actividad("Football_Alcorcon");  act1.getCentros().add(centro);
-		Actividad act2 = new Actividad("Baloncesto_Alcorcon");  act2.getCentros().add(centro);
-		Actividad act3 = new Actividad("Balonmano_Alcorcon");  act3.getCentros().add(centro);
-		Actividad act4 = new Actividad("Judo_Alcorcon");  act4.getCentros().add(centro);
-		Actividad act5 = new Actividad("Padel_Alcorcon");  act5.getCentros().add(centro);
-
-		servicioActividades.guardarActividad(act1);
-		servicioActividades.guardarActividad(act2);
-		servicioActividades.guardarActividad(act3);
-		servicioActividades.guardarActividad(act4);
-		servicioActividades.guardarActividad(act5);
+	{	
+		List<Actividad> act = new LinkedList<>();
+		act.add(new Actividad("Football_Alcorcon"));
+		act.add(new Actividad("Balonmano_Alcorcon"));
+		act.add(new Actividad("Judo_Alcorcon"));
+		act.add(new Actividad("Padel_Alcorcon"));
+		
+		for(Actividad a: act) a.getCentros().add(centro);
+		servicioActividades.guardarActividades(act);
 	}
 	
 	public void setActividadesFuenlabrada(CentroDeportivo centro)
-	{		
-		Actividad act1 = new Actividad("Football_Fuenla");  act1.getCentros().add(centro);
-		Actividad act2 = new Actividad("Baloncesto_Fuenla");  act2.getCentros().add(centro);
-		Actividad act3 = new Actividad("Tenis_Fuenla");  act3.getCentros().add(centro);
-		Actividad act4 = new Actividad("Balonmano_Fuenla");  act4.getCentros().add(centro);
-		Actividad act5 = new Actividad("Hockey_Fuenla");  act5.getCentros().add(centro);
-		Actividad act6 = new Actividad("Judo_Fuenla");  act6.getCentros().add(centro);
+	{	
+		List<Actividad> act = new LinkedList<>();
+		act.add(new Actividad("Football_Fuenla"));
+		act.add(new Actividad("Baloncesto_Fuenla"));
+		act.add(new Actividad("Tenis_Fuenla"));
+		act.add(new Actividad("Balonmano_Fuenla"));
+		act.add(new Actividad("Hockey_Fuenla"));
 		
-		servicioActividades.guardarActividad(act1);
-		servicioActividades.guardarActividad(act2);
-		servicioActividades.guardarActividad(act3);
-		servicioActividades.guardarActividad(act4);
-		servicioActividades.guardarActividad(act5);
-		servicioActividades.guardarActividad(act6);
+		for(Actividad a: act) a.getCentros().add(centro);
+		servicioActividades.guardarActividades(act);
 	}
 	
 	public void setActividadesAranjuez(CentroDeportivo centro)
 	{		
-		Actividad act1 = new Actividad("Football_Aranjuez");  act1.getCentros().add(centro);
-		Actividad act2 = new Actividad("Baloncesto_Aranjuez");  act2.getCentros().add(centro);
-		Actividad act3 = new Actividad("Tenis_Aranjuez");  act3.getCentros().add(centro);
-		Actividad act4 = new Actividad("Natacion_Aranjuez");  act4.getCentros().add(centro);
+		List<Actividad> act = new LinkedList<>();
+		act.add(new Actividad("Football_Aranjuez"));
+		act.add(new Actividad("Baloncesto_Aranjuez"));
+		act.add(new Actividad("Tenis_Aranjuez"));
+		act.add(new Actividad("Natacion_Aranjuez"));
 		
-		servicioActividades.guardarActividad(act1);
-		servicioActividades.guardarActividad(act2);
-		servicioActividades.guardarActividad(act3);
-		servicioActividades.guardarActividad(act4);
+		for(Actividad a: act) a.getCentros().add(centro);
+		servicioActividades.guardarActividades(act);
 	}
 	
 	public void setActividadesVicalvaro(CentroDeportivo centro)
 	{		
-		Actividad act1 = new Actividad("Football_Vicalvaro");  act1.getCentros().add(centro);
-		Actividad act2 = new Actividad("Judo_Vicalvaro");  act2.getCentros().add(centro);
-		Actividad act3 = new Actividad("Padel_Vicalvaro");  act3.getCentros().add(centro);
-
-		servicioActividades.guardarActividad(act1);
-		servicioActividades.guardarActividad(act2);
-		servicioActividades.guardarActividad(act3);
+		List<Actividad> act = new LinkedList<>();
+		act.add(new Actividad("Football_Vicalvaro"));
+		act.add(new Actividad("Judo_Vicalvaro"));
+		act.add(new Actividad("Padel_Vicalvaro"));
+		
+		for(Actividad a: act) a.getCentros().add(centro);
+		servicioActividades.guardarActividades(act);
 	}
 	
 	public List<Actividad> getActividadesCentro(String id) {

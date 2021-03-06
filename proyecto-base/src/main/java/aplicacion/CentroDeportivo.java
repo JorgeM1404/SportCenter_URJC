@@ -47,6 +47,10 @@ public class CentroDeportivo
 	public void setActividades(List<Actividad> actividades) {
 		this.actividades = actividades;
 	}
+	
+	/*public void addActividad(Actividad act) {
+		actividades.add(act);
+	}*/
 
 	@Override
 	public int hashCode() {

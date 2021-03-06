@@ -21,7 +21,11 @@ public class Reserva
 	@ManyToOne
 	private Usuario usuarioRes;
 	
-	//private Actividad actividadReservada;		
+	@OneToOne
+	private Actividad actividadRes;
+	
+	@OneToOne
+	private CentroDeportivo centro;	
 	
 	/*private int num_reservas;
 	private static final int MAX_PLAZAS = 40;*/
@@ -77,6 +81,14 @@ public class Reserva
 	public void setUsuario(Usuario usuarioRes) {
 		this.usuarioRes = usuarioRes;
 	}
+	
+	public Actividad getActividadRes() {
+		return actividadRes;
+	}
+
+	public void setActividadRes(Actividad actividadRes) {
+		this.actividadRes = actividadRes;
+	}
 
 	@Override
 	public int hashCode() {
@@ -102,6 +114,6 @@ public class Reserva
 
 	@Override
 	public String toString() {
-		return "Reserva [id=" + id + ", nombreReserva=" + nombreReserva + ", fecha=" + fecha + "] " + usuarioRes;
+		return "Reserva [id=" + id + ", nombreReserva=" + nombreReserva + ", fecha=" + fecha + "] " + usuarioRes + " " + actividadRes;
 	}
 }

@@ -1,6 +1,8 @@
 package aplicacion;
 
 import java.util.Collection;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,5 +27,9 @@ public class ServicioActividades
 	
 	public void guardarActividad(Actividad act) {
 		repositorio.save(act);
+	}
+	
+	public void guardarActividades(List<Actividad> act) {
+		repositorio.saveAll(act);
 	}
 }

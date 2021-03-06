@@ -1,35 +1,43 @@
 package aplicacion;
 
-public class PistaDeportiva {
+import javax.persistence.*;
 
+@Entity
+public class PistaDeportiva 
+{
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
-	private String nombre_pista;
-	private Actividad actividad;
+	private String pista;
+	
+	//@Transient
 	private boolean ocupado;
+	
+	@ManyToOne
+	private Actividad actividad;
 
-	public PistaDeportiva() {
-		
-	}
+	public PistaDeportiva() { }	
 	
-	public PistaDeportiva(String nombre_pista, Actividad actividad, boolean ocupado ) {
-		this.nombre_pista = nombre_pista;
-		this.actividad = actividad;
+	public PistaDeportiva(String pista, boolean ocupado) {
+		super();
+		this.pista = pista;
 		this.ocupado = ocupado;
 	}
 	
-	public PistaDeportiva(String nombre_pista, boolean ocupado) {
-		this.nombre_pista = nombre_pista;
-		//this.actividad = actividad;
-		this.ocupado = ocupado;
+	public long getId() {
+		return id;
 	}
-	
+
+	public void setId(long id) {
+		this.id = id;
+	}
 	public String getNombrePista() {
-		return nombre_pista;
+		return pista;
 	}
 
-	public void setNombrePista(String nombre_pista) {
-		this.nombre_pista = nombre_pista;
+	public void setNombrePista(String pista) {
+		this.pista = pista;
 	}
 	
 	public Actividad getActividad() {
@@ -51,13 +59,31 @@ public class PistaDeportiva {
 	public void setLibre() {
 		this.ocupado = false;
 	}
-	
-	public long getId() {
-		return id;
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		return result;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PistaDeportiva other = (PistaDeportiva) obj;
+		if (id != other.id)
+			return false;
+		return true;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "PistaDeportiva [id=" + id + ", nombrePista=" + pista + ", ocupado=" + ocupado + "]";
+	}
 }

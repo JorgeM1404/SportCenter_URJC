@@ -12,31 +12,27 @@ public class Actividad
 	@Id	
 	private String nombre;
 	
-	/*private ArrayList<PistaDeportiva> pistas;
-	private int plazas;*/	
+	@OneToMany(mappedBy="actividad")
+	private List<PistaDeportiva> pistas;
+	
+	//private int plazas;
 	
 	@ManyToMany
 	private List<CentroDeportivo> centros;
 	
 	public Actividad() { }
 	
-	public Actividad(String nombre, ArrayList<PistaDeportiva> pistas, Reserva reserva) {
+	public Actividad(String nombre, List<PistaDeportiva>pistas) {
 		super();
 		this.nombre = nombre;
-		//this.pistas = pistas;
-		//this.plazas = plazas;
-	}
-	
-	public Actividad(String nombre, ArrayList<PistaDeportiva>pistas) {
-		super();
-		this.nombre = nombre;
-		//this.plazas = plazas;
+		this.pistas = pistas;
+		this.centros = new LinkedList<>();
 	}
 	
 	public Actividad(String nombre) {
 		super();
 		this.nombre = nombre;
-		//this.plazas = plazas
+		this.pistas = new LinkedList<>();
 		this.centros =  new LinkedList<>();
 	}
 
@@ -48,20 +44,26 @@ public class Actividad
 		this.nombre = nombreActividad;
 	}
 
-	/*public ArrayList<PistaDeportiva> getPistas() {
+	public List<PistaDeportiva> getPistas() {
 		return pistas;
 	}
 
-	public void setPistas(ArrayList<PistaDeportiva> pistas) {
+	public void setPistas(List<PistaDeportiva> pistas) {
 		this.pistas = pistas;
 	}
 
-	public Int getPlazas() {
+	/*public Int getPlazas() {
 		return plazas;
 	}
 
 	public void setPlazas(Int plazas) {
 		this.plazas = plazas;
+	}*/
+	
+	/*public void addCentro(CentroDeportivo centro)
+	{
+		centro.addActividad(this);
+		centros.add(centro);
 	}*/
 	
 	public List<CentroDeportivo> getCentros() {
