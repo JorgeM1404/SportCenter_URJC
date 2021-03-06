@@ -202,6 +202,20 @@ public class ControladorWeb
 		return "mostrar_perfil";
 	}
 	
+	@GetMapping("/perfil/{id}")
+	public String verReserva(Model model, @PathVariable long id)
+	{
+		Reserva res = servicioReservas.getReservaById(id);
+		Actividad act = res.getActividadRes();
+		CentroDeportivo centro = res.getCentro();
+		
+		model.addAttribute("res",res);
+		model.addAttribute("act",act);
+		model.addAttribute("centro",centro);
+		
+		return "reserva";
+	}
+	
 	@GetMapping("/perfil/realizarReserva")
 	public String solicitarReservaGet()
 	{
@@ -209,11 +223,14 @@ public class ControladorWeb
 	}
 	
 	@PostMapping("/perfil/realizarReserva")
-	public String solicitarReservapsot(Model model, Reserva res)
+	public String solicitarReservapsot(Model model,Reserva res, @RequestParam String nombreActividad)
 	{
+		Actividad act = servicioActividades.getActividad(nombreActividad);
 		List<Reserva> reservas = usuarioActual.getReservas();
 		
 		res.setUsuario(usuarioActual);
+		res.setActividadRes(act);
+		res.setCentro(centroActual);
 		reservas.add(res);
 		servicioReservas.guardarReserva(res);
 		

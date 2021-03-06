@@ -45,10 +45,7 @@ public class Reserva
 		this.usuarioRes = usuarioRes;
 	}*/
 	
-	
-	/*public int getPlazas()b{
-		return MAX_PLAZAS;
-	}*/
+
 	
 	public long getId() {
 		return id;
@@ -88,6 +85,14 @@ public class Reserva
 
 	public void setActividadRes(Actividad actividadRes) {
 		this.actividadRes = actividadRes;
+	}
+	
+	public CentroDeportivo getCentro() {
+		return centro;
+	}
+
+	public void setCentro(CentroDeportivo centro) {
+		this.centro = centro;
 	}
 
 	@Override
