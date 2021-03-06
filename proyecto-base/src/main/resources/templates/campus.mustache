@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>CD Aranjuez</title>
-		<link rel="stylesheet" href="/aranjuez.css">
+		<title>{{centro.campus}}</title>
+		<link rel="stylesheet" href="/{{plantilla}}">
 	</head>
 
 <body>
@@ -18,7 +18,7 @@
 		<h1>Bienvenido al campus de  {{centro.campus}}</h1>
 	
 		{{#act}}
-	    <h1><a href="/campus/actividades/{{nombre}}">{{nombre}} </a><br></h1>
+	    	<h1><a href="/campus/actividades/{{nombre}}"><button class="button botonACTIVIDADES"> {{nombre}} </button></a></h1>
 		{{/act}}
 	
 		{{^act}}
@@ -27,6 +27,7 @@
 
 		<br>
 		<a href="/menuPrincipal"><button class="button botonVOLVER"> Volver </button></a>
+	
 	</div>
 
 {{>piepag}}

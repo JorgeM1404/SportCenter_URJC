@@ -1,28 +1,22 @@
 {{>cabecera}}
 
-<p>REGISTRAR USUARIO</p>
+<div class="iSesion">
 
-{{#datosIncorrectos}}
-   <p> Faltan datos por introducir </p>
-   <a href="/">Volver</a>
-{{/datosIncorrectos}}
+	{{#datosIncorrectos}}
+		<p style="color:red">Faltan datos por introducir.</p>
+	{{/datosIncorrectos}}
 
-{{#usuarioNoExiste}}
-   <p> El usuario introducido no existe </p>
-   <a href="/">Volver</a>
-{{/usuarioNoExiste}}
-
-
-   <form action="usuario/nuevo" method="post">
-   <p>Nombre usuario</p>
-   <p><input type= 'text' name= 'nombre'/></p>
-   <p>Clave</p>
-   <p><input type= 'text' name= 'clave'/></p>
-   <p>Correo</p>
-   <p><input type= 'text' name= 'correo'/></p>
-   <p><input type='submit' value= 'Registrarse'/></p>
-   </form>
-   <a href="/">Volver</a>
-
+	<p>REGISTRAR USUARIO</p>
+	<form action="usuario/nuevo" method="post">
+	<p>Nombre usuario</p>
+	<p><input type= 'text' name= 'nombre'/></p>
+	<p>Clave</p>
+	<p><input type= 'text' name= 'clave'/></p>
+	<p>Correo</p>
+	<p><input type= 'text' name= 'correo'/></p>
+	<p><input type='submit' value= 'Registrarse'/></p>
+	</form>
+	<a href="/"><button class="button botonVOLVER"> Volver </button></a>
+</div>
 
 {{>piepag}}

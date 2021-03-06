@@ -24,7 +24,8 @@ public class ControladorWeb
 	private Usuario usuarioActual;
 	private CentroDeportivo centroActual;
 	
-	private boolean datosIncorrectos = false;
+	private boolean datosIncorrectosReg = false;
+	private boolean datosIncorrectosIni = false;
 	private boolean usuarioNoExiste = false;
 	private boolean usuarioYaExiste = false;
 
@@ -38,7 +39,7 @@ public class ControladorWeb
 	public String irAmenuPrincipal(Model model)
 	{
 		model.addAttribute("usu",usuarioActual);
-		return "seleccion_campus";
+		return "paginaPrincipal";
 	}
 	
 	@GetMapping("/registrarse")
@@ -56,9 +57,9 @@ public class ControladorWeb
 	@GetMapping("/usuario/nuevo")
 	public String registrarse1(Model model)
 	{
-		model.addAttribute("datosIncorrectos", datosIncorrectos);
+		model.addAttribute("datosIncorrectos", datosIncorrectosReg);
 		model.addAttribute("usuarioYaExiste", usuarioYaExiste);
-		datosIncorrectos = false;
+		datosIncorrectosReg = false;
 		usuarioYaExiste = false;
 		
 		return "registrarse";
@@ -66,32 +67,31 @@ public class ControladorWeb
 	@PostMapping("/usuario/nuevo")
 	public String registrarse(Model model, Usuario usuario)
 	{
+		datosIncorrectosReg = false;
+		usuarioYaExiste = false;
 		if(usuario.getNombre().trim().equals("") || usuario.getClave().trim().equals("") || usuario.getCorreo().trim().equals(""))
 		{
-			datosIncorrectos = true;
-			model.addAttribute("datosIncorrectos", datosIncorrectos);
-			datosIncorrectos = false;
+			datosIncorrectosReg = true;
+			model.addAttribute("datosIncorrectosReg", datosIncorrectosReg);
 			
-			return "registrarse";
+			return "error";
 		}
 		else
 		{
-			Usuario usu = servicioUsuarios.getUsuario(usuario.getNombre());
-			if(!servicioUsuarios.existeUsuario(usu))
+			if(!servicioUsuarios.existeUsuario(usuario))
 			{
 				servicioUsuarios.guardarUsuario(usuario);
 				usuarioActual = usuario;
 				model.addAttribute("usu", usuarioActual);
 				
-				return "seleccion_campus";
+				return "paginaPrincipal";
 			}
 			else
 			{
 				usuarioYaExiste = true;
 				model.addAttribute("usuarioYaExiste", usuarioYaExiste);
-				usuarioYaExiste = false;
 				
-				return "yaExisteUsuario";
+				return "error";
 			}
 		}
 	}
@@ -99,40 +99,40 @@ public class ControladorWeb
 	@GetMapping("/usuario/acceso")
 	public String acceder(Model model)
 	{
-		model.addAttribute("datosIncorrectos", datosIncorrectos);
+		model.addAttribute("datosIncorrectosIni", datosIncorrectosIni);
 		model.addAttribute("usuarioNoExiste", usuarioNoExiste);
 		usuarioNoExiste = false;
-		datosIncorrectos = false;
+		datosIncorrectosIni = false;
 		
 		return "iniciarSesion";
 	}
 	@PostMapping("/usuario/acceso")
 	public String iniciarSesion(Model model,Usuario usuario)
 	{
+		usuarioNoExiste = false;
+		datosIncorrectosIni = false;
 		if(usuario.getNombre().trim().equals("") || usuario.getClave().trim().equals("") || usuario.getCorreo().trim().equals(""))
 		{
-			datosIncorrectos = true;
-			model.addAttribute("datosIncorrectos", datosIncorrectos);
-			datosIncorrectos = false;
+			datosIncorrectosIni = true;
+			model.addAttribute("datosIncorrectosIni", datosIncorrectosIni);
 			
-			return "iniciarSesion";
+			return "error";
 		}
 		else
 		{
-			Usuario usu = servicioUsuarios.getUsuario(usuario.getNombre());
+			Usuario usu = servicioUsuarios.getUsuarioByCampos(usuario.getNombre(), usuario.getClave(), usuario.getCorreo());
 			if(servicioUsuarios.existeUsuario(usu))
 			{
 				usuarioActual = usu;
 				model.addAttribute("usu", usuarioActual);
-				return "seleccion_campus";
+				return "paginaPrincipal";
 			}
 			else
 			{
 				usuarioNoExiste = true;
 				model.addAttribute("usuarioNoExiste", usuarioNoExiste);
-				usuarioNoExiste = false;
 				
-				return "noExisteUsuario";
+				return "error";
 			}
 		}
 	}
@@ -140,7 +140,7 @@ public class ControladorWeb
 	@GetMapping("/campus")
 	public String menuCampus()
 	{
-		return "seleccion_campus";
+		return "paginaPrincipal";
 	}
 	
 	@GetMapping("/campus/{campus}")
@@ -155,13 +155,14 @@ public class ControladorWeb
 		
 		switch (campus) 
 		{
-			case "Mostoles": plantilla = "campus1"; break;				
-			case "Alcorcón": plantilla = "campus2"; break;
-			case "Fuenlabrada": plantilla = "campus3"; break;
-			case "Aranjuez": plantilla = "campus4"; break;
-			case "Vicálvaro": plantilla = "campus5"; break;
+			case "Mostoles": plantilla = "mostoles.css"; break;				
+			case "Alcorcón": plantilla = "alcorcon.css"; break;
+			case "Fuenlabrada": plantilla = "fuenlabrada.css"; break;
+			case "Aranjuez": plantilla = "aranjuez.css"; break;
+			case "Vicálvaro": plantilla = "vicalvaro.css"; break;
 		}	
-		return plantilla;
+		model.addAttribute("plantilla", plantilla);
+		return "campus";
 	}
 	
 	@GetMapping("/campus/actividades")
@@ -171,15 +172,16 @@ public class ControladorWeb
 		List<Actividad> act = centroActual.getActividades();
 		model.addAttribute("centro", centroActual);
 		model.addAttribute("act", act);
-		switch (centroActual.getCampus()) 
+		switch (centroActual.getCampus())  
 		{
-			case "Mostoles": plantilla = "campus1"; break;				
-			case "Alcorcón": plantilla = "campus2"; break;
-			case "Fuenlabrada": plantilla = "campus3"; break;
-			case "Aranjuez": plantilla = "campus4"; break;
-			case "Vicálvaro": plantilla = "campus5"; break;
+			case "Mostoles": plantilla = "mostoles.css"; break;				
+			case "Alcorcón": plantilla = "alcorcon.css"; break;
+			case "Fuenlabrada": plantilla = "fuenlabrada.css"; break;
+			case "Aranjuez": plantilla = "aranjuez.css"; break;
+			case "Vicálvaro": plantilla = "vicalvaro.css"; break;
 		}	
-		return plantilla;
+		model.addAttribute("plantilla", plantilla);
+		return "campus";
 	}
 	
 	@GetMapping("/campus/actividades/{nombre}")

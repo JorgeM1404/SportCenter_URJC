@@ -1,7 +1,5 @@
 {{>cabecera}}
 
-<p>INICIAR SESION</p>
-
 <!--{{#errorNombre}}
    <p> Nombre incorrecto </p>
 {{/errorNombre}}
@@ -14,29 +12,28 @@
    <p> Faltan datos </p>
 {{/faltanDatos}} -->
 
+<div class="iSesion">
 
+	{{#datosIncorrectos}}
+		<p style="color:red">Faltan datos por introducir.</p>
+	{{/datosIncorrectos}}
 
-{{#datosIncorrectos}}
-   <p> Faltan datos por introducir </p>
-   <a href="/">Volver</a>
-{{/datosIncorrectos}}
+	{{#usuarioYaExiste}}
+		<p style="color:red">El usuario introducido ya existe </p>
+	{{/usuarioYaExiste}}
 
-{{#usuarioYaExiste}}
-   <p> El usuario introducido ya existe </p>
-   <a href="/">Volver</a>
-{{/usuarioYaExiste}}
-
-
-   <form action="usuario/acceso" method="post">
-   <p>Nombre usuario</p>
-   <p><input type= 'text' name= 'nombre'/></p>
-   <p>Clave</p>
-   <p><input type= 'text' name= 'clave'/></p>
-   <p>Correo</p>
-   <p><input type= 'text' name= 'correo'/></p>
-   <p><input type='submit' value= 'Iniciar Sesión'/></p>
-   </form>
+	<p>INICIAR SESION</p>
+	<form action="usuario/acceso" method="post">
+	<p>Nombre usuario</p>
+	<p><input type= 'text' name= 'nombre'/></p>
+	<p>Clave</p>
+	<p><input type= 'text' name= 'clave'/></p>
+	<p>Correo</p>
+	<p><input type= 'text' name= 'correo'/></p>
+	<p><input type='submit' value= 'Iniciar Sesión'/></p>
+	</form>
+	<a href="/"><button class="button botonVOLVER"> Volver </button></a>
    
-   <a href="/">Volver</a>
+</div>
 
 {{>piepag}}

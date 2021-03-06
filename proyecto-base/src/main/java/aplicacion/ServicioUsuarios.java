@@ -25,6 +25,10 @@ public class ServicioUsuarios
 		return repositorio.findById(id).orElseThrow();		
 	}
 	
+	public Usuario getUsuarioByCampos(String nombre, String clave, String correo) {
+		return repositorio.findByNombreAndClaveAndCorreo(nombre,clave,correo);		
+	}
+	
 	public void borrarUsuario(String id) {
 		Usuario usu = repositorio.findById(id).orElseThrow();
 		repositorio.delete(usu);

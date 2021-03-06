@@ -1,0 +1,26 @@
+{{>cabecera}}
+
+	<div class="error">
+		{{#usuarioYaExiste}}
+		<h1> El usuario  ya existe </h1>
+		<a href="/registrarse"><button class="button botonVOLVER"> Volver </button></a>
+		{{/usuarioYaExiste}}
+	
+		{{#datosIncorrectosReg}}
+		<h1> Datos incorrectos </h1>
+		<a href="/registrarse"><button class="button botonVOLVER"> Volver </button></a>
+		{{/datosIncorrectosReg}}
+		
+		{{#usuarioNoExiste}}
+		<h1> No existe el usuario </h1>
+		<a href="/iniciarSesion"><button class="button botonVOLVER"> Volver </button></a>
+		{{/usuarioNoExiste}}
+		
+		{{#datosIncorrectosIni}}
+		<h1> Datos incorrectos </h1>
+		<a href="/iniciarSesion"><button class="button botonVOLVER"> Volver </button></a>
+		{{/datosIncorrectosIni}}
+		
+	</div>
+	
+{{>piepag}}
