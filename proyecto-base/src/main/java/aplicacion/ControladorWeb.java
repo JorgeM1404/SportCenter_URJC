@@ -138,7 +138,7 @@ public class ControladorWeb
 	}
 	
 	@GetMapping("/campus")
-	public String menuCampus()
+	public String menuCampus(Model model)
 	{
 		return "paginaPrincipal";
 	}
@@ -155,11 +155,11 @@ public class ControladorWeb
 		
 		switch (campus) 
 		{
-			case "Mostoles": plantilla = "mostoles.css"; break;				
-			case "Alcorcón": plantilla = "alcorcon.css"; break;
-			case "Fuenlabrada": plantilla = "fuenlabrada.css"; break;
-			case "Aranjuez": plantilla = "aranjuez.css"; break;
-			case "Vicálvaro": plantilla = "vicalvaro.css"; break;
+			case "Mostoles": plantilla = "mostoles.css"; break;	
+			case "Alcorcón": plantilla = "alcorcon.css"; break;	
+			case "Fuenlabrada": plantilla = "fuenlabrada.css"; break;	
+			case "Aranjuez": plantilla = "aranjuez.css"; break;	
+			case "Vicálvaro": plantilla = "vicalvaro.css"; break;	
 		}	
 		model.addAttribute("plantilla", plantilla);
 		return "campus";

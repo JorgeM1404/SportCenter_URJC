@@ -68,7 +68,7 @@ body {
 
 .iSesion {
 	text-align: center;
-	background: lightgrey;
+	background: #dfffff;
 	color: black;
 	margin: auto;
     width: 20%;
@@ -78,7 +78,7 @@ body {
 
 .aSesion {
 	text-align: center;
-	background: lightgrey;
+	background: #dfffff;
 	color: black;
 	margin: auto;
     width: 20%;
@@ -88,12 +88,22 @@ body {
 
 .error {
 	text-align: center;
-	background: lightgrey;
+	background: #dfffff;
 	color: black;
 	margin: auto;
     width: 20%;
     border: 3px black;
 	padding: 10px 10px 10px 10px;
+}
+
+.mensajes {
+	text-align: center;
+	background: #dfffff;
+	color: black;
+	margin: auto;
+    width: 100%;
+    border: 3px black;
+	padding: 20px 20px 20px 20px;
 }
 
 .contenido
@@ -135,6 +145,10 @@ body {
     cursor: pointer;
 }
 
+.botonRESERVAR:hover {
+  background-color: grey;
+}
+
 input[type=submit] {
   background-color: #4CAF50;
   border: none;
@@ -159,6 +173,10 @@ input[type=submit] {
     cursor: pointer;
 }
 
+.botonMENU:hover {
+  background-color: grey;
+}
+
 .botonCERRARSESION {
 	background-color: #c34f4f;
 	border: none;
@@ -170,4 +188,8 @@ input[type=submit] {
     font-size: 16px;
     margin: 0px 0px;
     cursor: pointer;
+}
+
+.botonCERRARSESION:hover {
+  background-color: red;
 }

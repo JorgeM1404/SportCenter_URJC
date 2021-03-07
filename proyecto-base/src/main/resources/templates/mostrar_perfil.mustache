@@ -1,16 +1,17 @@
 {{>cabecera}}
 
-	<div class="contenido">
+	<div class="mensajes">
 		<h1> Bienvenido a tu perfil personal {{usu.nombre}}  </h1>
 		
 		{{#res}}
-		     <h1><a href="/perfil/{{id}}">{{nombreReserva}} </a><br></h1>
+		     <h2>Los nombres de tus reservas son:<a href="/perfil/{{id}}">{{nombreReserva}} </a><br></h2>
 		{{/res}}
 		
 		{{^res}}
-		     <p> No se ha realizado ninguna reserva todavia </p>
+		     <p> No se ha realizado ninguna reserva todavía. </p>
 		{{/res}}	
 		
+		<a href="/perfil/realizarReserva"><button class="button botonVOLVER"> Reservar </button></a>
 		<a href="/menuPrincipal"><button class="button botonVOLVER"> Volver </button></a>
 	</div>
 
