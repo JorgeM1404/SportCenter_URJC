@@ -69,6 +69,12 @@ public class Actividad
 	public List<CentroDeportivo> getCentros() {
 		return centros;
 	}
+	
+	public List<CentroDeportivo> getCentrosSalvo(CentroDeportivo centro) {
+		List<CentroDeportivo> cens = new LinkedList<>();
+		for(CentroDeportivo c: centros) if(!c.getCampus().equals(centro.getCampus())) cens.add(c);
+		return cens;
+	}
 
 	public void setCentros(ArrayList<CentroDeportivo> centro) {
 		this.centros = centro;

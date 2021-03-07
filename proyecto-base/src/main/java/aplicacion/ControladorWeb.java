@@ -188,9 +188,26 @@ public class ControladorWeb
 	public String SeleccionarActividad(Model model, @PathVariable String nombre)
 	{
 		Actividad act = servicioActividades.getActividad(nombre);
+		List<CentroDeportivo> centros = act.getCentrosSalvo(centroActual);
+		List<PistaDeportiva> pistas = act.getPistas();
+		
+		model.addAttribute("pistas", pistas);
+		model.addAttribute("centros", centros);
 		model.addAttribute("act", act);
 		
 		return "actividad";
+	}
+	
+	@GetMapping("/perfil/reservaCancelada/{id}")
+	public String miPerfil2(Model model, @PathVariable long id)
+	{
+		List<Reserva> reservas = usuarioActual.getReservas();
+		reservas.remove(servicioReservas.getReservaById(id));
+		servicioReservas.cancelarReservaById(id);
+		
+		model.addAttribute("usu", usuarioActual);
+		model.addAttribute("res", reservas);
+		return "mostrar_perfil";
 	}
 	
 	@GetMapping("/perfil")
@@ -214,6 +231,14 @@ public class ControladorWeb
 		model.addAttribute("centro",centro);
 		
 		return "reserva";
+	}
+	
+	@GetMapping("/perfil/cancelarReserva/{id}")
+	public String cancelarReservaGet(Model model, @PathVariable long id)
+	{
+		Reserva res = servicioReservas.getReservaById(id);
+		model.addAttribute("res",res);
+		return "cancelarReserva";
 	}
 	
 	@GetMapping("/perfil/realizarReserva")

@@ -1,0 +1,12 @@
+{{>cabecera}}
+
+	<div class="mensajes">
+		<h2> Estas a punto de cancelar la siguiente reserva: <em>"{{res.nombreReserva}}"</em></h2>
+		<h2> ¿Estas seguro? </h2>
+		
+		<a href="/perfil/reservaCancelada/{{res.id}}"><button class="button botonCERRARSESION"> SI </button></a>
+		<a href="/perfil/{{res.id}}"><button class="button botonVOLVER"> NO </button></a>
+
+	</div>
+
+{{>piepag}}

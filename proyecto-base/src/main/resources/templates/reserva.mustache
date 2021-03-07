@@ -1,13 +1,14 @@
 {{>cabecera}}
 
 	<div class="mensajes">
-		<h1> El nombre de tu reserva es: {{res.nombreReserva}} </h1>
+		<h1> Nombre de la reserva: <em>{{res.nombreReserva}}</em> </h1>
 		
-		<p> <b> Actividad reservada: </b> {{act.nombre}} </p>
-		<p> <b> Fecha reservada: </b> {{res.fecha}} </p>
-		<p> <b> Realizada en el centro: </b> {{centro.campus}} </p> 	    
+		<p> <b> Actividad reservada: </b> <em>{{act.nombre}}</em> </p>
+		<p> <b> Fecha reservada: </b> <em>{{res.fecha}}</em> </p>
+		<p> <b> Realizada en el centro: </b> <em>{{centro.campus}} </em></p> 	    
 		
 		<a href="/perfil"><button class="button botonVOLVER"> Volver </button></a>
+		<p><a href="/perfil/cancelarReserva/{{res.id}}"><button class="button botonCERRARSESION"> Cancelar Reserva </button></a></p>
 	</div>
 
 {{>piepag}}
