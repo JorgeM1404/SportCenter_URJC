@@ -155,11 +155,11 @@ public class ControladorWeb
 		
 		switch (campus) 
 		{
-			case "Mostoles": plantilla = "mostoles.css"; break;	
-			case "Alcorcón": plantilla = "alcorcon.css"; break;	
-			case "Fuenlabrada": plantilla = "fuenlabrada.css"; break;	
-			case "Aranjuez": plantilla = "aranjuez.css"; break;	
-			case "Vicálvaro": plantilla = "vicalvaro.css"; break;	
+			case "Mostoles": plantilla = "/imagenes/urjc_mostoles.jpg"; break;	
+			case "Alcorcón": plantilla = "/imagenes/urjc_alcorcon.jpg"; break;	
+			case "Fuenlabrada": plantilla = "/imagenes/urjc_fuenlabrada.jpg"; break;	
+			case "Aranjuez": plantilla = "/imagenes/urjc_aranjuez.jpg"; break;	
+			case "Vicálvaro": plantilla = "/imagenes/urjc_vicalvaro.jpg"; break;	
 		}	
 		model.addAttribute("plantilla", plantilla);
 		return "campus";
@@ -174,11 +174,11 @@ public class ControladorWeb
 		model.addAttribute("act", act);
 		switch (centroActual.getCampus())  
 		{
-			case "Mostoles": plantilla = "mostoles.css"; break;				
-			case "Alcorcón": plantilla = "alcorcon.css"; break;
-			case "Fuenlabrada": plantilla = "fuenlabrada.css"; break;
-			case "Aranjuez": plantilla = "aranjuez.css"; break;
-			case "Vicálvaro": plantilla = "vicalvaro.css"; break;
+			case "Mostoles": plantilla = "/imagenes/urjc_mostoles.jpg"; break;	
+			case "Alcorcón": plantilla = "/imagenes/urjc_alcorcon.jpg"; break;	
+			case "Fuenlabrada": plantilla = "/imagenes/urjc_fuenlabrada.jpg"; break;	
+			case "Aranjuez": plantilla = "/imagenes/urjc_aranjuez.jpg"; break;	
+			case "Vicálvaro": plantilla = "/imagenes/urjc_vicalvaro.jpg"; break;
 		}	
 		model.addAttribute("plantilla", plantilla);
 		return "campus";

@@ -16,7 +16,7 @@ body {
 	width:100%;
 	padding: 10px 0px 10px 0px;
 	background-color: #303030;
-	
+	color: white;
 }
 
 .logo
@@ -48,7 +48,7 @@ body {
 	position: absolute;
 	float: left;
 	padding: 10px 10px 0px 10px;
-	text-align: left;
+	text-align: center;
 	background: #292626;
 	color: white;
 	font-size: 20px;
@@ -68,7 +68,7 @@ body {
 
 .iSesion {
 	text-align: center;
-	background: lightgrey;
+	background: #dfffff;
 	color: black;
 	margin: auto;
     width: 20%;
@@ -78,7 +78,7 @@ body {
 
 .aSesion {
 	text-align: center;
-	background: lightgrey;
+	background: #dfffff;
 	color: black;
 	margin: auto;
     width: 20%;
@@ -88,12 +88,22 @@ body {
 
 .error {
 	text-align: center;
-	background: lightgrey;
+	background: #dfffff;
 	color: black;
 	margin: auto;
     width: 20%;
     border: 3px black;
 	padding: 10px 10px 10px 10px;
+}
+
+.mensajes {
+	text-align: center;
+	background: #dfffff;
+	color: black;
+	margin: auto;
+    width: 100%;
+    border: 3px black;
+	padding: 20px 20px 20px 20px;
 }
 
 .contenido
@@ -109,6 +119,23 @@ body {
 	background-color: #555555;
 	border: none;
 	color: white;
+    padding: 10px 27px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.botonVOLVER:hover {
+  background-color: grey;
+}
+
+.botonRESERVAR {
+	background-color: #4CAF50;
+	border: none;
+	color: white;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
@@ -116,4 +143,53 @@ body {
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
+}
+
+.botonRESERVAR:hover {
+  background-color: grey;
+}
+
+input[type=submit] {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 17px;
+  text-align: center;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.botonMENU {
+	background-color: #303030;
+	border: none;
+	color: white;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 0px 0px;
+    cursor: pointer;
+}
+
+.botonMENU:hover {
+  background-color: grey;
+}
+
+.botonCERRARSESION {
+	background-color: #c34f4f;
+	border: none;
+	color: white;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 0px 0px;
+    cursor: pointer;
+}
+
+.botonCERRARSESION:hover {
+  background-color: red;
 }

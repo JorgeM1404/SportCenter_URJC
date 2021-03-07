@@ -6,8 +6,16 @@
 	<form action="/perfil/realizarReserva" method="post">
 	<p>Nombre de la reserva</p>
 	<p><input type= 'text' name= 'nombreReserva'/></p>
+	<p>Actividad a reservar </p>
+	<p><input type= 'text' name= 'nombreActividad'/></p>
 	<p>Fecha </p>
 	<p><input type= 'date' name= 'fecha'/></p>
+	
+	<p>Hora </p>
+	<p>
+	     <input type= 'time' name= 'hora' min='07:00' max='20:00' required/>
+	     <small> Horario de reserva de 7am a 8pm </small> 
+	</p>
 
 	<p><input type='submit' value= 'CONFIRMAR'/></p>
 	</form>
