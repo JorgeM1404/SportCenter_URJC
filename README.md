@@ -9,7 +9,9 @@ Consiste en una web que administra y gestiona los centros deportivos de los camp
 - [Entidades](#entidades)
 - [Funcionalidades del servicio interno](#funcionalidades-del-servicio-interno)  
 - [Diagrama de navegación](#diagrama-de-navegación)  
-- [Esquema Entidad-Relación](#esquema_entidad_relación)
+- [Esquema Entidad Relación](#esquema-entidad-relacion)
+- [Diagrama UML](#diagrama-uml)
+- [Capturas de pantalla (Fase 2)](#capturas-de-pantalla)
 - [Miembros del equipo](#miembros-del-equipo)
 
 # Entidades 
@@ -43,6 +45,31 @@ Generación de un documento de texto con toda la información relacionada con el
 
 # Esquema Entidad-Relación
 ![EsquemaER](imagenes/EsquemaER.png)
+
+# Diagrama UML
+![DiagramaUML](imagenes/UML.png)
+
+# Capturas de pantalla (Fase 2)
+Página inicial de bienvenida
+![PAGINA INICIO](imagenes/PAGINA INICIO.png)
+Formulario de registro de usuario nuevo
+![PAGINA REGISTRO](imagenes/PAGINA REGISTRO.png)
+Formulario inicio de sesión de usuario registrado
+![PAGINA INICIO SESIONL](imagenes/PAGINA INICIO SESION.png)
+Página principal de la web
+![PAGINA PRINCIPAL](imagenes/PAGINA PRINCIPAL.png)
+Página de selección de campus
+![PAGINA CAMPUS](imagenes/PAGINA CAMPUS.png)
+Página de selección de actividad
+![PAGINA ACTIVIDAD](imagenes/PAGINA ACTIVIDAD.png)
+Formulario de reserva de actividad
+![PAGINA RESERVAR](imagenes/PAGINA RESERVAR.png)
+Página de cancelación de reserva
+![PANTALLA CANCELAR](imagenes/PANTALLA CANCELAR.png)
+Confirmación de reserva
+![PANTALLA RESERVADO](imagenes/PANTALLA RESERVADO.png)
+Página del perfil del usuario
+![PANTALLA PERFIL](imagenes/PANTALLA PERFIL.png)
 
 # Miembros del equipo
 - Antonio Francisco Roldan Martin - af.roldan@alumnos.urjc.es - https://github.com/afroldan
