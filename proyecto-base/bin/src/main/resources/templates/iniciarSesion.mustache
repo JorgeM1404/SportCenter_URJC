@@ -1,4 +1,28 @@
-{{>cabecera}}
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>SportCenterURJC</title>
+		<link rel="stylesheet" href="/styles.css">
+			<style>
+				body {
+					background-image: url('/imagenes/fondo.jpg');
+					background-repeat: no-repeat;
+					background-attachment: fixed;
+					background-size: cover;
+					margin: 0;
+					}
+			</style>
+	</head>
+
+<body>
+
+<div class="wrapper">
+	<div class="header">
+		<div class="logo">
+			<img src="/imagenes/logo.png" alt="logo" style="float: left;">SportCenter<span style="color: #c34f4f">URJC</span>
+		</div>
+	</div>
+	
 
 <!--{{#errorNombre}}
    <p> Nombre incorrecto </p>
@@ -22,9 +46,9 @@
 		<p style="color:red">El usuario introducido ya existe </p>
 	{{/usuarioYaExiste}}
 
-	<p>INICIAR SESION</p>
+	<h2>INICIAR SESION</h2>
 	<form action="usuario/acceso" method="post">
-	<p>Nombre usuario</p>
+	<p>Nombre de usuario</p>
 	<p><input type= 'text' name= 'nombre'/></p>
 	<p>Clave</p>
 	<p><input type= 'text' name= 'clave'/></p>
@@ -36,4 +60,11 @@
    
 </div>
 
-{{>piepag}}
+	<div class="footer">
+		<p>SportCenterURJC - Trabajo DAD 2021 ©</p>
+	</div>
+</div>
+
+</body>
+
+</html>

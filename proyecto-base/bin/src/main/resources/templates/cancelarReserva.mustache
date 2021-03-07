@@ -25,18 +25,12 @@
 	
 
 	<div class="mensajes">
-		<h1> Bienvenido a tu perfil personal {{usu.nombre}}  </h1>
+		<h2> Estas a punto de cancelar la siguiente reserva: <em>"{{res.nombreReserva}}"</em></h2>
+		<h2> ¿Estas seguro? </h2>
 		
-		{{#res}}
-		     <h2>Los nombres de tus reservas son:<a href="/perfil/{{id}}">{{nombreReserva}} </a><br></h2>
-		{{/res}}
-		
-		{{^res}}
-		     <p> No se ha realizado ninguna reserva todavía. </p>
-		{{/res}}	
-		
-		<a href="/perfil/realizarReserva"><button class="button botonVOLVER"> Reservar </button></a>
-		<a href="/menuPrincipal"><button class="button botonVOLVER"> Volver </button></a>
+		<a href="/perfil/reservaCancelada/{{res.id}}"><button class="button botonCERRARSESION"> SI </button></a>
+		<a href="/perfil/{{res.id}}"><button class="button botonVOLVER"> NO </button></a>
+
 	</div>
 
 	<div class="footer">
