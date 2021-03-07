@@ -8,4 +8,56 @@
 	</buildSpec>
 	<natures>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>imagenes/PAGINAACTIVIDAD.png</name>
+			<type>1</type>
+			<location>C:/Users/Usuario/Desktop/JORGE/UNIVERSIDAD/4º Curso/Cuatrimestre 2/DAD/PAGINAACTIVIDAD.png</location>
+		</link>
+		<link>
+			<name>imagenes/PAGINACAMPUS.png</name>
+			<type>1</type>
+			<location>C:/Users/Usuario/Desktop/JORGE/UNIVERSIDAD/4º Curso/Cuatrimestre 2/DAD/PAGINACAMPUS.png</location>
+		</link>
+		<link>
+			<name>imagenes/PAGINAINICIO.png</name>
+			<type>1</type>
+			<location>C:/Users/Usuario/Desktop/JORGE/UNIVERSIDAD/4º Curso/Cuatrimestre 2/DAD/PAGINAINICIO.png</location>
+		</link>
+		<link>
+			<name>imagenes/PAGINAINICIOSESION.png</name>
+			<type>1</type>
+			<location>C:/Users/Usuario/Desktop/JORGE/UNIVERSIDAD/4º Curso/Cuatrimestre 2/DAD/PAGINAINICIOSESION.png</location>
+		</link>
+		<link>
+			<name>imagenes/PAGINAPRINCIPAL.png</name>
+			<type>1</type>
+			<location>C:/Users/Usuario/Desktop/JORGE/UNIVERSIDAD/4º Curso/Cuatrimestre 2/DAD/PAGINAPRINCIPAL.png</location>
+		</link>
+		<link>
+			<name>imagenes/PAGINAREGISTRO.png</name>
+			<type>1</type>
+			<location>C:/Users/Usuario/Desktop/JORGE/UNIVERSIDAD/4º Curso/Cuatrimestre 2/DAD/PAGINAREGISTRO.png</location>
+		</link>
+		<link>
+			<name>imagenes/PAGINARESERVAR.png</name>
+			<type>1</type>
+			<location>C:/Users/Usuario/Desktop/JORGE/UNIVERSIDAD/4º Curso/Cuatrimestre 2/DAD/PAGINARESERVAR.png</location>
+		</link>
+		<link>
+			<name>imagenes/PANTALLACANCELAR.png</name>
+			<type>1</type>
+			<location>C:/Users/Usuario/Desktop/JORGE/UNIVERSIDAD/4º Curso/Cuatrimestre 2/DAD/PANTALLACANCELAR.png</location>
+		</link>
+		<link>
+			<name>imagenes/PANTALLAPERFIL.png</name>
+			<type>1</type>
+			<location>C:/Users/Usuario/Desktop/JORGE/UNIVERSIDAD/4º Curso/Cuatrimestre 2/DAD/PANTALLAPERFIL.png</location>
+		</link>
+		<link>
+			<name>imagenes/PANTALLARESERVADO.png</name>
+			<type>1</type>
+			<location>C:/Users/Usuario/Desktop/JORGE/UNIVERSIDAD/4º Curso/Cuatrimestre 2/DAD/PANTALLARESERVADO.png</location>
+		</link>
+	</linkedResources>
 </projectDescription>
