@@ -23,11 +23,11 @@ Cada centro deportivo estará constituido por una serie de distintas Actividades
 
 ### Actividad
 Representa los distintos tipos de actividades deportivas disponibles para los usuarios.
-Cada actividad está asociada a un centro deportivo y a una pista deportiva.
+Cada actividad está asociada a un centro deportivo y a una/varias pistas deportivas.
 
 ### Reserva
-Representa la forma de acceder a un centro deportivo y sus actividades.
-Está asociada al centro deportivo.
+Representa la forma en la que un usuario solicita una reserva para una actividad en un centro deportivo.
+Está asociada al centro deportivo donde se realiza la reserva, a la actividad reservada y al usuario que realiza la reserva.
 
 ### Pista deportiva
 Representa todas las distintas pistas/canchas de las distintas actividades que se realizan en los distintos centros deportivos.
