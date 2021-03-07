@@ -5,6 +5,12 @@ Consiste en una web que administra y gestiona los centros deportivos de los camp
 - La parte pública consistiria en la navegación libre por la web y la visualizacion de todos sus apartados.
 - La parte privada consiste en la gestion por parte de los usuarios de todos los recursos a los que se tenga acceso. 
 
+## Índice
+- [Entidades](#entidades)
+- [Funcionalidades del servicio interno](#funcionalidades-del-servicio-interno)  
+- [Diagrama de navegación](#diagrama-de-navegación)  
+- [Miembros del equipo](#miembros-del-equipo)
+
 # Entidades 
 ### Usuario
 Representa a los usuarios del sistema que pueden ser alumnos, docentes, trabajadores y administradores de los centros deportivos.
@@ -30,6 +36,9 @@ Las pistas deportivas están asociadas a las actividades de los centros deportiv
 Generación de mensaje de aviso sobre la disponibilidad de las actividades.
 Generación de correo electrónico a la cuenta de la universidad con los datos de la reserva.
 Generación de un documento de texto con toda la información relacionada con el usuario (reservas y/o actividades).
+
+# Diagrama de navegación
+![Diagrama de navegación](imagenes/diagramaNavegacion.png)
 
 # Miembros del equipo
 - Antonio Francisco Roldan Martin - af.roldan@alumnos.urjc.es - https://github.com/afroldan
