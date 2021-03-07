@@ -9,6 +9,7 @@ Consiste en una web que administra y gestiona los centros deportivos de los camp
 - [Entidades](#entidades)
 - [Funcionalidades del servicio interno](#funcionalidades-del-servicio-interno)  
 - [Diagrama de navegación](#diagrama-de-navegación)  
+- [Esquema Entidad-Relación](#esquema_entidad_relación)
 - [Miembros del equipo](#miembros-del-equipo)
 
 # Entidades 
@@ -39,6 +40,9 @@ Generación de un documento de texto con toda la información relacionada con el
 
 # Diagrama de navegación
 ![Diagrama de navegación](imagenes/diagramaNavegacion.png)
+
+# Esquema Entidad-Relación
+![EsquemaER](imagenes/EsquemaER.png)
 
 # Miembros del equipo
 - Antonio Francisco Roldan Martin - af.roldan@alumnos.urjc.es - https://github.com/afroldan
