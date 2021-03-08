@@ -7,11 +7,11 @@ Consiste en una web que administra y gestiona los centros deportivos de los camp
 
 ## Índice
 - [Entidades](#entidades)
-- [Funcionalidades del servicio interno](#funcionalidades-del-servicio-interno)  
-- [Diagrama de navegación](#diagrama-de-navegación)  
-- [Esquema Entidad Relación](#esquema-entidad-relacion)
+- [Funcionalidades del servicio interno](#funcionalidades-del-servicio-interno)
+- [Diagrama de navegación](#diagrama-de-navegación)
+- [Esquema Entidad Relación](#esquema-entidad-relación)
 - [Diagrama UML](#diagrama-uml)
-- [Capturas de pantalla (Fase 2)](#capturas-de-pantalla)
+- [Capturas de pantalla Fase 2](#capturas-de-pantalla-fase-2)
 - [Miembros del equipo](#miembros-del-equipo)
 
 # Entidades 
@@ -43,33 +43,33 @@ Generación de un documento de texto con toda la información relacionada con el
 # Diagrama de navegación
 ![Diagrama de navegación](imagenes/diagramaNavegacion.png)
 
-# Esquema Entidad-Relación
+# Esquema Entidad Relación
 ![EsquemaER](imagenes/EsquemaER.png)
 
 # Diagrama UML
 ![DiagramaUML](imagenes/UML.png)
 
-# Capturas de pantalla (Fase 2)
+# Capturas de pantalla Fase 2
 Página inicial de bienvenida
-![PAGINA INICIO](imagenes/PAGINA INICIO.png)
+![PAGINA INICIO](imagenes/PAGINAINICIO.png)
 Formulario de registro de usuario nuevo
-![PAGINA REGISTRO](imagenes/PAGINA REGISTRO.png)
+![PAGINA REGISTRO](imagenes/PAGINAREGISTRO.png)
 Formulario inicio de sesión de usuario registrado
-![PAGINA INICIO SESIONL](imagenes/PAGINA INICIO SESION.png)
+![PAGINA INICIO SESIONL](imagenes/PAGINAINICIOSESION.png)
 Página principal de la web
-![PAGINA PRINCIPAL](imagenes/PAGINA PRINCIPAL.png)
+![PAGINA PRINCIPAL](imagenes/PAGINAPRINCIPAL.png)
 Página de selección de campus
-![PAGINA CAMPUS](imagenes/PAGINA CAMPUS.png)
+![PAGINA CAMPUS](imagenes/PAGINACAMPUS.png)
 Página de selección de actividad
-![PAGINA ACTIVIDAD](imagenes/PAGINA ACTIVIDAD.png)
+![PAGINA ACTIVIDAD](imagenes/PAGINAACTIVIDAD.png)
 Formulario de reserva de actividad
-![PAGINA RESERVAR](imagenes/PAGINA RESERVAR.png)
+![PAGINA RESERVAR](imagenes/PAGINARESERVAR.png)
+Visualización de reserva
+![PANTALLA RESERVADO](imagenes/PANTALLARESERVADO.png)
 Página de cancelación de reserva
-![PANTALLA CANCELAR](imagenes/PANTALLA CANCELAR.png)
-Confirmación de reserva
-![PANTALLA RESERVADO](imagenes/PANTALLA RESERVADO.png)
+![PANTALLA CANCELAR](imagenes/PANTALLACANCELAR.png)
 Página del perfil del usuario
-![PANTALLA PERFIL](imagenes/PANTALLA PERFIL.png)
+![PANTALLA PERFIL](imagenes/PANTALLAPERFIL.png)
 
 # Miembros del equipo
 - Antonio Francisco Roldan Martin - af.roldan@alumnos.urjc.es - https://github.com/afroldan
