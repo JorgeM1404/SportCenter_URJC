@@ -49,7 +49,7 @@ public class ServicioCentros
 	@PostConstruct
 	public void Init()
 	{   
-		p1.setActividad(a1); p2.setActividad(a2); p3a.setActividad(a3); p3b.setActividad(a3); p4.setActividad(a4); p5.setActividad(a5); 
+		p1.setActividad(a1); p2.setActividad(a2); p3a.setActividad(a3); p3b.setActividad(a3); p4.setActividad(a4); p5.setActividad(a5); p6.setActividad(a6); p7.setActividad(a7); p8.setActividad(a8);
 		
 		CentroDeportivo centro1 = new CentroDeportivo("Mostoles");		
 	    repositorio.save(centro1);
