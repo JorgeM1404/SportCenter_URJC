@@ -21,7 +21,7 @@ public class ServicioCentros
 	@Autowired
 	private ServicioPistas servicioPistas;
 	
-	PistaDeportiva p1 = new PistaDeportiva("Campo de Futbol",false);	
+	/*PistaDeportiva p1 = new PistaDeportiva("Campo de Futbol",false);	
 	Actividad a1 = new Actividad("Fútbol",Arrays.asList(p1));
 	
 	PistaDeportiva p2 = new PistaDeportiva("Cancha de baloncesto",false);	
@@ -87,7 +87,7 @@ public class ServicioCentros
 		}
 	}
 		
-	/*public void setActividadesMostoles(CentroDeportivo centro)
+	public void setActividadesMostoles(CentroDeportivo centro)
 	{	
 		p1.setActividad(a1);  a1.getCentros().add(centro);	
 		p2.setActividad(a2);  a2.getCentros().add(centro);
