@@ -49,6 +49,8 @@ public class ServicioCentros
 	@PostConstruct
 	public void Init()
 	{   
+		p1.setActividad(a1); p2.setActividad(a2); p3a.setActividad(a3); p3b.setActividad(a3); p4.setActividad(a4); p5.setActividad(a5); 
+		
 		CentroDeportivo centro1 = new CentroDeportivo("Mostoles");		
 	    repositorio.save(centro1);
 	    setActividadesCampus(centro1);//setActividadesMostoles(centro1);
@@ -74,8 +76,7 @@ public class ServicioCentros
 	}
 	
 	public void setActividadesCampus(CentroDeportivo centro)
-	{
-		p1.setActividad(a1); p2.setActividad(a2); p3a.setActividad(a3); p3b.setActividad(a3); p4.setActividad(a4); p5.setActividad(a5); 	
+	{	
 		switch (centro.getCampus())
 		{
 		     case "Mostoles": a1.getCentros().add(centro); a2.getCentros().add(centro); a3.getCentros().add(centro); a4.getCentros().add(centro); a5.getCentros().add(centro); break;
