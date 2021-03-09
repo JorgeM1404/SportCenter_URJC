@@ -20,8 +20,12 @@ public class ServicioActividades
 		return repositorio.findById(id).orElseThrow();
 	}
 	
-	public void borrarUsuarios(String id) {
+	public void borrarActividadById(String id) {
 		Actividad act = repositorio.findById(id).orElseThrow();
+		repositorio.delete(act);
+	}
+	
+	public void borrarActividad(Actividad act) {
 		repositorio.delete(act);
 	}
 	

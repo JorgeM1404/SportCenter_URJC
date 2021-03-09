@@ -221,7 +221,7 @@ public class ControladorWeb
 	}
 	
 	@PostMapping("/gestion/crear")
-	public String crearNuevaActividad(Model model, @PathVariable String nombreActividad, @PathVariable String nombreCentro, @PathVariable String nombrePista)
+	public String crearNuevaActividad(Model model, @RequestParam String nombreActividad, @RequestParam String nombreCentro, @RequestParam String nombrePista)
 	{
 		PistaDeportiva p = new PistaDeportiva(nombrePista,false);
 		Actividad a = new Actividad(nombreActividad,Arrays.asList(p));
@@ -234,6 +234,29 @@ public class ControladorWeb
 		servicioPistas.guardarPista(p);
 		
 		return "gestion";
+	}
+	
+	@GetMapping("/gestion/borrar/{id}")
+	public String borrarActividadExistente(Model model, @PathVariable String id)
+	{
+		Actividad act = servicioActividades.getActividad(id);
+		centroActual.getActividades().remove(act);
+		servicioActividades.borrarActividad(act);
+		String plantilla = "";
+		List<Actividad> act2 = centroActual.getActividades();
+		model.addAttribute("centro", centroActual);
+		model.addAttribute("act", act2);
+		switch (centroActual.getCampus())  
+		{
+			case "Mostoles": plantilla = "/imagenes/urjc_mostoles.jpg"; break;	
+			case "Alcorcón": plantilla = "/imagenes/urjc_alcorcon.jpg"; break;	
+			case "Fuenlabrada": plantilla = "/imagenes/urjc_fuenlabrada.jpg"; break;	
+			case "Aranjuez": plantilla = "/imagenes/urjc_aranjuez.jpg"; break;	
+			case "Vicálvaro": plantilla = "/imagenes/urjc_vicalvaro.jpg"; break;
+		}	
+		model.addAttribute("plantilla", plantilla);
+		
+		return "campus";
 	}
 	
 	@GetMapping("/perfil/reservaCancelada/{id}")
