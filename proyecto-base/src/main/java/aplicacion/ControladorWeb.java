@@ -1,5 +1,6 @@
 package aplicacion;
 
+import java.util.Arrays;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,9 @@ public class ControladorWeb
 	
 	@Autowired
 	private ServicioReservas servicioReservas;
+	
+	@Autowired
+	private ServicioPistas servicioPistas;
 	
 	private Usuario usuarioActual;
 	private CentroDeportivo centroActual;
@@ -196,6 +200,40 @@ public class ControladorWeb
 		model.addAttribute("act", act);
 		
 		return "actividad";
+	}
+	
+	@GetMapping("/gestion")
+	public String gestionActividad()
+	{
+		return "gestion";
+	}
+	
+	@GetMapping("/gestion/crear")
+	public String crearActividad()
+	{
+		return "crearActividad";
+	}
+	
+	@GetMapping("/gestion/borrar")
+	public String borrarActividad()
+	{
+		return "gestion";
+	}
+	
+	@PostMapping("/gestion/crear")
+	public String crearNuevaActividad(Model model, @PathVariable String nombreActividad, @PathVariable String nombreCentro, @PathVariable String nombrePista)
+	{
+		PistaDeportiva p = new PistaDeportiva(nombrePista,false);
+		Actividad a = new Actividad(nombreActividad,Arrays.asList(p));
+		CentroDeportivo c = servicioCentros.getCentro(nombreCentro);
+		c.getActividades().add(a);
+		a.getCentros().add(c);
+		p.setActividad(a);
+		
+		servicioActividades.guardarActividad(a);
+		servicioPistas.guardarPista(p);
+		
+		return "gestion";
 	}
 	
 	@GetMapping("/perfil/reservaCancelada/{id}")

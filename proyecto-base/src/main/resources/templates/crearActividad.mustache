@@ -23,25 +23,23 @@
 		</div>
 	</div>
 	
-<br><br><br><br><br><br>
-<div class="iSesion">
 
-	{{#datosIncorrectos}}
-		<p style="color:red">Faltan datos por introducir.</p>
-	{{/datosIncorrectos}}
+	<div class="contenido">
+		<div class="iSesion">
 
-	<h2>REGISTRARSE</h2>
-	<form action="usuario/nuevo" method="post">
-	<p>Nombre de usuario</p>
-	<p><input type= 'text' name= 'nombre'/></p>
-	<p>Clave</p>
-	<p><input type= 'text' name= 'clave'/></p>
-	<p>Correo</p>
-	<p><input type= 'text' name= 'correo'/></p>
-	<p><input type='submit' value= 'Registrarse'/></p>
+	<h2>CREAR ACTIVIDAD</h2>
+	<form action="/gestion/nuevaActividad" method="post">
+	<p>Nombre de la actividad</p>
+	<p><input type= 'text' name= 'nombreActividad'/></p>
+	<p>Nombre de Centro </p>
+	<p><input type= 'text' name= 'nombreCentro'/></p>
+	<p>Nombre de pista </p>
+	<p><input type= 'text' name= 'nombrePista'/></p>
+	<p><input type='submit' value= 'CONFIRMAR'/></p>
 	</form>
-	<a href="/"><button class="button botonVOLVER"> Volver </button></a>
+	<a href="/gestion"><button class="button botonVOLVER"> Volver </button></a>
 </div>
+	</div>
 
 	<div class="footer">
 		<p>SportCenterURJC - Trabajo DAD 2021 ©</p>
