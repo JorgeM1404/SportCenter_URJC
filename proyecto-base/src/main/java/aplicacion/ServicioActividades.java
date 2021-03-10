@@ -16,12 +16,21 @@ public class ServicioActividades
 		return repositorio.findAll();
 	}
 	
-	public Actividad getActividad(String id) {
+	public Actividad getActividadById(long id) {
 		return repositorio.findById(id).orElseThrow();
 	}
 	
-	public void borrarActividadById(String id) {
+	public Actividad getActividadByNombre(String nombre) {
+		return repositorio.findByNombre(nombre);
+	}
+	
+	public void borrarActividadById(long id) {
 		Actividad act = repositorio.findById(id).orElseThrow();
+		repositorio.delete(act);
+	}
+	
+	public void borrarActividadByNombre(String nombre) {
+		Actividad act = repositorio.findByNombre(nombre);
 		repositorio.delete(act);
 	}
 	

@@ -10,6 +10,9 @@ import javax.persistence.*;
 public class Actividad 
 {
 	@Id	
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private long id;
+	
 	private String nombre;
 	
 	@OneToMany(mappedBy="actividad")
@@ -34,6 +37,14 @@ public class Actividad
 		this.nombre = nombre;
 		this.pistas = new LinkedList<>();
 		this.centros =  new LinkedList<>();
+	}
+	
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getNombreActividad() {

@@ -188,10 +188,10 @@ public class ControladorWeb
 		return "campus";
 	}
 	
-	@GetMapping("/campus/actividades/{nombre}")
-	public String SeleccionarActividad(Model model, @PathVariable String nombre)
+	@GetMapping("/campus/actividades/{id}")
+	public String SeleccionarActividad(Model model, @PathVariable long id)
 	{
-		Actividad act = servicioActividades.getActividad(nombre);
+		Actividad act = servicioActividades.getActividadById(id);
 		List<CentroDeportivo> centros = act.getCentrosSalvo(centroActual);
 		List<PistaDeportiva> pistas = act.getPistas();
 		
@@ -239,9 +239,9 @@ public class ControladorWeb
 	}
 	
 	@GetMapping("/gestion/borrar/{id}")
-	public String borrarActividadExistente(Model model, @PathVariable String id)
+	public String borrarActividadExistente(Model model, @PathVariable long id)
 	{		
-		Actividad act = servicioActividades.getActividad(id);
+		Actividad act = servicioActividades.getActividadById(id);
         model.addAttribute("act", act);    
         model.addAttribute("centro", centroActual);
 		
@@ -249,9 +249,9 @@ public class ControladorWeb
 	}
 	
 	@GetMapping("/gestion/borrada/{id}")
-	public String borradaActividadExistente(Model model, @PathVariable String id)
+	public String borradaActividadExistente(Model model, @PathVariable long id)
 	{
-		Actividad act = servicioActividades.getActividad(id);
+		Actividad act = servicioActividades.getActividadById(id);
 		List<PistaDeportiva> pistas = act.getPistas();
 		
 		String plantilla = "";
@@ -331,7 +331,7 @@ public class ControladorWeb
 	@PostMapping("/perfil/realizarReserva")
 	public String solicitarReservapsot(Model model,Reserva res, @RequestParam String nombreActividad)
 	{
-		Actividad act = servicioActividades.getActividad(nombreActividad);
+		Actividad act = servicioActividades.getActividadByNombre(nombreActividad);
 		List<Reserva> reservas = usuarioActual.getReservas();
 		
 		res.setUsuario(usuarioActual);
