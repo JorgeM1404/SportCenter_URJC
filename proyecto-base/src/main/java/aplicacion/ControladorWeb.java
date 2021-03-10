@@ -199,6 +199,8 @@ public class ControladorWeb
 		model.addAttribute("centros", centros);
 		model.addAttribute("act", act);
 		
+		//model.addAttribute("centroActual",centroActual); // nuevo
+		
 		return "actividad";
 	}
 	
@@ -238,24 +240,42 @@ public class ControladorWeb
 	
 	@GetMapping("/gestion/borrar/{id}")
 	public String borrarActividadExistente(Model model, @PathVariable String id)
+	{		
+		Actividad act = servicioActividades.getActividad(id);
+        model.addAttribute("act", act);    
+        model.addAttribute("centro", centroActual);
+		
+		return "borrarActividad";
+	}
+	
+	@GetMapping("/gestion/borrada/{id}")
+	public String borradaActividadExistente(Model model, @PathVariable String id)
 	{
 		Actividad act = servicioActividades.getActividad(id);
-		centroActual.getActividades().remove(act);
-		servicioActividades.borrarActividad(act);
+		List<PistaDeportiva> pistas = act.getPistas();
+		
 		String plantilla = "";
-		List<Actividad> act2 = centroActual.getActividades();
+		List<Actividad> actividades = centroActual.getActividades();
+			
+		for(PistaDeportiva p: pistas) p.setActividad(null);
+		act.setPistas(null);
+		act.getCentros().remove(centroActual);
+		servicioActividades.borrarActividadById(id);	
+		
+		actividades.remove(act);
+		
 		model.addAttribute("centro", centroActual);
-		model.addAttribute("act", act2);
-		switch (centroActual.getCampus())  
+		model.addAttribute("act", actividades);
+		
+		switch (centroActual.getCampus()) 
 		{
 			case "Mostoles": plantilla = "/imagenes/urjc_mostoles.jpg"; break;	
 			case "Alcorcón": plantilla = "/imagenes/urjc_alcorcon.jpg"; break;	
 			case "Fuenlabrada": plantilla = "/imagenes/urjc_fuenlabrada.jpg"; break;	
 			case "Aranjuez": plantilla = "/imagenes/urjc_aranjuez.jpg"; break;	
-			case "Vicálvaro": plantilla = "/imagenes/urjc_vicalvaro.jpg"; break;
+			case "Vicálvaro": plantilla = "/imagenes/urjc_vicalvaro.jpg"; break;	
 		}	
 		model.addAttribute("plantilla", plantilla);
-		
 		return "campus";
 	}
 	
