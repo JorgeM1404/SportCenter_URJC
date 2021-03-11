@@ -21,7 +21,7 @@ public class ServicioActividades
 	}
 	
 	public Actividad getActividadByNombre(String nombre) {
-		return repositorio.findByNombre(nombre);
+		return repositorio.findByNombre(nombre).orElseThrow();
 	}
 	
 	public void borrarActividadById(long id) {
@@ -30,7 +30,7 @@ public class ServicioActividades
 	}
 	
 	public void borrarActividadByNombre(String nombre) {
-		Actividad act = repositorio.findByNombre(nombre);
+		Actividad act = repositorio.findByNombre(nombre).orElseThrow();
 		repositorio.delete(act);
 	}
 	

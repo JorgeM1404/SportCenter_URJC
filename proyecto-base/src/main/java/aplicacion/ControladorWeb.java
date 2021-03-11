@@ -251,6 +251,19 @@ public class ControladorWeb
 	@GetMapping("/gestion/borrada/{id}")
 	public String borradaActividadExistente(Model model, @PathVariable long id)
 	{
+		List<Reserva> reservasUsu = usuarioActual.getReservas();
+		for(Reserva res : reservasUsu)
+		{
+			if(res.getActividadRes().getId() == id)
+			{
+				reservasUsu.remove(res);
+				res.setUsuario(null);
+				res.setActividadRes(null);
+				res.setCentro(null);
+				servicioReservas.cancelarReserva(res);
+			}	
+		}
+		
 		Actividad act = servicioActividades.getActividadById(id);
 		List<PistaDeportiva> pistas = act.getPistas();
 		
@@ -331,7 +344,15 @@ public class ControladorWeb
 	@PostMapping("/perfil/realizarReserva")
 	public String solicitarReservapsot(Model model,Reserva res, @RequestParam String nombreActividad)
 	{
-		Actividad act = servicioActividades.getActividadByNombre(nombreActividad);
+		long id = 0;// Actividad act = servicioActividades.getActividadByNombre(nombreActividad);
+		
+		List<Actividad> actCentro = centroActual.getActividades();
+		for(Actividad a : actCentro)
+		{
+			if(a.getNombreActividad() == nombreActividad) id = a.getId(); 
+		}
+		Actividad act = servicioActividades.getActividadById(id);
+		
 		List<Reserva> reservas = usuarioActual.getReservas();
 		
 		res.setUsuario(usuarioActual);
