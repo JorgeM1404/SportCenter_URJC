@@ -251,20 +251,26 @@ public class ControladorWeb
 	@GetMapping("/gestion/borrada/{id}")
 	public String borradaActividadExistente(Model model, @PathVariable long id)
 	{
-		List<Reserva> reservasUsu = usuarioActual.getReservas();
+		Actividad act = servicioActividades.getActividadById(id);				
+		List<Reserva> reservasUsu = usuarioActual.getReservas();	
+		
+		Reserva borrar = null;
+		
 		for(Reserva res : reservasUsu)
 		{
-			if(res.getActividadRes().getId() == id)
+			if(res.getActividadRes().equals(act))
 			{
-				reservasUsu.remove(res);
 				res.setUsuario(null);
 				res.setActividadRes(null);
 				res.setCentro(null);
-				servicioReservas.cancelarReserva(res);
-			}	
+				borrar = res;//reservasUsu.remove(res);
+				//servicioReservas.cancelarReserva(res);
+			}
 		}
+		reservasUsu.remove(borrar);
+		servicioReservas.cancelarReserva(borrar);
 		
-		Actividad act = servicioActividades.getActividadById(id);
+		//Actividad act = servicioActividades.getActividadById(id);
 		List<PistaDeportiva> pistas = act.getPistas();
 		
 		String plantilla = "";
@@ -349,7 +355,7 @@ public class ControladorWeb
 		List<Actividad> actCentro = centroActual.getActividades();
 		for(Actividad a : actCentro)
 		{
-			if(a.getNombreActividad() == nombreActividad) id = a.getId(); 
+			if(a.getNombreActividad().equals(nombreActividad) ) id = a.getId(); 
 		}
 		Actividad act = servicioActividades.getActividadById(id);
 		
