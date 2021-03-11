@@ -44,7 +44,7 @@ public class ServicioCentros
 	Actividad a7 = new Actividad("Hockey sala", Arrays.asList(p7));
 	
 	PistaDeportiva p8 = new PistaDeportiva("Cancha de balonmano",false);	
-	Actividad a8 = new Actividad("Balonmano",Arrays.asList(p8));
+	Actividad a8 = new Actividad("Balonmano",Arrays.asList(p8));*/
 	
 	@PostConstruct
 	public void Init()
@@ -87,7 +87,7 @@ public class ServicioCentros
 		}
 	}*/
 		
-	/*public void setActividadesMostoles(CentroDeportivo centro)
+	public void setActividadesMostoles(CentroDeportivo centro)
 	{	
 		PistaDeportiva p1 = new PistaDeportiva("Campo de Futbol",false);	
 		Actividad a1 = new Actividad("Fútbol",Arrays.asList(p1));
@@ -202,7 +202,7 @@ public class ServicioCentros
 		
 		servicioActividades.guardarActividades(Arrays.asList(a1,a5,a6));
 		servicioPistas.guardarPistas(Arrays.asList(p1,p5,p6));
-	}*/
+	}
 	
 	public List<Actividad> getActividadesCentro(String id) {
 		return repositorio.findById(id).orElseThrow().getActividades();

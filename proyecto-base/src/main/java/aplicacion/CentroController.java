@@ -1,0 +1,88 @@
+package aplicacion;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+@Controller
+public class CentroController {
+	
+	@Autowired
+	private ServicioCentros servicioCentros;
+	@Autowired
+	private ServicioActividades servicioActividades;
+	@Autowired
+	private ServicioCentroActual servicioCentroActual;
+	
+	//private CentroDeportivo centroActual;
+	
+	@GetMapping("/campus")
+	public String menuCampus(Model model)
+	{
+		return "paginaPrincipal";
+	}
+	
+	@GetMapping("/campus/{campus}")
+	public String SeleccionarCampus(Model model, @PathVariable String campus)
+	{	
+		String plantilla = "";
+		CentroDeportivo centroActual = servicioCentros.getCentro(campus);//.getCentroByCampus(campus);
+		servicioCentroActual.setCentroActual(centroActual);
+		List<Actividad> act = centroActual.getActividades();
+		
+		model.addAttribute("centro", centroActual);
+		model.addAttribute("act", act);
+		
+		switch (campus) 
+		{
+			case "Mostoles": plantilla = "/imagenes/urjc_mostoles.jpg"; break;	
+			case "Alcorcón": plantilla = "/imagenes/urjc_alcorcon.jpg"; break;	
+			case "Fuenlabrada": plantilla = "/imagenes/urjc_fuenlabrada.jpg"; break;	
+			case "Aranjuez": plantilla = "/imagenes/urjc_aranjuez.jpg"; break;	
+			case "Vicálvaro": plantilla = "/imagenes/urjc_vicalvaro.jpg"; break;	
+		}	
+		model.addAttribute("plantilla", plantilla);
+		return "campus";
+	}
+	
+	@GetMapping("/campus/actividades")
+	public String menuActividades(Model model)
+	{
+		CentroDeportivo centroActual = servicioCentroActual.getCentroActual();
+		String plantilla = "";
+		List<Actividad> act = centroActual.getActividades();
+		model.addAttribute("centro", centroActual);
+		model.addAttribute("act", act);
+		switch (centroActual.getCampus())  
+		{
+			case "Mostoles": plantilla = "/imagenes/urjc_mostoles.jpg"; break;	
+			case "Alcorcón": plantilla = "/imagenes/urjc_alcorcon.jpg"; break;	
+			case "Fuenlabrada": plantilla = "/imagenes/urjc_fuenlabrada.jpg"; break;	
+			case "Aranjuez": plantilla = "/imagenes/urjc_aranjuez.jpg"; break;	
+			case "Vicálvaro": plantilla = "/imagenes/urjc_vicalvaro.jpg"; break;
+		}	
+		model.addAttribute("plantilla", plantilla);
+		return "campus";
+	}
+	
+	@GetMapping("/campus/actividades/{id}")
+	public String SeleccionarActividad(Model model, @PathVariable long id)
+	{
+		CentroDeportivo centroActual = servicioCentroActual.getCentroActual();
+		Actividad act = servicioActividades.getActividadById(id);
+		List<CentroDeportivo> centros = act.getCentrosSalvo(centroActual);
+		List<PistaDeportiva> pistas = act.getPistas();
+		
+		model.addAttribute("pistas", pistas);
+		model.addAttribute("centros", centros);
+		model.addAttribute("act", act);
+		
+		//model.addAttribute("centroActual",centroActual); // nuevo
+		
+		return "actividad";
+	}
+}
