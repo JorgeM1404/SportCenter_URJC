@@ -1,7 +1,9 @@
 package aplicacion;
 
+import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +42,18 @@ public class ReservaController {
 		return "realizarReserva";
 	}
 	
+	@GetMapping("/mostrar_perfil")
+	public String mostrarPerfil(Model model, HttpSession sesion)
+	{
+	Usuario usuarioActual = (Usuario) sesion.getAttribute("usuarioActual");
+	List<Reserva> reservas = usuarioActual.getReservas();
+	model.addAttribute("usu", usuarioActual);
+	model.addAttribute("res", reservas);
+	return "mostrar_perfil";
+	}
+	
 	@PostMapping("/perfil/realizarReserva")
-	public String solicitarReservapsot(Model model,Reserva res, @RequestParam String nombreActividad, HttpSession sesion)
+	public void solicitarReservapsot(Model model,Reserva res, @RequestParam String nombreActividad, HttpSession sesion,  HttpServletResponse response) throws IOException
 	{
 		CentroDeportivo centroActual = servicioCentroActual.getCentroActual();
 		Usuario usuarioActual = (Usuario) sesion.getAttribute("usuarioActual");
@@ -50,7 +62,10 @@ public class ReservaController {
 		List<Actividad> actCentro = centroActual.getActividades();
 		for(Actividad a : actCentro)
 		{
-			if(a.getNombreActividad() == nombreActividad) id = a.getId(); 
+			if(a.getNombreActividad().equalsIgnoreCase(nombreActividad))
+			{
+				id = a.getId();
+			}
 		}
 		Actividad act = servicioActividades.getActividadById(id);
 		
@@ -62,9 +77,7 @@ public class ReservaController {
 		reservas.add(res);
 		servicioReservas.guardarReserva(res);
 		
-		model.addAttribute("usu", usuarioActual);
-		model.addAttribute("res", reservas);
-		return "mostrar_perfil";
+		response.sendRedirect("/mostrar_perfil");
 	}
 	
 	@GetMapping("/perfil/reservaCancelada/{id}")
