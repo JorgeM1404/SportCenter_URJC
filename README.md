@@ -62,6 +62,12 @@ Página de selección de campus
 ![PAGINA CAMPUS](imagenes/PAGINACAMPUS.png)
 Página de selección de actividad
 ![PAGINA ACTIVIDAD](imagenes/PAGINAACTIVIDAD.png)
+Página de creación de actividad
+![PAGINA CREACION ACTIVIDAD](imagenes/PAGINACREACIONACTIVIDAD.png)
+Formulario de creación de actividad
+![FORMULARIO CREACION ACTIVIDAD](imagenes/FORMULARIOCREACIONACTIVIDAD.png)
+Página de borrado de actividad
+![PAGINA BORRADO ACTIVIDAD](imagenes/PAGINABORRADOACTIVIDAD.png)
 Formulario de reserva de actividad
 ![PAGINA RESERVAR](imagenes/PAGINARESERVAR.png)
 Visualización de reserva
