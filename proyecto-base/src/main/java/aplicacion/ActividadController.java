@@ -81,44 +81,54 @@ public class ActividadController {
 	{
 		CentroDeportivo centroActual = servicioCentroActual.getCentroActual();
 		Usuario usuarioActual = (Usuario) sesion.getAttribute("usuarioActual");
-		List<Reserva> reservasUsu = usuarioActual.getReservas();
-		for(Reserva res : reservasUsu)
-		{
-			if(res.getActividadRes().getId() == id)
-			{
-				reservasUsu.remove(res);
-				res.setUsuario(null);
-				res.setActividadRes(null);
-				res.setCentro(null);
-				servicioReservas.cancelarReserva(res);
-			}	
-		}
-		
+
 		Actividad act = servicioActividades.getActividadById(id);
+		List<Reserva> reservasUsu = usuarioActual.getReservas();
+
+		Reserva borrar = null;
+
+		for(Reserva res : reservasUsu)
+			{
+				if(res.getActividadRes().equals(act))
+				{
+					res.setUsuario(null);
+					res.setActividadRes(null);
+					res.setCentro(null);
+					borrar = res;
+				}
+			}
+		if(borrar != null)
+		{
+			reservasUsu.remove(borrar);
+			servicioReservas.cancelarReserva(borrar);
+		}
+
+		//Actividad act = servicioActividades.getActividadById(id);
 		List<PistaDeportiva> pistas = act.getPistas();
-		
+
 		String plantilla = "";
 		List<Actividad> actividades = centroActual.getActividades();
-			
+
 		for(PistaDeportiva p: pistas) p.setActividad(null);
 		act.setPistas(null);
 		act.getCentros().remove(centroActual);
-		servicioActividades.borrarActividadById(id);	
-		
+		servicioActividades.borrarActividadById(id);
+
 		actividades.remove(act);
-		
+
 		model.addAttribute("centro", centroActual);
 		model.addAttribute("act", actividades);
-		
-		switch (centroActual.getCampus()) 
+
+		switch (centroActual.getCampus())
 		{
-			case "Mostoles": plantilla = "/imagenes/urjc_mostoles.jpg"; break;	
-			case "Alcorcón": plantilla = "/imagenes/urjc_alcorcon.jpg"; break;	
-			case "Fuenlabrada": plantilla = "/imagenes/urjc_fuenlabrada.jpg"; break;	
-			case "Aranjuez": plantilla = "/imagenes/urjc_aranjuez.jpg"; break;	
-			case "Vicálvaro": plantilla = "/imagenes/urjc_vicalvaro.jpg"; break;	
-		}	
+			case "Mostoles": plantilla = "/imagenes/urjc_mostoles.jpg"; break;
+			case "Alcorcón": plantilla = "/imagenes/urjc_alcorcon.jpg"; break;
+			case "Fuenlabrada": plantilla = "/imagenes/urjc_fuenlabrada.jpg"; break;
+			case "Aranjuez": plantilla = "/imagenes/urjc_aranjuez.jpg"; break;
+			case "Vicálvaro": plantilla = "/imagenes/urjc_vicalvaro.jpg"; break;
+		}
 		model.addAttribute("plantilla", plantilla);
+		
 		return "campus";
 	}
 }
