@@ -95,7 +95,7 @@ public class Actividad
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
 		return result;
 	}
 
@@ -108,10 +108,7 @@ public class Actividad
 		if (getClass() != obj.getClass())
 			return false;
 		Actividad other = (Actividad) obj;
-		if (nombre == null) {
-			if (other.nombre != null)
-				return false;
-		} else if (!nombre.equals(other.nombre))
+		if (id != other.id)
 			return false;
 		return true;
 	}
