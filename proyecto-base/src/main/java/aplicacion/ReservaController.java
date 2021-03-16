@@ -1,6 +1,9 @@
 package aplicacion;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -39,7 +42,13 @@ public class ReservaController
 		CentroDeportivo centroActual = servicioCentroActual.getCentroActual();
 		List<Actividad> actsCentro = centroActual.getActividades(); 
 		
+		/*SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date(System.currentTimeMillis());*/
+		
+		LocalDate date = LocalDate.now();
+		
 		model.addAttribute("actsCentro",actsCentro);
+		model.addAttribute("date",date);
 		
 		return "realizarReserva";
 	}
