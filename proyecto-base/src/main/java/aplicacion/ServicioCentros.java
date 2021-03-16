@@ -216,7 +216,7 @@ public class ServicioCentros
 		repositorio.deleteById(id);
 	}
 	
-	public Collection<CentroDeportivo> findAll() {
+	public List<CentroDeportivo> findAll() {
 		return repositorio.findAll();
 	}
 }

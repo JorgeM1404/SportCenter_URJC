@@ -29,11 +29,19 @@
 
 	<h2>CREAR ACTIVIDAD</h2>
 	<form action="/gestion/crear" method="post">
-	<p>Nombre de la actividad</p>
+	<p><b>Nombre de la actividad</b></p>
 	<p><input type= 'text' name= 'nombreActividad'/></p>
-	<p>Nombre de Centro </p>
-	<p><input type= 'text' name= 'nombreCentro'/></p>
-	<p>Nombre de pista </p>
+	
+	<p><label for="centro"><b>Centro deportivo</b></label></p>
+			
+			<select id="centro" name="nombreCentro">
+			    {{#centros}}
+  				        <option value="{{campus}}">{{campus}}</option>
+  				{{/centros}}
+			</select>
+	
+	
+	<p><b>Nombre de pista </b></p>
 	<p><input type= 'text' name= 'nombrePista'/></p>
 	<p><input type='submit' value= 'CONFIRMAR'/></p>
 	</form>

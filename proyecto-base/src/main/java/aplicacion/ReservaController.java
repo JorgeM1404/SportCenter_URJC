@@ -16,17 +16,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
-public class ReservaController {
+public class ReservaController 
+{
 	@Autowired
 	private ServicioReservas servicioReservas;
 	@Autowired
 	private ServicioActividades servicioActividades;
 	@Autowired
 	private ServicioCentroActual servicioCentroActual;
-	
-	//private Usuario usuarioActual;
-	//private CentroDeportivo centroActual;
-	
 	
 	@GetMapping("/perfil/cancelarReserva/{id}")
 	public String cancelarReservaGet(Model model, @PathVariable long id)
@@ -37,8 +34,13 @@ public class ReservaController {
 	}
 	
 	@GetMapping("/perfil/realizarReserva")
-	public String solicitarReservaGet()
+	public String solicitarReservaGet(Model model)
 	{
+		CentroDeportivo centroActual = servicioCentroActual.getCentroActual();
+		List<Actividad> actsCentro = centroActual.getActividades(); 
+		
+		model.addAttribute("actsCentro",actsCentro);
+		
 		return "realizarReserva";
 	}
 	

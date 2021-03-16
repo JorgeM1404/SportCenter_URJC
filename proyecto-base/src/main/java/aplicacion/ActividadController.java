@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
-public class ActividadController {
-	
+public class ActividadController 
+{	
 	@Autowired
 	private ServicioCentros servicioCentros;
 	@Autowired
@@ -28,9 +28,6 @@ public class ActividadController {
 	@Autowired
 	private ServicioCentroActual servicioCentroActual;
 	
-	//private Usuario usuarioActual;
-	//private CentroDeportivo centroActual;
-	
 	@GetMapping("/gestion")
 	public String gestionActividad()
 	{
@@ -38,8 +35,11 @@ public class ActividadController {
 	}
 	
 	@GetMapping("/gestion/crear")
-	public String crearActividad()
+	public String crearActividad(Model model)
 	{
+		List<CentroDeportivo> centros = servicioCentros.findAll();
+		model.addAttribute("centros",centros);
+		
 		return "crearActividad";
 	}
 	

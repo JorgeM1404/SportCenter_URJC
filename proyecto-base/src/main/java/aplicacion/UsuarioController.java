@@ -13,14 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 
 @Controller
-public class UsuarioController {
-	
+public class UsuarioController 
+{
 	@Autowired
 	private ServicioUsuarios servicioUsuarios;
 	@Autowired
 	private ServicioReservas servicioReservas;
-	
-	//private Usuario usuarioActual;
 	
 	private boolean datosIncorrectosReg = false;
 	private boolean datosIncorrectosIni = false;

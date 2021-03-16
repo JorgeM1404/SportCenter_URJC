@@ -28,14 +28,21 @@
 
 	<h2>SOLICITAR RESERVA</h2>
 	<form action="/perfil/realizarReserva" method="post">
-	<p>Nombre de la reserva</p>
+	<p><b>Nombre de la reserva</b></p>
 	<p><input type= 'text' name= 'nombreReserva'/></p>
-	<p>Actividad a reservar </p>
-	<p><input type= 'text' name= 'nombreActividad'/></p>
-	<p>Fecha </p>
+	
+	<p><label for="tipoAct"><b>Actividad a reservar:</b></label></p>
+			
+			<select id="tipoAct" name="nombreActividad">
+			    {{#actsCentro}}
+  				        <option value="{{nombre}}">{{nombre}}</option>
+  				{{/actsCentro}}
+			</select>
+	
+	<p><b> Fecha </b></p>
 	<p><input type= 'date' name= 'fecha'/></p>
 	
-	<p>Hora </p>
+	<p><b> Hora </b></p>
 	<p>
 	     <input type= 'time' name= 'hora' min='07:00' max='20:00' required/>
 	     <small> Horario de reserva de 7am a 8pm </small> 
@@ -43,7 +50,7 @@
 
 	<p><input type='submit' value= 'CONFIRMAR'/></p>
 	</form>
-	<a href="/perfil"><button class="button botonVOLVER"> Volver </button></a>
+	<a href="/campus/actividades"><button class="button botonVOLVER"> Volver </button></a>
 </div>
 
 	<div class="footer">

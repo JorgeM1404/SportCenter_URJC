@@ -9,16 +9,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
-public class CentroController {
-	
+public class CentroController 
+{
 	@Autowired
 	private ServicioCentros servicioCentros;
 	@Autowired
 	private ServicioActividades servicioActividades;
 	@Autowired
 	private ServicioCentroActual servicioCentroActual;
-	
-	//private CentroDeportivo centroActual;
 	
 	@GetMapping("/campus")
 	public String menuCampus(Model model)
