@@ -135,6 +135,70 @@ public class UsuarioController
 		}
 	}
 	
+	// prueba con mappings nuevos del login
+	
+	/*
+	 
+	 
+	 @PostMapping("/usuario/acceso")
+	public void iniciarSesion(Model model,Usuario usuario, HttpSession sesion, HttpServletResponse response) throws IOException
+	{
+		usuarioNoExiste = false;
+		datosIncorrectosIni = false;
+		if(usuario.getNombre().trim().equals("") || usuario.getClave().trim().equals("") || usuario.getCorreo().trim().equals(""))
+		{
+			datosIncorrectosIni = true;
+			model.addAttribute("datosIncorrectosIni", datosIncorrectosIni);
+			
+			response.sendRedirect("/error");
+		}
+		else
+		{
+			Usuario usu = servicioUsuarios.getUsuarioByCampos(usuario.getNombre(), usuario.getClave(), usuario.getCorreo());
+			if(servicioUsuarios.existeUsuario(usu))
+			{
+				//usuarioActual = usu;
+				//model.addAttribute("usu", usu);
+				sesion.setAttribute("usuarioActual", usu);
+				//model.addAttribute("usu", usu);
+				response.sendRedirect("/loginCorrecto");
+			}
+			else
+			{
+				//usuarioNoExiste = true;
+				//model.addAttribute("usuarioNoExiste", usuarioNoExiste);
+				
+				response.sendRedirect("/error");
+			}
+		}
+	}
+	
+	@GetMapping("/error")
+	public String errorLogin(Model model)
+	{
+		usuarioNoExiste = true;
+		model.addAttribute("usuarioNoExiste", usuarioNoExiste);
+		return "error";
+	}
+	
+	@GetMapping("/loginCorrecto")
+	public String correctoLogin(Model model, HttpSession sesion)
+	{
+		Usuario usu = (Usuario) sesion.getAttribute("usuarioActual");
+		model.addAttribute("usu", usu);
+		return "paginaPrincipal";
+	}
+	
+	@GetMapping("/logout")
+	public String logout()
+	{
+		return "inicio";
+	}
+	
+	  
+	 
+	 */
+	
 	@GetMapping("/perfil")
 	public String miPerfil(Model model, HttpSession sesion)
 	{
