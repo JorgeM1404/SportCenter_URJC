@@ -1,4 +1,4 @@
-/*package aplicacion;
+package aplicacion;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -25,7 +25,7 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter{
 		 http.formLogin().loginPage("/iniciarSesion");
 		 http.formLogin().usernameParameter("nombre");
 		 http.formLogin().passwordParameter("clave");
-		 http.formLogin().passwordParameter("correo");
+	   //http.formLogin().passwordParameter("correo");
 		 http.formLogin().defaultSuccessUrl("/campus");
 		 http.formLogin().failureUrl("/loginerror");
 		 
@@ -34,8 +34,7 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter{
 		 http.logout().logoutSuccessUrl("/");
 		
 		// Disable CSRF at the moment
-		 http.csrf().disable();
+		// http.csrf().disable();
 	}
 	
 }
-*/
