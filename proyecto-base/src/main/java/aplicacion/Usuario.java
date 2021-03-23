@@ -16,7 +16,7 @@ public class Usuario
 	private String nombre;
 	
 	private String clave;
-	private String claveHash;
+	private String passwordHash;
 	private String correo;
 	/*
 	@ElementCollection(fetch=FetchType.EAGER)
@@ -27,11 +27,11 @@ public class Usuario
 	
 	public Usuario() {}
 	
-	public Usuario(String nombre, String clave, String correo)
+	public Usuario(String nombre, String passwordHash, String correo)
 	{
 		super();
 		this.nombre = nombre;
-		this.clave = clave;
+		this.passwordHash = passwordHash;
 		this.correo = correo;
 		this.reservas = new LinkedList<Reserva>();
 	}
@@ -43,7 +43,7 @@ public class Usuario
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
+	/*
 	public String getClave() {
 		return clave;
 	}
@@ -51,9 +51,18 @@ public class Usuario
 	public void setClave(String clave) {
 		this.clave = clave;
 	}
-
+	 */
+	
 	public String getCorreo() {
 		return correo;
+	}
+
+	public void setPasswordHash(String passwordHash) {
+		this.passwordHash = passwordHash;
+	}
+	
+	public String getPasswordHash() {
+		return passwordHash;
 	}
 
 	public void setCorreo(String correo) {
@@ -87,10 +96,10 @@ public class Usuario
 		if (getClass() != obj.getClass())
 			return false;
 		Usuario other = (Usuario) obj;
-		if (clave == null) {
-			if (other.clave != null)
+		if (passwordHash == null) {
+			if (other.passwordHash != null)
 				return false;
-		} else if (!clave.equals(other.clave))
+		} else if (!passwordHash.equals(other.passwordHash))
 			return false;
 		if (correo == null) {
 			if (other.correo != null)
@@ -107,6 +116,6 @@ public class Usuario
 
 	@Override
 	public String toString() {
-		return "Usuario [nombre=" + nombre + ", clave=" + clave + ", correo=" + correo + "]";
+		return "Usuario [nombre=" + nombre + ", clave=" + passwordHash + ", correo=" + correo + "]";
 	}
 }

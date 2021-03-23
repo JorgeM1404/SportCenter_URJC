@@ -66,7 +66,7 @@ public class UsuarioController
 	{
 		datosIncorrectosReg = false;
 		usuarioYaExiste = false;
-		if(usuario.getNombre().trim().equals("") || usuario.getClave().trim().equals("") || usuario.getCorreo().trim().equals(""))
+		if(usuario.getNombre().trim().equals("") || usuario.getPasswordHash().trim().equals("") || usuario.getCorreo().trim().equals(""))
 		{
 			datosIncorrectosReg = true;
 			model.addAttribute("datosIncorrectosReg", datosIncorrectosReg);
@@ -108,7 +108,7 @@ public class UsuarioController
 	{
 		usuarioNoExiste = false;
 		datosIncorrectosIni = false;
-		if(usuario.getNombre().trim().equals("") || usuario.getClave().trim().equals("") || usuario.getCorreo().trim().equals(""))
+		if(usuario.getNombre().trim().equals("") || usuario.getPasswordHash().trim().equals("") || usuario.getCorreo().trim().equals(""))
 		{
 			datosIncorrectosIni = true;
 			model.addAttribute("datosIncorrectosIni", datosIncorrectosIni);
@@ -117,7 +117,7 @@ public class UsuarioController
 		}
 		else
 		{
-			Usuario usu = servicioUsuarios.getUsuarioByCampos(usuario.getNombre(), usuario.getClave(), usuario.getCorreo());
+			Usuario usu = servicioUsuarios.getUsuarioByCampos(usuario.getNombre(), usuario.getPasswordHash(), usuario.getCorreo());
 			if(servicioUsuarios.existeUsuario(usu))
 			{
 				//usuarioActual = usu;
