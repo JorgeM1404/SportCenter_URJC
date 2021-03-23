@@ -2,6 +2,8 @@ package aplicacion;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -14,8 +16,12 @@ public class Usuario
 	private String nombre;
 	
 	private String clave;
+	private String claveHash;
 	private String correo;
-	
+	/*
+	@ElementCollection(fetch=FetchType.EAGER)
+	private List<String> roles;
+	*/
 	@OneToMany(mappedBy="usuarioRes",fetch=FetchType.EAGER)
 	private List<Reserva> reservas;
 	

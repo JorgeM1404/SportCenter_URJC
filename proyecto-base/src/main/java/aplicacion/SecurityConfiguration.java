@@ -1,6 +1,7 @@
 package aplicacion;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
@@ -17,7 +18,8 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter{
 		http.authorizeRequests().antMatchers("/iniciarSesion").permitAll();
 		http.authorizeRequests().antMatchers("/usuario/acceso").permitAll();
 		http.authorizeRequests().antMatchers("/error").permitAll();
-		
+		http.authorizeRequests().antMatchers("/imagenes/**").permitAll();
+		http.authorizeRequests().antMatchers("/styles.css").permitAll();
 		// paginas privadas
 		http.authorizeRequests().anyRequest().authenticated();
 		
@@ -26,7 +28,7 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter{
 		 http.formLogin().usernameParameter("nombre");
 		 http.formLogin().passwordParameter("clave");
 	   //http.formLogin().passwordParameter("correo");
-		 http.formLogin().defaultSuccessUrl("/campus");
+		 http.formLogin().defaultSuccessUrl("/paginaPrincipal");
 		 http.formLogin().failureUrl("/loginerror");
 		 
 		// Logout
