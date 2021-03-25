@@ -11,25 +11,25 @@ public class ServicioUsuarios
 	@Autowired
 	private RepositorioUsuarios repositorio;
 	
-	@PostConstruct
+	/*@PostConstruct
 	public void init() {
 		repositorio.save(new Usuario("Jorge","1234","j.molinat.2017@alumnos.urjc.es"));
 		repositorio.save(new Usuario("q","w","e"));		// caso prueba
-	}
+	}*/
 	
 	public Collection<Usuario> getUsuarios() {
 		return repositorio.findAll();
 	}
 	
-	public Usuario getUsuario(String id) {
+	public Usuario getUsuario(long id) {
 		return repositorio.findById(id).orElseThrow();		
 	}
 	
-	public Usuario getUsuarioByCampos(String nombre, String clave, String correo) {
-		return repositorio.findByNombreAndClaveAndCorreo(nombre,clave,correo);		
+	public Usuario getUsuarioByCampos(String nombre, String passwordHash, String correo) {
+		return repositorio.findByNombreAndPasswordHashAndCorreo(nombre,passwordHash,correo);		
 	}
 	
-	public void borrarUsuario(String id) {
+	public void borrarUsuario(long id) {
 		Usuario usu = repositorio.findById(id).orElseThrow();
 		repositorio.delete(usu);
 	}
@@ -39,6 +39,6 @@ public class ServicioUsuarios
 	}
 	
 	public boolean existeUsuario(Usuario usu) {
-		return repositorio.existsByNombreAndClaveAndCorreo(usu.getNombre(), usu.getClave(), usu.getCorreo());
+		return repositorio.existsByNombreAndPasswordHashAndCorreo(usu.getNombre(), usu.getPasswordHash(), usu.getCorreo());
 	}
 }

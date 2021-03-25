@@ -4,8 +4,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RepositorioUsuarios extends JpaRepository<Usuario,String>
+public interface RepositorioUsuarios extends JpaRepository<Usuario,Long>
 {
-	boolean existsByNombreAndClaveAndCorreo(String nombre, String clave, String correo);
-	Usuario findByNombreAndClaveAndCorreo(String nombre, String clave, String correo);
+	Usuario findByNombre(String nombre);
+	boolean existsByNombreAndPasswordHashAndCorreo(String nombre, String passwordHash, String correo);
+	Usuario findByNombreAndPasswordHashAndCorreo(String nombre, String passwordHash, String correo);
 }

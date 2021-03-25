@@ -1,28 +1,36 @@
 package aplicacion;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 public class Usuario 
 {
 	@Id
-	private String nombre;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 	
-	private String clave;
+	private String nombre;
 	private String passwordHash;
 	private String correo;
-	/*
+	
 	@ElementCollection(fetch=FetchType.EAGER)
-	private List<String> roles;
-	*/
+	private List<String> roles = new ArrayList<String>();
+	
 	@OneToMany(mappedBy="usuarioRes",fetch=FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
 	private List<Reserva> reservas;
 	
 	public Usuario() {}
@@ -33,6 +41,16 @@ public class Usuario
 		this.nombre = nombre;
 		this.passwordHash = passwordHash;
 		this.correo = correo;
+		this.reservas = new LinkedList<Reserva>();
+	}
+	
+	public Usuario(String nombre, String passwordHash, String correo, String rol)
+	{
+		super();
+		this.nombre = nombre;
+		this.passwordHash = passwordHash;
+		this.correo = correo;
+		this.roles.add(rol);
 		this.reservas = new LinkedList<Reserva>();
 	}
 
@@ -77,7 +95,15 @@ public class Usuario
 		this.reservas = reservas;
 	}
 
-	@Override
+	public List<String> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<String> roles) {
+		this.roles = roles;
+	}
+
+	/*@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -110,6 +136,37 @@ public class Usuario
 			if (other.nombre != null)
 				return false;
 		} else if (!nombre.equals(other.nombre))
+			return false;
+		return true;
+	}*/
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		result = prime * result + ((passwordHash == null) ? 0 : passwordHash.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Usuario other = (Usuario) obj;
+		if (nombre == null) {
+			if (other.nombre != null)
+				return false;
+		} else if (!nombre.equals(other.nombre))
+			return false;
+		if (passwordHash == null) {
+			if (other.passwordHash != null)
+				return false;
+		} else if (!passwordHash.equals(other.passwordHash))
 			return false;
 		return true;
 	}
