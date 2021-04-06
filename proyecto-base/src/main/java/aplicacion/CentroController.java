@@ -2,6 +2,8 @@ package aplicacion;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -68,7 +70,7 @@ public class CentroController
 	}
 	
 	@GetMapping("/campus/actividades/{id}")
-	public String SeleccionarActividad(Model model, @PathVariable long id)
+	public String SeleccionarActividad(Model model, @PathVariable long id, HttpServletRequest request)
 	{
 		CentroDeportivo centroActual = servicioCentroActual.getCentroActual();
 		Actividad act = servicioActividades.getActividadById(id);
@@ -79,7 +81,7 @@ public class CentroController
 		model.addAttribute("centros", centros);
 		model.addAttribute("act", act);
 		
-		//model.addAttribute("centroActual",centroActual); // nuevo
+		model.addAttribute("admin",request.isUserInRole("ADMIN"));
 		
 		return "actividad";
 	}

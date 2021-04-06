@@ -34,10 +34,15 @@ public class UsuarioController
 	}
 	
 	@GetMapping("/menuPrincipal")
-	public String irAmenuPrincipal(Model model, HttpSession sesion)
+	public String irAmenuPrincipal(Model model, HttpSession sesion, HttpServletRequest request)
 	{
-		Usuario usuarioActual = (Usuario) sesion.getAttribute("usuarioActual");
-		model.addAttribute("usu",usuarioActual);
+		String nombre = request.getUserPrincipal().getName();
+		Usuario usuarioActual = servicioUsuarios.getUsuarioByNombre(nombre);
+		
+		sesion.setAttribute("usuarioActual", usuarioActual);
+		model.addAttribute("nombre", usuarioActual.getNombre());
+		model.addAttribute("admin", request.isUserInRole("ADMIN"));
+		
 		return "paginaPrincipal";
 	}
 	
@@ -45,13 +50,7 @@ public class UsuarioController
 	public String registrarse()
 	{
 		return "registrarse";
-	}
-	
-	@GetMapping("/iniciarSesion")
-	public String iniciarSesion()
-	{
-		return "iniciarSesion";
-	}
+	}	
 	
 	@GetMapping("/usuario/nuevo")
 	public String registrarse1(Model model)
@@ -95,111 +94,6 @@ public class UsuarioController
 		}
 	}
 	
-	/*@GetMapping("/usuario/acceso")
-	public String acceder(Model model)
-	{
-		model.addAttribute("datosIncorrectosIni", datosIncorrectosIni);
-		model.addAttribute("usuarioNoExiste", usuarioNoExiste);
-		usuarioNoExiste = false;
-		datosIncorrectosIni = false;
-		
-		return "iniciarSesion";
-	}
-	@PostMapping("/usuario/acceso")
-	public String iniciarSesion(Model model,Usuario usuario, HttpSession sesion)
-	{
-		usuarioNoExiste = false;
-		datosIncorrectosIni = false;
-		if(usuario.getNombre().trim().equals("") || usuario.getPasswordHash().trim().equals("") || usuario.getCorreo().trim().equals(""))
-		{
-			datosIncorrectosIni = true;
-			model.addAttribute("datosIncorrectosIni", datosIncorrectosIni);
-			
-			return "error";
-		}
-		else
-		{
-			Usuario usu = servicioUsuarios.getUsuarioByCampos(usuario.getNombre(), usuario.getPasswordHash(), usuario.getCorreo());
-			if(servicioUsuarios.existeUsuario(usu))
-			{
-				//usuarioActual = usu;
-				model.addAttribute("usu", usu);
-				sesion.setAttribute("usuarioActual", usu);
-				return "paginaPrincipal";
-			}
-			else
-			{
-				usuarioNoExiste = true;
-				model.addAttribute("usuarioNoExiste", usuarioNoExiste);
-				
-				return "error";
-			}
-		}
-	}*/
-	
-	// prueba con mappings nuevos del login
-	
-	/*
-	 
-	 
-	 @PostMapping("/usuario/acceso")
-	public void iniciarSesion(Model model,Usuario usuario, HttpSession sesion, HttpServletResponse response) throws IOException
-	{
-		usuarioNoExiste = false;
-		datosIncorrectosIni = false;
-		if(usuario.getNombre().trim().equals("") || usuario.getClave().trim().equals("") || usuario.getCorreo().trim().equals(""))
-		{
-			datosIncorrectosIni = true;
-			model.addAttribute("datosIncorrectosIni", datosIncorrectosIni);
-			
-			response.sendRedirect("/error");
-		}
-		else
-		{
-			Usuario usu = servicioUsuarios.getUsuarioByCampos(usuario.getNombre(), usuario.getClave(), usuario.getCorreo());
-			if(servicioUsuarios.existeUsuario(usu))
-			{
-				//usuarioActual = usu;
-				//model.addAttribute("usu", usu);
-				sesion.setAttribute("usuarioActual", usu);
-				//model.addAttribute("usu", usu);
-				response.sendRedirect("/loginCorrecto");
-			}
-			else
-			{
-				//usuarioNoExiste = true;
-				//model.addAttribute("usuarioNoExiste", usuarioNoExiste);
-				
-				response.sendRedirect("/error");
-			}
-		}
-	}
-	
-	@GetMapping("/error")
-	public String errorLogin(Model model)
-	{
-		usuarioNoExiste = true;
-		model.addAttribute("usuarioNoExiste", usuarioNoExiste);
-		return "error";
-	}
-	
-	@GetMapping("/loginCorrecto")
-	public String correctoLogin(Model model, HttpSession sesion)
-	{
-		Usuario usu = (Usuario) sesion.getAttribute("usuarioActual");
-		model.addAttribute("usu", usu);
-		return "paginaPrincipal";
-	}
-	
-	@GetMapping("/logout")
-	public String logout()
-	{
-		return "inicio";
-	}
-	
-	  
-	 
-	 */
 	
 	@GetMapping("/login")
 	public String RealizarLogin(Model model, HttpServletRequest request)
@@ -213,7 +107,7 @@ public class UsuarioController
 	@GetMapping("/loginerror")
 	public String falloLogin(Model model)
 	{
-		model.addAttribute("usuarioNoExiste", true);
+		model.addAttribute("datosIncorrectosIni", true);
 		return "error";
 	}
 	

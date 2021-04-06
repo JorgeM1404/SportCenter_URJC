@@ -25,6 +25,10 @@ public class ServicioUsuarios
 		return repositorio.findById(id).orElseThrow();		
 	}
 	
+	public Usuario getUsuarioByNombre(String nombre) {
+		return repositorio.findByNombre(nombre).orElseThrow();		
+	}
+	
 	public Usuario getUsuarioByCampos(String nombre, String passwordHash, String correo) {
 		return repositorio.findByNombreAndPasswordHashAndCorreo(nombre,passwordHash,correo);		
 	}
