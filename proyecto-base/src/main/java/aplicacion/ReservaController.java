@@ -6,10 +6,12 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +39,7 @@ public class ReservaController
 	}
 	
 	@GetMapping("/perfil/realizarReserva")
-	public String solicitarReservaGet(Model model)
+	public String solicitarReservaGet(Model model, HttpServletRequest request)
 	{
 		CentroDeportivo centroActual = servicioCentroActual.getCentroActual();
 		List<Actividad> actsCentro = centroActual.getActividades(); 
@@ -49,6 +51,9 @@ public class ReservaController
 		
 		model.addAttribute("actsCentro",actsCentro);
 		model.addAttribute("date",date);
+		
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf"); 
+	    model.addAttribute("token", token.getToken());
 		
 		return "realizarReserva";
 	}

@@ -2,9 +2,11 @@ package aplicacion;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -93,7 +95,7 @@ public class UsuarioController
 		}
 	}
 	
-	@GetMapping("/usuario/acceso")
+	/*@GetMapping("/usuario/acceso")
 	public String acceder(Model model)
 	{
 		model.addAttribute("datosIncorrectosIni", datosIncorrectosIni);
@@ -133,7 +135,7 @@ public class UsuarioController
 				return "error";
 			}
 		}
-	}
+	}*/
 	
 	// prueba con mappings nuevos del login
 	
@@ -198,6 +200,22 @@ public class UsuarioController
 	  
 	 
 	 */
+	
+	@GetMapping("/login")
+	public String RealizarLogin(Model model, HttpServletRequest request)
+	{
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf"); 
+	    model.addAttribute("token", token.getToken()); 
+	    
+		return "login";
+	}
+	
+	@GetMapping("/loginerror")
+	public String falloLogin(Model model)
+	{
+		model.addAttribute("usuarioNoExiste", true);
+		return "error";
+	}
 	
 	@GetMapping("/perfil")
 	public String miPerfil(Model model, HttpSession sesion)
