@@ -6,6 +6,7 @@ import javax.annotation.PostConstruct;
 
 import org.apache.tomcat.jni.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -23,11 +24,14 @@ public class DatabaseLoader
 	@Autowired
 	private ServicioPistas servicioPistas;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	@PostConstruct 
 	private void initDatabase() 
 	{
-		repositorioUsuarios.save(new Usuario("Jorge","1234","j.molinat.2017@alumnos.urjc.es","USER"));
-		repositorioUsuarios.save(new Usuario("q","w","e","ADMIN"));
+		repositorioUsuarios.save(new Usuario("Jorge",passwordEncoder.encode("1234"),"j.molinat.2017@alumnos.urjc.es","USER"));
+		repositorioUsuarios.save(new Usuario("q",passwordEncoder.encode("w"),"e","ADMIN"));
 		
 		CentroDeportivo centro1 = new CentroDeportivo("Mostoles");		
 		repositorioCentros.save(centro1);
