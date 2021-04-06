@@ -44,13 +44,13 @@ public class Usuario
 		this.reservas = new LinkedList<Reserva>();
 	}
 	
-	public Usuario(String nombre, String passwordHash, String correo, String rol)
+	public Usuario(String nombre, String passwordHash, String correo, String...roles )
 	{
 		super();
 		this.nombre = nombre;
 		this.passwordHash = passwordHash;
 		this.correo = correo;
-		this.roles.add(rol);
+		this.roles = List.of(roles);
 		this.reservas = new LinkedList<Reserva>();
 	}
 
