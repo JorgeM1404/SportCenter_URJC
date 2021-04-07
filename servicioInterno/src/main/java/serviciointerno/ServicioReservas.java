@@ -1,4 +1,4 @@
-package aplicacion;
+package serviciointerno;
 
 import java.util.Collection;
 import java.util.Date;

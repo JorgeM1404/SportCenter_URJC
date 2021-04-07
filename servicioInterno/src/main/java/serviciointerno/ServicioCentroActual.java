@@ -1,4 +1,4 @@
-package aplicacion;
+package serviciointerno;
 
 import org.springframework.stereotype.Service;
 
