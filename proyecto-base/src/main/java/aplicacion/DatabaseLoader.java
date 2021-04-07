@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class DatabaseLoader 
 {	
-	@Autowired
+	/*@Autowired
 	private RepositorioUsuarios repositorioUsuarios;
 	
 	@Autowired
@@ -169,5 +169,5 @@ public class DatabaseLoader
 		
 		servicioActividades.guardarActividades(Arrays.asList(a1,a5,a6));
 		servicioPistas.guardarPistas(Arrays.asList(p1,p5,p6));
-	}
+	}*/
 }
