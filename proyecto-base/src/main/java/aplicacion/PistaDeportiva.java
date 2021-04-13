@@ -2,6 +2,8 @@ package aplicacion;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class PistaDeportiva 
 {
@@ -14,6 +16,7 @@ public class PistaDeportiva
 	//@Transient
 	private boolean ocupado;
 	
+	@JsonIgnore
 	@ManyToOne
 	private Actividad actividad;
 

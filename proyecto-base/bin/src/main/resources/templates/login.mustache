@@ -27,14 +27,13 @@
 <div class="iSesion">
 
 	<h2>INICIAR SESION</h2>
-	<form action="usuario/acceso" method="post">
+	<form action="/login" method="post">
 	<p>Nombre de usuario</p>
-	<p><input type= 'text' name= 'nombre'/></p>
+	<p><input type= "text" name= "nombre"/></p>
 	<p>Clave</p>
-	<p><input type= 'text' name= 'clave'/></p>
-	<p>Correo</p>
-	<p><input type= 'text' name= 'correo'/></p>
-	<p><input type='submit' value= 'Iniciar Sesión'/></p>
+	<p><input type= "password" name= "clave"/></p>
+	<input type="hidden" name="_csrf" value="{{token}}"/>
+	<p><input type="submit" value= "Iniciar Sesión"/></p>
 	</form>
 	<a href="/"><button class="button botonVOLVER"> Volver </button></a>
    

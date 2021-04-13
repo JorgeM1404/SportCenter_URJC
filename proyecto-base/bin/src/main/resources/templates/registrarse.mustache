@@ -31,10 +31,11 @@
 	<p>Nombre de usuario</p>
 	<p><input type= 'text' name= 'nombre'/></p>
 	<p>Clave</p>
-	<p><input type= 'text' name= 'clave'/></p>
+	<p><input type= 'text' name= 'passwordHash'/></p>
 	<p>Correo</p>
 	<p><input type= 'text' name= 'correo'/></p>
 	<p><input type='submit' value= 'Registrarse'/></p>
+	<input type="hidden" name="_csrf" value="{{token}}"/>
 	</form>
 	<a href="/"><button class="button botonVOLVER"> Volver </button></a>
 </div>

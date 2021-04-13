@@ -43,16 +43,19 @@
     	<section>
    		<p><a href="/perfil"><button class="button botonMENU">MI PERFIL</button></a></p>
     	</section>
+    	{{#admin}}
     	<section>
    		<p><a href="/gestion"><button class="button botonMENU">GESTION</button></a></p>
     	</section>
+    	{{/admin}}
     	<section>
     	<p><a href="/"><button class="button botonCERRARSESION">CERRAR SESION</button></a></p>
     	</section>
+	
 	</div>
 	
 	<div class="contenido">
-		<h1>{{usu.nombre}}, bienvenido a la web de los centros deportivos de la URJC.</h1>
+		<h1>{{nombre}}, bienvenido a la web de los centros deportivos de la URJC.</h1>
 		<h2>En el menú puedes elegir el centro en el que desees realizar tu actividad.</h2>
 		<h2>También puedes entrar en tu perfil y ver todas tus reservas o reservar la actividad que desees.</h2>
 	</div>
