@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 
 
 @Controller
@@ -56,6 +60,27 @@ public class ReservaController
 	    model.addAttribute("token", token.getToken());
 		
 		return "realizarReserva";
+	}
+	
+	@GetMapping("/descargaPDF")
+	public String descargarPDF(Model model, HttpSession sesion)
+	{
+		Usuario usuarioActual = (Usuario) sesion.getAttribute("usuarioActual");
+		List<Reserva> reservas = usuarioActual.getReservas();
+		RestTemplate restTemplate = new RestTemplate();
+		String url = "http://localhost:8080/pdf/enviar";
+		
+		List<InfoReserva> infoReservas = new LinkedList<>();
+		for(Reserva r : reservas)
+		{
+			infoReservas.add(new InfoReserva(r.getNombreReserva(),r.getCentro().getCampus(),r.getActividadRes().getNombreActividad(), r.getFecha().toString()));
+		}
+		HttpEntity<List<InfoReserva>> info = new HttpEntity <> (infoReservas);
+		ResponseEntity<String> result = restTemplate.postForEntity(url, info, String.class);
+		
+		model.addAttribute("usu", usuarioActual);
+		model.addAttribute("res", reservas);
+		return "mostrar_perfil";
 	}
 	
 	@GetMapping("/mostrar_perfil")
