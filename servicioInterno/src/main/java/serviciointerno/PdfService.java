@@ -2,8 +2,6 @@ package serviciointerno;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -23,9 +21,6 @@ public class PdfService {
 	public void generarPdf(List<InfoReserva> reservas) throws FileNotFoundException, DocumentException
 	{
 		Document documento = new Document();
-		
-		
-		
 		FileOutputStream ficheroPDF = new FileOutputStream("Mis Reservas.pdf");
 		PdfWriter.getInstance(documento, ficheroPDF);
 		

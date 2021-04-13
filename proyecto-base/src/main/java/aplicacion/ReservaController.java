@@ -62,6 +62,18 @@ public class ReservaController
 		return "realizarReserva";
 	}
 	
+	@GetMapping("/mostrar_perfil")
+	public String volverAPerfil(Model model, HttpSession sesion)
+	{
+		Usuario usuarioActual = (Usuario) sesion.getAttribute("usuarioActual");
+		List<Reserva> reservas = usuarioActual.getReservas();
+		
+		model.addAttribute("usu", usuarioActual);
+		model.addAttribute("res", reservas);
+		
+		return "mostrar_perfil";
+	}
+	
 	@GetMapping("/descargaPDF")
 	public String descargarPDF(Model model, HttpSession sesion)
 	{
@@ -89,18 +101,23 @@ public class ReservaController
 		Usuario usuarioActual = (Usuario) sesion.getAttribute("usuarioActual");
 		List<Reserva> reservas = usuarioActual.getReservas();
 		
-		Reserva res = servicioReservas.getReservaById(id);
-		RestTemplate restTemplate = new RestTemplate();
+		if(id != 0)
+		{
+			Reserva res = servicioReservas.getReservaById(id);
+			RestTemplate restTemplate = new RestTemplate();
 
-		String url = "http://localhost:8080/email/enviar";
-		String asunto = "Reserva '" + res.getNombreReserva() + "' realizada";
-		String cuerpo = "¡Gracias por reservar en SportCenterURJC! \n\nLa informacion sobre tu reserva es la siguiente: \n\nRealizada para el centro: " + res.getCentro().getCampus() + "\nActividad reservada: " + res.getActividadRes().getNombreActividad() + "\nFecha reservada: " + res.getFecha().toString() + "\n\n¡Muchas gracias por su apoyo!";
-		HttpEntity<InfoCorreo> info = new HttpEntity <> (new InfoCorreo("sportcenterurjc@gmail.com",usuarioActual.getCorreo(),asunto,cuerpo));
-		ResponseEntity<String> result = restTemplate.postForEntity(url, info, String.class);
-		
-		model.addAttribute("usu", usuarioActual);
-		model.addAttribute("res", reservas);
-		return "mostrar_perfil";
+			String url = "http://localhost:8080/email/enviar";
+			String asunto = "Reserva '" + res.getNombreReserva() + "' realizada";
+			String cuerpo = "¡Gracias por reservar en SportCenterURJC! \n\nLa informacion sobre tu reserva es la siguiente: \n\nRealizada para el centro: " + res.getCentro().getCampus() + "\nActividad reservada: " + res.getActividadRes().getNombreActividad() + "\nFecha reservada: " + res.getFecha().toString() + "\n\n¡Muchas gracias por su apoyo!";
+			HttpEntity<InfoCorreo> info = new HttpEntity <> (new InfoCorreo("sportcenterurjc@gmail.com",usuarioActual.getCorreo(),asunto,cuerpo));
+			ResponseEntity<String> result = restTemplate.postForEntity(url, info, String.class);
+			
+			model.addAttribute("usu", usuarioActual);
+			model.addAttribute("res", reservas);
+			
+			return "mostrar_perfil";
+		}
+		else return "pistaOcupada";
 	}
 	
 	@PostMapping("/perfil/realizarReserva")
@@ -108,7 +125,7 @@ public class ReservaController
 	{
 		CentroDeportivo centroActual = servicioCentroActual.getCentroActual();
 		Usuario usuarioActual = (Usuario) sesion.getAttribute("usuarioActual");
-		long id = 0;// Actividad act = servicioActividades.getActividadByNombre(nombreActividad);
+		long id = 0;
 		
 		List<Actividad> actCentro = centroActual.getActividades();
 		for(Actividad a : actCentro)
@@ -120,7 +137,38 @@ public class ReservaController
 		}
 		Actividad act = servicioActividades.getActividadById(id);
 		
-		List<Reserva> reservas = usuarioActual.getReservas();
+		RestTemplate restTemplate = new RestTemplate();
+		Boolean hayLibre = false;
+		
+		long idRes = 0;
+		int numPistas = act.getPistas().size();
+		boolean encontrada = false;
+		int n = 0;
+		
+		while(n <= numPistas && !encontrada)
+		{
+			PistaDeportiva p = act.getPistas().get(n);
+			String url = "http://localhost:8080/pistas/comprobarPista/" + p.getId();
+			hayLibre = restTemplate.getForObject(url, Boolean.class);
+			
+			if(hayLibre == true)
+			{
+				p.setOcupado();
+				List<Reserva> reservas = usuarioActual.getReservas();
+				
+				res.setUsuario(usuarioActual);
+				res.setActividadRes(act);
+				res.setCentro(centroActual);
+				reservas.add(res);
+				servicioReservas.guardarReserva(res);
+				
+				idRes = res.getId();
+				encontrada = true;
+			}
+		}
+		response.sendRedirect("/redireccion_perfil/" + idRes);
+			
+		/*List<Reserva> reservas = usuarioActual.getReservas();
 		
 		res.setUsuario(usuarioActual);
 		res.setActividadRes(act);
@@ -128,7 +176,7 @@ public class ReservaController
 		reservas.add(res);
 		servicioReservas.guardarReserva(res);
 		
-		response.sendRedirect("/redireccion_perfil/"+res.getId());
+		response.sendRedirect("/redireccion_perfil/"+res.getId());*/
 	}
 	
 	@GetMapping("/perfil/reservaCancelada/{id}")

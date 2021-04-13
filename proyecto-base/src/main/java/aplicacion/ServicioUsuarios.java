@@ -1,7 +1,6 @@
 package aplicacion;
 
 import java.util.Collection;
-import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,12 +9,6 @@ public class ServicioUsuarios
 {
 	@Autowired
 	private RepositorioUsuarios repositorio;
-	
-	/*@PostConstruct
-	public void init() {
-		repositorio.save(new Usuario("Jorge","1234","j.molinat.2017@alumnos.urjc.es"));
-		repositorio.save(new Usuario("q","w","e"));		// caso prueba
-	}*/
 	
 	public Collection<Usuario> getUsuarios() {
 		return repositorio.findAll();
