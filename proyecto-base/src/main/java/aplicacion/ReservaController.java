@@ -83,14 +83,24 @@ public class ReservaController
 		return "mostrar_perfil";
 	}
 	
-	@GetMapping("/mostrar_perfil")
-	public String mostrarPerfil(Model model, HttpSession sesion)
+	@GetMapping("/redireccion_perfil/{id}")
+	public String mostrarPerfil(Model model, HttpSession sesion, @PathVariable long id)
 	{
-	Usuario usuarioActual = (Usuario) sesion.getAttribute("usuarioActual");
-	List<Reserva> reservas = usuarioActual.getReservas();
-	model.addAttribute("usu", usuarioActual);
-	model.addAttribute("res", reservas);
-	return "mostrar_perfil";
+		Usuario usuarioActual = (Usuario) sesion.getAttribute("usuarioActual");
+		List<Reserva> reservas = usuarioActual.getReservas();
+		
+		Reserva res = servicioReservas.getReservaById(id);
+		RestTemplate restTemplate = new RestTemplate();
+
+		String url = "http://localhost:8080/email/enviar";
+		String asunto = "Reserva '" + res.getNombreReserva() + "' realizada";
+		String cuerpo = "¡Gracias por reservar en SportCenterURJC! \n\nLa informacion sobre tu reserva es la siguiente: \n\nRealizada para el centro: " + res.getCentro().getCampus() + "\nActividad reservada: " + res.getActividadRes().getNombreActividad() + "\nFecha reservada: " + res.getFecha().toString() + "\n\n¡Muchas gracias por su apoyo!";
+		HttpEntity<InfoCorreo> info = new HttpEntity <> (new InfoCorreo("sportcenterurjc@gmail.com",usuarioActual.getCorreo(),asunto,cuerpo));
+		ResponseEntity<String> result = restTemplate.postForEntity(url, info, String.class);
+		
+		model.addAttribute("usu", usuarioActual);
+		model.addAttribute("res", reservas);
+		return "mostrar_perfil";
 	}
 	
 	@PostMapping("/perfil/realizarReserva")
@@ -118,7 +128,7 @@ public class ReservaController
 		reservas.add(res);
 		servicioReservas.guardarReserva(res);
 		
-		response.sendRedirect("/mostrar_perfil");
+		response.sendRedirect("/redireccion_perfil/"+res.getId());
 	}
 	
 	@GetMapping("/perfil/reservaCancelada/{id}")
