@@ -55,11 +55,13 @@ Generación de un documento de texto con toda la información relacionada con el
 ![DiagramaUMLsic](imagenes/UMLsic.png)
 ![LeyendaUML](imagenes/LeyendaUML.png)
 
-# Capturas de pantalla Fase 2
+# Capturas de pantalla Fase 3
 Página inicial de bienvenida
 ![PAGINA INICIO](imagenes/PAGINAINICIO.png)
 Formulario de registro de usuario nuevo
 ![PAGINA REGISTRO](imagenes/PAGINAREGISTRO.png)
+Plantilla confirmación del registro de usuario
+![REGISTRARSE2](imagenes/REGISTRARSE2.png)
 Formulario inicio de sesión de usuario registrado
 ![PAGINA INICIO SESIONL](imagenes/PAGINAINICIOSESION.png)
 Página principal de la web
@@ -74,6 +76,8 @@ Formulario de creación de actividad
 ![FORMULARIO CREACION ACTIVIDAD](imagenes/FORMULARIOCREACIONACTIVIDAD.png)
 Página de borrado de actividad
 ![PAGINA BORRADO ACTIVIDAD](imagenes/PAGINABORRADOACTIVIDAD.png)
+Aviso de pista ocupada
+![PAGINA RESERVAR](imagenes/PISTAOCUPADA.png)
 Formulario de reserva de actividad
 ![PAGINA RESERVAR](imagenes/PAGINARESERVAR.png)
 Visualización de reserva
@@ -81,7 +85,7 @@ Visualización de reserva
 Página de cancelación de reserva
 ![PANTALLA CANCELAR](imagenes/PANTALLACANCELAR.png)
 Página del perfil del usuario
-![PANTALLA PERFIL](imagenes/PANTALLAPERFIL.png)
+![PANTALLA PERFIL](imagenes/REDIRECCIONPERFIL.png)
 
 # Miembros del equipo
 - Antonio Francisco Roldan Martin - af.roldan@alumnos.urjc.es - https://github.com/afroldan
