@@ -178,7 +178,15 @@ public class ReservaController
 	{
 		Usuario usuarioActual = (Usuario) sesion.getAttribute("usuarioActual");
 		List<Reserva> reservas = usuarioActual.getReservas();
-		reservas.remove(servicioReservas.getReservaById(id));
+		
+		Reserva res = servicioReservas.getReservaById(id);
+		for (PistaDeportiva p: res.getActividadRes().getPistas())
+		{
+			if (p.getOcupado() == true)
+					p.setLibre();
+		}
+		
+		reservas.remove(res);
 		servicioReservas.cancelarReservaById(id);
 		
 		model.addAttribute("usu", usuarioActual);
