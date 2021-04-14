@@ -41,7 +41,7 @@ Generación de correo electrónico a la cuenta de la universidad con los datos d
 Generación de un documento de texto con toda la información relacionada con el usuario (reservas y/o actividades).
 
 # Diagrama de navegación
-![Diagrama de navegación](imagenes/diagramaNavegacion.png)
+![Diagrama de navegación](imagenes/diagramaNavegacionFase3.png)
 
 # Esquema Entidad Relación
 ![EsquemaER](imagenes/EsquemaER.png)
