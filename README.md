@@ -46,8 +46,14 @@ Generación de un documento de texto con toda la información relacionada con el
 # Esquema Entidad Relación
 ![EsquemaER](imagenes/EsquemaER.png)
 
-# Diagrama UML
-![DiagramaUML](imagenes/UML.png)
+# Diagramas UML
+### UML General
+![DiagramaUMLpsi](imagenes/UMLpsi.png)
+### UML Aplicación Web
+![DiagramaUMLpc](imagenes/UMLpc.png)
+### UML Servicio Interno
+![DiagramaUMLsic](imagenes/UMLsic.png)
+![LeyendaUML](imagenes/LeyendaUML.png)
 
 # Capturas de pantalla Fase 2
 Página inicial de bienvenida
