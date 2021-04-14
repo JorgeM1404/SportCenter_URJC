@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +22,9 @@ public class UsuarioController
 	private ServicioUsuarios servicioUsuarios;
 	@Autowired
 	private ServicioReservas servicioReservas;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	private boolean datosIncorrectosReg = false;
 	private boolean datosIncorrectosIni = false;
@@ -47,12 +51,15 @@ public class UsuarioController
 	}
 	
 	@GetMapping("/registrarse")
-	public String registrarse()
+	public String registrarse(Model model, HttpServletRequest request)
 	{
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf"); 
+	    model.addAttribute("token", token.getToken());
+	    
 		return "registrarse";
 	}	
 	
-	@GetMapping("/usuario/nuevo")
+	/*@GetMapping("/usuario/nuevo")
 	public String registrarse1(Model model)
 	{
 		model.addAttribute("datosIncorrectos", datosIncorrectosReg);
@@ -61,8 +68,8 @@ public class UsuarioController
 		usuarioYaExiste = false;
 		
 		return "registrarse";
-	}
-	@PostMapping("/usuario/nuevo")
+	}*/
+	@PostMapping("/registrarse")//@PostMapping("/usuario/nuevo")
 	public String registrarse(Model model, Usuario usuario, HttpSession sesion)
 	{
 		datosIncorrectosReg = false;
@@ -78,11 +85,14 @@ public class UsuarioController
 		{
 			if(!servicioUsuarios.existeUsuario(usuario))
 			{
+				usuario.getRoles().add("USER");
+				usuario.setPasswordHash(passwordEncoder.encode(usuario.getPasswordHash()));				
 				servicioUsuarios.guardarUsuario(usuario);
-				//Usuario usuarioActual = usuario;
-				model.addAttribute("usu", usuario);
-				sesion.setAttribute("usuarioActual", usuario);
-				return "paginaPrincipal";
+
+				//model.addAttribute("nombre", usuario.getNombre());
+				//sesion.setAttribute("usuarioActual", usuario);
+				
+				return "confirmacionRegistro";
 			}
 			else
 			{

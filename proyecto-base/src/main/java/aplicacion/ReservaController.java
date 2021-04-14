@@ -57,8 +57,6 @@ public class ReservaController
 		
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf"); 
 	    model.addAttribute("token", token.getToken());
-		
-	    model.addAttribute("pistaOcupada",false);
 	    
 		return "realizarReserva";
 	}
@@ -119,20 +117,9 @@ public class ReservaController
 			return "mostrar_perfil";
 		}
 		else 
-		{
-			CentroDeportivo centroActual = servicioCentroActual.getCentroActual();	
-			List<Actividad> actsCentro = centroActual.getActividades(); 			
-			
-			CsrfToken token = (CsrfToken) request.getAttribute("_csrf"); 
-		    model.addAttribute("token", token.getToken());
-			
-			LocalDate date = LocalDate.now();
-			
-			model.addAttribute("actsCentro",actsCentro);
-			model.addAttribute("date",date);			
-		    model.addAttribute("pistaOcupada",true);
-		    
-			return "realizarReserva";
+		{	
+			model.addAttribute("campus", servicioCentroActual.getCentroActual().getCampus());
+			return "actividadReservada";
 		}
 	}
 	
@@ -161,7 +148,7 @@ public class ReservaController
 		boolean encontrada = false;
 		int n = 0;
 		
-		while(n > numPistas && !encontrada)
+		while(n < numPistas && !encontrada)
 		{
 			PistaDeportiva p = act.getPistas().get(n);
 			String url = "http://localhost:8080/pistas/comprobarPista/" + p.getId();
