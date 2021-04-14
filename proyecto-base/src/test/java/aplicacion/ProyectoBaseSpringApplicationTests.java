@@ -1,4 +1,4 @@
-package es.urjc.etsii.dad.helloworldweb;
+package aplicacion;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
