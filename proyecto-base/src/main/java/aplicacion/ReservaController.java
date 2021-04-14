@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
-
 @Controller
 public class ReservaController 
 {
@@ -59,6 +58,8 @@ public class ReservaController
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf"); 
 	    model.addAttribute("token", token.getToken());
 		
+	    model.addAttribute("pistaOcupada",false);
+	    
 		return "realizarReserva";
 	}
 	
@@ -96,7 +97,7 @@ public class ReservaController
 	}
 	
 	@GetMapping("/redireccion_perfil/{id}")
-	public String mostrarPerfil(Model model, HttpSession sesion, @PathVariable long id)
+	public String mostrarPerfil(Model model, HttpSession sesion, HttpServletRequest request, @PathVariable long id)
 	{
 		Usuario usuarioActual = (Usuario) sesion.getAttribute("usuarioActual");
 		List<Reserva> reservas = usuarioActual.getReservas();
@@ -117,7 +118,22 @@ public class ReservaController
 			
 			return "mostrar_perfil";
 		}
-		else return "pistaOcupada";
+		else 
+		{
+			CentroDeportivo centroActual = servicioCentroActual.getCentroActual();	
+			List<Actividad> actsCentro = centroActual.getActividades(); 			
+			
+			CsrfToken token = (CsrfToken) request.getAttribute("_csrf"); 
+		    model.addAttribute("token", token.getToken());
+			
+			LocalDate date = LocalDate.now();
+			
+			model.addAttribute("actsCentro",actsCentro);
+			model.addAttribute("date",date);			
+		    model.addAttribute("pistaOcupada",true);
+		    
+			return "realizarReserva";
+		}
 	}
 	
 	@PostMapping("/perfil/realizarReserva")
@@ -145,7 +161,7 @@ public class ReservaController
 		boolean encontrada = false;
 		int n = 0;
 		
-		while(n <= numPistas && !encontrada)
+		while(n > numPistas && !encontrada)
 		{
 			PistaDeportiva p = act.getPistas().get(n);
 			String url = "http://localhost:8080/pistas/comprobarPista/" + p.getId();
@@ -165,18 +181,9 @@ public class ReservaController
 				idRes = res.getId();
 				encontrada = true;
 			}
+			n++;
 		}
 		response.sendRedirect("/redireccion_perfil/" + idRes);
-			
-		/*List<Reserva> reservas = usuarioActual.getReservas();
-		
-		res.setUsuario(usuarioActual);
-		res.setActividadRes(act);
-		res.setCentro(centroActual);
-		reservas.add(res);
-		servicioReservas.guardarReserva(res);
-		
-		response.sendRedirect("/redireccion_perfil/"+res.getId());*/
 	}
 	
 	@GetMapping("/perfil/reservaCancelada/{id}")
