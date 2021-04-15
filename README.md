@@ -12,6 +12,7 @@ Consiste en una web que administra y gestiona los centros deportivos de los camp
 - [Esquema Entidad Relación](#esquema-entidad-relación)
 - [Diagrama UML](#diagrama-uml)
 - [Capturas de pantalla Fase 2](#capturas-de-pantalla-fase-2)
+- [Proceso de instalación de SportCenterURJC en Windows 10](#proceso-de-instalacion-de-sportcenterurjc-en-windows-10)
 - [Miembros del equipo](#miembros-del-equipo)
 
 # Entidades 
@@ -86,6 +87,27 @@ Página de cancelación de reserva
 ![PANTALLA CANCELAR](imagenes/PANTALLACANCELAR.png)
 Página del perfil del usuario
 ![PANTALLA PERFIL](imagenes/REDIRECCIONPERFIL.png)
+
+# Proceso de instalación de SportCenterURJC en Windows 10
+
+Información:
+
+- Versión proyecto maven: 2.4.2
+- Versión compilador java: JavaSE-1.8
+
+Requisitos:
+
+1. Java JDK 8: es necesario tener instalado el java versión 8 en la máquina para poder arrancar los ejecutables.
+
+2. Visual C++ 2019: antes de poder instalar MySQL installer el sistema tiene que tener instalado la versión del Visual C++ 2019 o en adelante. Si ya se tiene esto instalado omitir este paso.
+
+3. MySQL Installer: habrá que instalarse y configurar el servicio MySQL. Para ello una vez instalado el programa hay que añadir el servicio del servidor mysql y configurarlo con el usuario "root" y la contraseña "clave".
+
+4. MySQL Workbench: una vez se tenga instalado el programa, ejecutarlo y conectarlo en MySQL Connections al servicio que se ha configurado en el paso anterior con el usuario y contraseña.
+
+4.1. Crear un schema en el workbench, para ello new -> schema, y ponerle de nombre bdd_sec, que es así como se llama la base de datos de la aplicación de los ejecutables.
+
+5. Arrancar ambos ejecutables jar para crear los procesos java en la máquina. Una vez estén arrancados, se podrá usar la aplicación SportCenterURJC desdeel navegador.
 
 # Miembros del equipo
 - Antonio Francisco Roldan Martin - af.roldan@alumnos.urjc.es - https://github.com/afroldan
