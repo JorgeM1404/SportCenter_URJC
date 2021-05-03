@@ -1,0 +1,19 @@
+services:
+
+  db:
+     image: mysql:8.0
+     ports:
+       - "3306:3306"
+     environment:
+       - MYSQL_DATABASE=bdd_sec
+       - MYSQL_ROOT_PASSWORD=clave
+     restart: always
+     
+  web:
+     build: webapp/.
+     ports:
+       - "8443:8443"
+     depends_on:
+       - db
+     restart: always
+
