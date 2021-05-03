@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
+@CacheConfig(cacheNames="cacheURJC")
 @Controller
 public class ActividadController 
 {	
@@ -36,6 +39,7 @@ public class ActividadController
 		return "gestion";
 	}
 	
+	@Cacheable
 	@GetMapping("/gestion/crear")
 	public String crearActividad(Model model, HttpServletRequest request)
 	{
@@ -54,6 +58,7 @@ public class ActividadController
 		return "gestion";
 	}
 	
+	@CachePut
 	@PostMapping("/gestion/crear")
 	public String crearNuevaActividad(Model model, @RequestParam String nombreActividad, @RequestParam String nombreCentro, @RequestParam String nombrePista)
 	{
@@ -70,6 +75,7 @@ public class ActividadController
 		return "gestion";
 	}
 	
+	@Cacheable
 	@GetMapping("/gestion/borrar/{id}")
 	public String borrarActividadExistente(Model model, @PathVariable long id)
 	{		
@@ -81,6 +87,7 @@ public class ActividadController
 		return "borrarActividad";
 	}
 	
+	@Cacheable
 	@GetMapping("/gestion/borrada/{id}")
 	public String borradaActividadExistente(Model model, @PathVariable long id, HttpSession sesion)
 	{

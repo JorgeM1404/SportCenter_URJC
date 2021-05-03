@@ -6,6 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
@@ -14,7 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-
+@CacheConfig(cacheNames="cacheURJC")
 @Controller
 public class UsuarioController 
 {
@@ -69,6 +72,7 @@ public class UsuarioController
 		
 		return "registrarse";
 	}*/
+	@CacheEvict
 	@PostMapping("/registrarse")//@PostMapping("/usuario/nuevo")
 	public String registrarse(Model model, Usuario usuario, HttpSession sesion)
 	{
@@ -104,7 +108,6 @@ public class UsuarioController
 		}
 	}
 	
-	
 	@GetMapping("/login")
 	public String RealizarLogin(Model model, HttpServletRequest request)
 	{
@@ -121,6 +124,7 @@ public class UsuarioController
 		return "error";
 	}
 	
+	@Cacheable
 	@GetMapping("/perfil")
 	public String miPerfil(Model model, HttpSession sesion)
 	{
@@ -131,6 +135,7 @@ public class UsuarioController
 		return "mostrar_perfil";
 	}
 	
+	@Cacheable
 	@GetMapping("/perfil/{id}")
 	public String verReserva(Model model, @PathVariable long id)
 	{

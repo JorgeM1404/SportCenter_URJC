@@ -5,11 +5,14 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+@CacheConfig(cacheNames="cacheURJC")
 @Controller
 public class CentroController 
 {
@@ -26,6 +29,7 @@ public class CentroController
 		return "paginaPrincipal";
 	}
 	
+	@Cacheable
 	@GetMapping("/campus/{campus}")
 	public String SeleccionarCampus(Model model, @PathVariable String campus)
 	{	
@@ -49,6 +53,7 @@ public class CentroController
 		return "campus";
 	}
 	
+	@Cacheable
 	@GetMapping("/campus/actividades")
 	public String menuActividades(Model model)
 	{
@@ -69,6 +74,7 @@ public class CentroController
 		return "campus";
 	}
 	
+	@Cacheable
 	@GetMapping("/campus/actividades/{id}")
 	public String SeleccionarActividad(Model model, @PathVariable long id, HttpServletRequest request)
 	{

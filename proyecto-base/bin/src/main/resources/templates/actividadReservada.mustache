@@ -24,21 +24,11 @@
 	</div>
 	
 
-	<div class="contenido">
-		<h1> Bienvenido a tu perfil personal {{usu.nombre}}  </h1>
-		<h3>Los nombres de tus reservas son:</h3>
-		{{#res}}
-		     <h2><a href="/perfil/{{id}}">{{nombreReserva}} </a><br>
-		{{/res}}
-		
-		{{^res}}
-		     <p> No se ha realizado ninguna reserva todavía. </p>
-		{{/res}}	
-		
-		<p><a href="/menuPrincipal"><button class="button botonVOLVER"> Volver </button></a></p>
-		<p><a href="/descargaPDF"><button class="button botonVOLVER"> Descargar PDF </button></a></p>
+	<div class="error">
+		<h3> Las pistas asociadas a esta actividad ya han sido ocupadas </h3>
+		<a href="/campus/{{campus}}"><button class="button botonRESERVAR"> OK </button></a>	
 	</div>
-
+	
 	<div class="footer">
 		<p>SportCenterURJC - Trabajo DAD 2021 ©</p>
 	</div>
