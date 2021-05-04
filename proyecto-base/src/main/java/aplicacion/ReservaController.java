@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
-@CacheConfig(cacheNames="cacheURJC")
 @Controller
 public class ReservaController 
 {
@@ -37,7 +36,6 @@ public class ReservaController
 	@Autowired
 	private ServicioCentroActual servicioCentroActual;
 	
-	@Cacheable
 	@GetMapping("/perfil/cancelarReserva/{id}")
 	public String cancelarReservaGet(Model model, @PathVariable long id)
 	{
@@ -46,7 +44,6 @@ public class ReservaController
 		return "cancelarReserva";
 	}
 	
-	@Cacheable
 	@GetMapping("/perfil/realizarReserva")
 	public String solicitarReservaGet(Model model, HttpServletRequest request)
 	{
@@ -67,7 +64,6 @@ public class ReservaController
 		return "realizarReserva";
 	}
 	
-	@Cacheable
 	@GetMapping("/mostrar_perfil")
 	public String volverAPerfil(Model model, HttpSession sesion)
 	{
@@ -80,7 +76,6 @@ public class ReservaController
 		return "mostrar_perfil";
 	}
 	
-	@Cacheable
 	@GetMapping("/descargaPDF")
 	public String descargarPDF(Model model, HttpSession sesion)
 	{
@@ -102,7 +97,6 @@ public class ReservaController
 		return "mostrar_perfil";
 	}
 	
-	@Cacheable
 	@GetMapping("/redireccion_perfil/{id}")
 	public String mostrarPerfil(Model model, HttpSession sesion, HttpServletRequest request, @PathVariable long id)
 	{
@@ -132,7 +126,6 @@ public class ReservaController
 		}
 	}
 	
-	@CachePut
 	@PostMapping("/perfil/realizarReserva")
 	public void solicitarReservapsot(Model model,Reserva res, @RequestParam String nombreActividad, HttpSession sesion,  HttpServletResponse response) throws IOException
 	{
@@ -183,7 +176,6 @@ public class ReservaController
 		response.sendRedirect("/redireccion_perfil/" + idRes);
 	}
 	
-	@Cacheable
 	@GetMapping("/perfil/reservaCancelada/{id}")
 	public String miPerfil2(Model model, @PathVariable long id, HttpSession sesion)
 	{

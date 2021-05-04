@@ -27,10 +27,6 @@ public class Reserva
 	@OneToOne
 	private CentroDeportivo centro;	
 	
-	/*private int num_reservas;
-	private static final int MAX_PLAZAS = 40;*/
-	
-	
 	public Reserva() { }
 	
 	public Reserva(String nombreReserva, Date fecha) {
@@ -38,14 +34,6 @@ public class Reserva
 		this.nombreReserva = nombreReserva;
 		this.fecha = fecha;
 	}
-	
-	/*public Reserva(Actividad actividad, Usuario usuarioRes) {
-		super();
-		this.actividadReservada = actividad;
-		this.usuarioRes = usuarioRes;
-	}*/
-	
-
 	
 	public long getId() {
 		return id;

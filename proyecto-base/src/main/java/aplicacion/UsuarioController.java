@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-@CacheConfig(cacheNames="cacheURJC")
 @Controller
 public class UsuarioController 
 {
@@ -72,7 +71,7 @@ public class UsuarioController
 		
 		return "registrarse";
 	}*/
-	@CacheEvict
+
 	@PostMapping("/registrarse")//@PostMapping("/usuario/nuevo")
 	public String registrarse(Model model, Usuario usuario, HttpSession sesion)
 	{
@@ -124,7 +123,6 @@ public class UsuarioController
 		return "error";
 	}
 	
-	@Cacheable
 	@GetMapping("/perfil")
 	public String miPerfil(Model model, HttpSession sesion)
 	{
@@ -135,7 +133,6 @@ public class UsuarioController
 		return "mostrar_perfil";
 	}
 	
-	@Cacheable
 	@GetMapping("/perfil/{id}")
 	public String verReserva(Model model, @PathVariable long id)
 	{

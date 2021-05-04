@@ -61,15 +61,6 @@ public class Usuario
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	/*
-	public String getClave() {
-		return clave;
-	}
-
-	public void setClave(String clave) {
-		this.clave = clave;
-	}
-	 */
 	
 	public String getCorreo() {
 		return correo;
@@ -144,8 +135,7 @@ public class Usuario
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
-		result = prime * result + ((passwordHash == null) ? 0 : passwordHash.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -158,19 +148,14 @@ public class Usuario
 		if (getClass() != obj.getClass())
 			return false;
 		Usuario other = (Usuario) obj;
-		if (nombre == null) {
-			if (other.nombre != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!nombre.equals(other.nombre))
-			return false;
-		if (passwordHash == null) {
-			if (other.passwordHash != null)
-				return false;
-		} else if (!passwordHash.equals(other.passwordHash))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Usuario [nombre=" + nombre + ", clave=" + passwordHash + ", correo=" + correo + "]";
