@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "actividad")
 public class Actividad 
@@ -14,12 +16,12 @@ public class Actividad
 	private long id;
 	
 	private String nombre;
-	
+	@JsonIgnore
 	@OneToMany(mappedBy="actividad")
 	private List<PistaDeportiva> pistas;
 	
 	//private int plazas;
-	
+	@JsonIgnore
 	@ManyToMany
 	private List<CentroDeportivo> centros;
 	

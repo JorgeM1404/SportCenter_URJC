@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Usuario 
 {
@@ -28,7 +30,7 @@ public class Usuario
 	
 	@ElementCollection(fetch=FetchType.EAGER)
 	private List<String> roles = new ArrayList<String>();
-	
+	@JsonIgnore
 	@OneToMany(mappedBy="usuarioRes",fetch=FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
 	private List<Reserva> reservas;

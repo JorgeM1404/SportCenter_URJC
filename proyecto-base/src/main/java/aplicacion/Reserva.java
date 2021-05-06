@@ -5,6 +5,8 @@ import javax.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Reserva 
 {
@@ -17,13 +19,13 @@ public class Reserva
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(iso=ISO.DATE)
 	private Date fecha;
-	
+	@JsonIgnore
 	@ManyToOne
 	private Usuario usuarioRes;
-	
+	@JsonIgnore
 	@OneToOne
 	private Actividad actividadRes;
-	
+	@JsonIgnore
 	@OneToOne
 	private CentroDeportivo centro;	
 	

@@ -7,13 +7,15 @@ import javax.persistence.*;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "centro")
 public class CentroDeportivo 
 {
     @Id
 	private String campus;
-	
+    @JsonIgnore
     @ManyToMany(mappedBy = "centros")
     @LazyCollection(LazyCollectionOption.FALSE)
 	private List<Actividad> actividades;
