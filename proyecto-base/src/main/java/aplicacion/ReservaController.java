@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.web.csrf.CsrfToken;
@@ -79,7 +82,7 @@ public class ReservaController
 		Usuario usuarioActual = (Usuario) sesion.getAttribute("usuarioActual");
 		List<Reserva> reservas = usuarioActual.getReservas();
 		RestTemplate restTemplate = new RestTemplate();
-		String url = "http://localhost:8080/pdf/enviar";
+		String url = "http://servicioIn1:8080/pdf/enviar";
 		
 		List<InfoReserva> infoReservas = new LinkedList<>();
 		for(Reserva r : reservas)
@@ -105,7 +108,7 @@ public class ReservaController
 			Reserva res = servicioReservas.getReservaById(id);
 			RestTemplate restTemplate = new RestTemplate();
 
-			String url = "http://localhost:8080/email/enviar";
+			String url = "http://servicioIn1:8080/email/enviar";
 			String asunto = "Reserva '" + res.getNombreReserva() + "' realizada";
 			String cuerpo = "¡Gracias por reservar en SportCenterURJC! \n\nLa informacion sobre tu reserva es la siguiente: \n\nRealizada para el centro: " + res.getCentro().getCampus() + "\nActividad reservada: " + res.getActividadRes().getNombreActividad() + "\nFecha reservada: " + res.getFecha().toString() + "\n\n¡Muchas gracias por su apoyo!";
 			HttpEntity<InfoCorreo> info = new HttpEntity <> (new InfoCorreo("sportcenterurjc@gmail.com",usuarioActual.getCorreo(),asunto,cuerpo));
@@ -151,7 +154,7 @@ public class ReservaController
 		while(n < numPistas && !encontrada)
 		{
 			PistaDeportiva p = act.getPistas().get(n);
-			String url = "http://localhost:8080/pistas/comprobarPista/" + p.getId();
+			String url = "http://servicioIn1:8080/pistas/comprobarPista/" + p.getId();
 			hayLibre = restTemplate.getForObject(url, Boolean.class);
 			
 			if(hayLibre == true)

@@ -1,15 +1,46 @@
-version:"3.9"
+version: '3'
 
 services:
+    database:
+        image: mysql:8.0.24
+        environment:
+            - MYSQL_ROOT_PASSWORD=clave
+            - MYSQL_USER=admin
+            - MYSQL_PASSWORD=clave
+            - MYSQL_DATABASE=bdd_sec 
+        ports:
+            - 3306:3306
+        networks: 
+            - sportcenter-network
 
-  db:
-     image: mysql:8.0
-     ports:
-       - "3306:3306"
-     environment:
-       - MYSQL_DATABASE=bdd_sec
-       - MYSQL_ROOT_PASSWORD=clave
-       - MYSQL_USER=root
-       - MYSQL_PASSWORD=clave
-     restart: always
-     
+    sportcenter:
+        image: sportcenter:v1
+        restart: always
+        ports:
+            - 8443:8443
+        environment:
+            - SPRING_DATASOURCE_URL=jdbc:mysql://database:3306/bdd_sec?serverTimezone=UTC
+            - SPRING_DATASOURCE_USERNAME=admin
+            - SPRING_DATASOURCE_PASSWORD=clave
+        depends_on:
+             - database
+             - servicioIn1
+        networks:
+            - sportcenter-network
+            
+    servicioIn1:
+        image: si:v1
+        ports:
+            - 8080:8080
+        environment:
+            - SPRING_DATASOURCE_URL=jdbc:mysql://database:3306/bdd_sec?serverTimezone=UTC
+            - SPRING_DATASOURCE_USERNAME=admin
+            - SPRING_DATASOURCE_PASSWORD=clave
+        depends_on:
+            - database
+        networks:
+            - sportcenter-network
+        restart: always
+networks:
+    sportcenter-network:
+        driver: bridge

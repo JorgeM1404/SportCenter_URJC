@@ -9,29 +9,24 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-
 @Service
 public class ServicioReservas 
 {
 	@Autowired
 	private RepositorioReservas repositorio;
 	
-
 	public Collection<Reserva> getReservas() {
 		return repositorio.findAll();
 	}
 	
-
 	public Reserva getReservaById(long id) {
 		return repositorio.findById(id).orElseThrow();
 	}	
 	
-
 	public Reserva getReservaByFecha(Date fecha) {
 		return repositorio.findByFecha(fecha).orElseThrow();
 	}
 	
-
 	public void cancelarReserva(Reserva reserva) {
 		repositorio.delete(reserva);
 	}	
@@ -48,7 +43,6 @@ public class ServicioReservas
 		repositorio.deleteAll();
 	}
 	
-
 	public void guardarReserva(Reserva res) {
 		repositorio.save(res);
 	}
@@ -57,7 +51,6 @@ public class ServicioReservas
 		repositorio.saveAll(reservas);
 	}
 	
-
 	public boolean existeReserva(Reserva res) {
 		return repositorio.existsById(res.getId());
 	}
