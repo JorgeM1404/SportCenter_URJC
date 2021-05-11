@@ -11,7 +11,9 @@ import org.springframework.session.hazelcast.config.annotation.web.http.EnableHa
 import com.hazelcast.config.Config;
 import com.hazelcast.config.JoinConfig;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -34,8 +36,12 @@ public class ProyectoBaseSpringApplication
 		JoinConfig joinConfig = config.getNetworkConfig().getJoin();
 		
 		joinConfig.getMulticastConfig().setEnabled(false);
-		joinConfig.getTcpIpConfig().setEnabled(true).setMembers(Collections.singletonList("sportcenter"));
 	
+		List<String> servicios=new ArrayList<String>();
+		servicios.add("sportcenter1");
+		servicios.add("sportcenter2");
+		
+		joinConfig.getTcpIpConfig().setEnabled(true).setMembers(servicios);
 		return config;
 	}
 	
