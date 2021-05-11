@@ -13,8 +13,8 @@ services:
         networks: 
             - sportcenter-network
 
-    sportcenter:
-        image: sportcenter:v1
+    sportcenter1:
+        image: sportcenter:v11
         restart: always
         ports:
             - 8443:8443
@@ -27,7 +27,22 @@ services:
              - servicioIn1
         networks:
             - sportcenter-network
-            
+    
+    sportcenter2:
+        image: sportcenter:v22
+        restart: always
+        ports:
+            - 8444:8443
+        environment:
+            - SPRING_DATASOURCE_URL=jdbc:mysql://database:3306/bdd_sec?serverTimezone=UTC
+            - SPRING_DATASOURCE_USERNAME=admin
+            - SPRING_DATASOURCE_PASSWORD=clave
+        depends_on:
+             - database
+             - servicioIn1
+        networks:
+            - sportcenter-network
+    
     servicioIn1:
         image: si:v1
         ports:
@@ -38,6 +53,20 @@ services:
             - SPRING_DATASOURCE_PASSWORD=clave
         depends_on:
             - database
+        networks:
+            - sportcenter-network
+        restart: always
+        
+    balanceador:
+        image: haproxy:latest
+        ports:
+            - 9090:443
+            - 9091:444
+        volumes:
+            - ./haproxy.cfg:/usr/local/etc/haproxy.cfg:ro
+        depends_on:
+            - sportcenter1
+            - sportcenter2   
         networks:
             - sportcenter-network
         restart: always
