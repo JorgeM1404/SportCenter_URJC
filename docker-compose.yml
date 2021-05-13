@@ -10,6 +10,8 @@ services:
             - MYSQL_DATABASE=bdd_sec 
         ports:
             - 3306:3306
+        cap_add:
+            - SYS_NICE
         networks: 
             - sportcenter-network
 
@@ -58,12 +60,10 @@ services:
         restart: always
         
     balanceador:
-        image: haproxy:latest
+        image: haproxy:v1
         ports:
-            - 9090:443
-            - 9091:444
-        volumes:
-            - ./haproxy.cfg:/usr/local/etc/haproxy.cfg:ro
+            - 443:443
+            - 444:444
         depends_on:
             - sportcenter1
             - sportcenter2   
