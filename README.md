@@ -11,8 +11,9 @@ Consiste en una web que administra y gestiona los centros deportivos de los camp
 - [Diagrama de navegación](#diagrama-de-navegación)
 - [Esquema Entidad Relación](#esquema-entidad-relación)
 - [Diagrama UML](#diagrama-uml)
-- [Capturas de pantalla Fase 2](#capturas-de-pantalla-fase-2)
+- [Capturas de pantalla Fase 4](#capturas-de-pantalla-fase-4)
 - [Proceso de instalación de SportCenterURJC en Windows 10](#proceso-de-instalacion-de-sportcenterurjc-en-windows-10)
+- [Diagrama Docker](#diagrama-docker)
 - [Miembros del equipo](#miembros-del-equipo)
 
 # Entidades 
@@ -56,7 +57,7 @@ Generación de un documento de texto con toda la información relacionada con el
 ![DiagramaUMLsic](imagenes/UMLsic.png)
 ![LeyendaUML](imagenes/LeyendaUML.png)
 
-# Capturas de pantalla Fase 3
+# Capturas de pantalla Fase 4
 Página inicial de bienvenida
 ![PAGINA INICIO](imagenes/PAGINAINICIO.png)
 Formulario de registro de usuario nuevo
@@ -108,6 +109,9 @@ Requisitos:
 4.1. Crear un schema en el workbench, para ello new -> schema, y ponerle de nombre bdd_sec, que es así como se llama la base de datos de la aplicación de los ejecutables.
 
 5. Arrancar ambos ejecutables jar para crear los procesos java en la máquina. Una vez estén arrancados, se podrá usar la aplicación SportCenterURJC desdeel navegador.
+
+# Diagrama Docker
+![DiagramaDocker](imagenes/DiagramaDocker.png)
 
 # Miembros del equipo
 - Antonio Francisco Roldan Martin - af.roldan@alumnos.urjc.es - https://github.com/afroldan
