@@ -16,7 +16,7 @@ services:
             - sportcenter-network
 
     sportcenter1:
-        image: sportcenter:v11
+        image: sportcenter:create
         restart: always
         ports:
             - 8443:8443
@@ -31,7 +31,7 @@ services:
             - sportcenter-network
     
     sportcenter2:
-        image: sportcenter:v22
+        image: sportcenter:none
         restart: always
         ports:
             - 8444:8443
@@ -60,7 +60,7 @@ services:
         restart: always
         
     balanceador:
-        image: haproxy:v1
+        image: haproxy:v3
         ports:
             - 443:443
             - 444:444

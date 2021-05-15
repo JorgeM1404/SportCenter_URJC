@@ -13,6 +13,9 @@ import org.springframework.stereotype.Repository;
 public interface RepositorioReservas extends JpaRepository<Reserva,Long>
 {
 	@Cacheable
+    Optional<Reserva> findById(long id);
+	
+	@Cacheable
 	Optional<Reserva> findByFecha(Date date);
 	
 	@CacheEvict(allEntries=true)
