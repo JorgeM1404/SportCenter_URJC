@@ -1,6 +1,6 @@
 ![Logo oficial](imagenes/logoSportCenterURJC.png)
 
-# Video Demostracción
+# Video Demostración
 https://www.youtube.com/watch?v=WfYrbFcIZts
 
 # SportCenter_URJC
