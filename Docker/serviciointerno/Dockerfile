@@ -1,7 +1,5 @@
-FROM openjdk:8-jre
+FROM openjdk:11
 
-COPY servicioInterno-0.0.1-SNAPSHOT.jar /usr/servicio
+COPY servicioInterno-0.0.1-SNAPSHOT.jar servicioInterno.jar
 
-WORKDIR /usr/servicio
-
-CMD ["java","-jar","servicioInterno-0.0.1-SNAPSHOT.jar"]
+CMD java -jar servicioInterno.jar
